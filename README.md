@@ -1,14 +1,18 @@
 # GA4 Events, Parameters & Annotations documentation & administration solution
-This is an solution in 4 parts that makes it easier to document and administrate Events, Conversion Events, Parameters (Dimensions & Metrics) for **Google Analytics 4 (GA4)**. It also makes it easier for "non-technical" people to understand what a particular **event_name** tracks, and what the different **parameters** connected to the **event_name** tracks by **presenting** the documentation in [**Looker Studio**](Looker-Studio). The solution also includes [**Annotations**](#annotations), which can help you understand changes to your data.
+This is an solution in 4 parts that makes it easier to document and administrate **Events**, **Conversion Events**, **Parameters** (Dimensions & Metrics) for **Google Analytics 4 (GA4)**. Since the Google Sheet is integrated with several API's, you can (bulk) create/edit/delete Custom Dimensions & Metrics and Conversion Events. This means that you can document and administrate Custom Dimensions & Metrics and Conversion Events in the same operation.
+
+It also makes it easier for "non-technical" people to understand what a particular **event_name** is tracking, and what the different **parameters** connected to the **event_name** is tracking by **presenting** the documentation in [**Looker Studio**](Looker-Studio). 
+
+The solution also includes [**Annotations**](#annotations), which can help you understand changes to your data. Annotations can either be added manually, or automatically created from **GA4 Change History** or **Google Tag Manager Container Versions**.
 
 ![GA4 Documentation illustration](Google-Sheet/images/ga4-documentation-illustration.png)
 
-Using all parts in the solution gives the greatest value, but you can also just use part 1, the Google Sheet.
+The solution contains 4 parts, but you can use only part 1, the Google Sheet, if you want:
 
 1. [**Google Sheet**](https://docs.google.com/spreadsheets/d/1j0xGxwdyeYTTbr2mgcIRr_BsVOhzn_tZEZsV_x50hg4/copy) using [**Apps Script**](Apps-Script) for easier documentation and administration of Events, Parameters and Annotations. Everything starts with this Google Sheet.
 2. **Export** documentation from Google Sheet to [**BigQuery**](BigQuery). This export will join the GA4 documentation with your GA4 BigQuery data. Export can be both manual and automated.
-3. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation stored in BigQuery. This report will make it easy to identify if your documentation is aligned with the data you are collecting. You can for example easily spot if your data collection / implementation / documentation have issues. Other solutions than Looker Studio can also be used, as long as the solution can connect to BigQuery. Power BI can for example be used, but you will have to build the reporting yourself.
-4. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **event_group** from the Event documentation in Google Sheet to your GA4 data in real-time. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
+3. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation stored in BigQuery. This report will make it easy to identify if your documentation is aligned with the data you are collecting. You can for example easily spot if your data collection / implementation / documentation have issues.
+4. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **event_group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
 
 This solution is made by [**Eivind Savio**](https://wwww.savio.no) from [**Knowit Experience Oslo**](https://www.knowit.no/). It is not officially supported by Knowit Experience Oslo.
 
@@ -16,7 +20,7 @@ This solution is made by [**Eivind Savio**](https://wwww.savio.no) from [**Knowi
 The documentation is divided into 5 separate parts:
 1. [Google Sheet](#google-sheet-documentation) (is documented on this page).
 2. [Apps Script](Apps-Script) (used in this Google Sheet)
-3. [BigQuery](BigQuery) (for integrating the documentation with GA4 Data so you can understand if the documentation is aligned with GA4 data collected)
+3. [BigQuery](BigQuery) (for integrating the documentation with GA4 Data so you can understand if the documentation is aligned with data collected)
 4. [Looker Studio](Looker-Studio) (for presenting Events, Parameters and Annotations in a way that is easier to understand)
 5. [Firestore](Firestore) (for flagging or blocking undocumented GA4 Events)
 
