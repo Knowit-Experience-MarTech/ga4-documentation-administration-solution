@@ -148,10 +148,10 @@ The different columns in the Sheet are described below.
 | GTM Setup & Comment | Use this to describe the Parameter in GTM/SGTM. Ex. name of Variable, how the value is created (Data Layer) etc. How detailed this description should be is up to you. |
 
 ## Annotations
-At the time of writing, GA4 doesn't have annotations, so this solutio is trying to fill the blanks for that.
+At the time of writing, GA4 doesn't have annotations, so this solution is trying to fill the blanks for that.
 ![Annotations](Google-Sheet/images/google-sheet-annotations.png)
 
-The reason for adding Annotations to this Sheet, is that if you create/delete a Conversion Event, Dimension or Metric, this may affect your data, and should therefore be documented. Other things that may affect your data are changes made in **Google Tag Manager**.
+The reason for adding Annotations to this Sheet, is that if you create/delete a Conversion Event, Dimension or Metric - this may affect your data, and should therefore be documented. Other things that may affect your data are changes made in **Google Tag Manager**.
 To simplify this, you can download **GA4 Change History** for the property to the Sheet as annotations. The same goes with GTM, you can download **GTM Container Versions** as Annotations. Annotations can also be added manually in the Sheet.
 
 ### GA4 Change History
