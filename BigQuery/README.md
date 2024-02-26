@@ -145,7 +145,7 @@ The following BigQuery tables will be used in **Looker Studio**:
 | event_name | STRING | Event Name |
 | event_method | STRING | Method |
 | event_type | STRING | Type |
-| event_conversion | BOOLEAN | Is the Event Name an conversion |
+| event_conversion | BOOLEAN | Is the Event Name an Conversion |
 | event_conversion_counting | STRING | How is the conversion counted (event/session) |
 | event_description | STRING | Event Description |
 | event_comment | STRING | Event Comment |
@@ -153,14 +153,14 @@ The following BigQuery tables will be used in **Looker Studio**:
 | event_website | BOOLEAN | Should the Event Name be tracked on a website |
 | event_ios_app | BOOLEAN | Should the  Event Name be tracked in an iOS app |
 | event_android_app | BOOLEAN | Should the Event Name be tracked in an Android app |
-| event_documentation_status | STRING | Documentation in Google Sheet is joied with GA4 BQ data. Status can be: **Documented and Data**, **Documented no Data** and **Not Documented** |
+| event_documentation_status | STRING | Documentation in Google Sheet is joined with GA4 BQ data. Status can be: **Documented and Data**, **Documented no Data** and **Not Documented** |
 | platform_web | BOOLEAN | GA4 BQ data. Is the Event Name tracked in the **web platform** |
 | platform_android | BOOLEAN | GA4 BQ data. Is the Event Name tracked in the **Android platform** |
 | platform_ios | BOOLEAN | GA4 BQ data. Is the Event Name tracked in the **iOS platform** |
 | event_count_total | INTEGER | GA4 BQ data. Total Event Count |
-| event_count_web | INTEGER | GA4 BQ data. Event Count for **web platforrm** |
-| event_count_android | INTEGER | GA4 BQ data. Event Count for **Android platforrm** |
-| event_count_ios | INTEGER | GA4 BQ data. Event Count for **iOS platforrm** |
+| event_count_web | INTEGER | GA4 BQ data. Event Count for **web platform** |
+| event_count_android | INTEGER | GA4 BQ data. Event Count for **Android platform** |
+| event_count_ios | INTEGER | GA4 BQ data. Event Count for **iOS platform** |
 | event_edited_time | DATETIME | Time when Event Name was edited in Google Sheet |
 | event_uploaded_to_bq_time | DATETIME | Time when Event documentation was uploaded to BQ |
 | event_last_seen_date_total | DATE | Date showing the last date the Event Name was "seen" overall |
