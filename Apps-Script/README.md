@@ -42,7 +42,7 @@ If you grant access to the Apps Script, the following permissions will be given.
 ## This app is blocked / make the warnings "more kind"
 Some users may not get any warnings, they will just get "**This app is blocked**". This shouldn't have anything to do with the scripts used in the Google Sheet, it's a common issue some users have with any Apps Script.
 
-The best route (probably) around this problem, is to change the **Google Cloud Platform (GCP) Project Number** used by the Apps Script, and choose an existing GCP Project Number (ex. your BigQuery project). Users that should be able to run Apps Script in the Sheet must be added as users to this GCP Project. Since the Google Sheet is integrated with BigQuery (if you set it up), using the BigQuery GCP Project is probably a good solution, but that is up to you to decide.
+The best route (maybe) around this problem is to change the **Google Cloud Platform (GCP) Project Number** used by the Apps Script, and choose an existing GCP Project Number (ex. your BigQuery project). Users that should be able to run Apps Script in the Sheet must be added as users to this GCP Project. Since the Google Sheet is integrated with BigQuery (if you set it up), using the BigQuery GCP Project is probably a good solution, but that is up to you to decide.
 
 * Choose **Extensions** from the Google Sheet menu.
   * Go to **Apps Script -> Project Settings**
