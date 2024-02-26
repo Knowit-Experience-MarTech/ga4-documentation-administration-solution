@@ -7,7 +7,7 @@ The solution also includes [**Annotations**](#annotations), which can help you u
 
 ![GA4 Documentation illustration](Google-Sheet/images/ga4-documentation-illustration.png)
 
-The solution contains 4 parts, but you can use the Google Sheet if you want:
+The solution contains 4 parts, but you can use only the Google Sheet if you want:
 
 1. [**Google Sheet**](https://docs.google.com/spreadsheets/d/1j0xGxwdyeYTTbr2mgcIRr_BsVOhzn_tZEZsV_x50hg4/copy) using [**Apps Script**](Apps-Script) for easier documentation and administration of Events, Parameters and Annotations. Everything starts with this Google Sheet.
 2. **Export** documentation from Google Sheet to [**BigQuery**](BigQuery). This export will join the GA4 documentation with your GA4 BigQuery data. Export can be both manual and automated.
