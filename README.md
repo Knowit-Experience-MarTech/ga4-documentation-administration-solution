@@ -184,7 +184,7 @@ Description of the Settings sheet.
 
 | Function  | Comment | 
 | ------------- | ------------- |
-| Clear Settings Fields & Data | This will clear the following settings and data the Sheet:  |
+| Clear Settings Fields & Data | This will clear the following settings and data the Sheet: GA4 Settings, BigQuery Settings, GTM Settings, Firestore Settings, GA4 Account & Property helper Sheet, GTM Account & Container helper Sheet, GA4 API Event Data from helper Sheet, GA4 BigQuery Event Data from helper Sheet, GA4 BigQuery Parameter Data from helper Sheet, Event Count from Event Sheet, Resource Name (GA4 API) from Event Sheet, Parameter Resource Name (GA4 API) from Parameter Sheet, Parameter Count from Parameter Sheet & Annotations. |
 | **Sheet Settings** | |
 | Enforce snake_case | Enforce **snake_case** for Event Name & Parameter Name. Recommende setting is Yes, but if you download Events & Parameters from GA4 that isn't in this format, select No. |
 | Date Format | Date format used in exports, annotations etc. |
