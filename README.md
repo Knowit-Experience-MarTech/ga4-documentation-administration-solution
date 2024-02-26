@@ -1,7 +1,7 @@
 # GA4 Events, Parameters & Annotations documentation & administration solution
 This is a solution in 4 parts that makes it easier to document and administrate **Events**, **Conversion Events**, **Parameters** (Dimensions & Metrics) for **Google Analytics 4 (GA4)**. Since the Google Sheet is integrated with several API's, you can (bulk) create/edit/delete Custom Dimensions & Metrics and Conversion Events. This means that you can document and administrate Custom Dimensions & Metrics and Conversion Events in the same operation.
 
-It also makes it easier for "non-technical" people to understand what a particular **event_name** is tracking, and what the different **parameters** connected to the **event_name** is tracking by **presenting** the documentation in [**Looker Studio**](Looker-Studio). 
+It also makes it easier for "non-technical" people to understand what a particular **event_name** is tracking, and what the different **parameters** connected to the **event_name** is tracking, by **presenting** the documentation in [**Looker Studio**](Looker-Studio). 
 
 The solution also includes [**Annotations**](#annotations), which can help you understand changes to your data. Annotations can either be added manually, or automatically created from **GA4 Change History** or **Google Tag Manager Container Versions**.
 
