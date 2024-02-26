@@ -118,7 +118,7 @@ exports.runScheduledQuery = async (event, context) => {
 ```
 
 ## Testing scheduled queries setup
-o test the setup, simply go to the **Google Sheet**, select the **GA4 Documentation menu** at the top of the sheet, and select **BigQuery -> Export Event & Parameter Documentation**.
+To test the setup, simply go to the **Google Sheet**, select the **📈 GA4 Documentation Menu** at the top of the sheet, and select **BigQuery -> Export Event & Parameter Documentation**.
 
 This will run a BigQuery query using Apps Script. If this is completed without errors, you should now see 3 new tables in BigQuery:
 
@@ -126,7 +126,7 @@ This will run a BigQuery query using Apps Script. If this is completed without e
 2. ga4_documentation_events_and_images
 3. ga4_documentation_parameters_and_documentation_status
 
-These tables (in addition to the ga4_documentation_annotations table) are your BigQuery tables that you will use in Looker Studio (or another solution).
+These tables (in addition to the ga4_documentation_annotations table) are your BigQuery tables that you will use in Looker Studio.
 
 # Overview over tables created in BigQuery
 The following BigQuery tables will be used in **Looker Studio**:
