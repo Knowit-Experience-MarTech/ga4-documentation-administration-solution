@@ -3,17 +3,17 @@ Documentation for creating Looker Studio for presenting Event & Parameter Docume
 
 <table>
   <tr>
-    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-solution_initial/blob/main/Looker-Studio/images/ga4-documentation-overview_ls.png" alt="GA4 Documentation Overview"  ></td>
-    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-solution_initial/blob/main/Looker-Studio/images/ga4-event-documentation_ls.png" alt="GA4 Event Documentation" ></td>
+    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-administration-solution/blob/main/Looker-Studio/images/ga4-documentation-overview_ls.png" alt="GA4 Documentation Overview"  ></td>
+    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-administration-solution/blob/main/Looker-Studio/images/ga4-event-documentation_ls.png" alt="GA4 Event Documentation" ></td>
    </tr> 
     <tr>
-    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-solution_initial/blob/main/Looker-Studio/images/ga4-parameter-documentation_ls.png" alt="GA4 Parameter Documentation"  ></td>
-    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-solution_initial/blob/main/Looker-Studio/images/ga4-event-parameter-documentation_ls.png" alt="GA4 Event & Parameter Documentation" ></td>
+    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-administration-solution/blob/main/Looker-Studio/images/ga4-parameter-documentation_ls.png" alt="GA4 Parameter Documentation"  ></td>
+    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-administration-solution/blob/main/Looker-Studio/images/ga4-event-parameter-documentation_ls.png" alt="GA4 Event & Parameter Documentation" ></td>
    </tr> 
 
 </table>
 
-* Make sure you first have created the [**BigQuery tables**](../BigQuery#overview-over-tables-created-in-bigquery) that will be used as Data Sources in Looker Studio.
+* Make sure you first have created the [**BigQuery tables**](../BigQuery#overview-over-tables-created-in-bigquery) that will be used as **Data Sources** in Looker Studio.
 * Make a copy of the [**Looker Studio GA4 Documentation report**](https://lookerstudio.google.com/s/ihyU84wd7uY)
 * Add the following BigQuery Data Sources to Looker Studio:
   1. [ga4_documentation_parameters_and_documentation_status](#ga4_documentation_parameters_and_documentation_status)
@@ -152,7 +152,7 @@ HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/42a4e160-741d-481c-a
 2. **Parameter Scope** filter: Select a single Scope (ex. **EVENT**)
 3. **Parameter Name** filter: Select a single Parameter (ex. **file_extension**)
 4. Copy the URL
-5.Find the **Parameter Scope** in the URL, ex. **EVENT**. Replace **EVENT** with **parameter_scope** as shown in the **Formula** above.
+5. Find the **Parameter Scope** in the URL, ex. **EVENT**. Replace **EVENT** with **parameter_scope** as shown in the **Formula** above.
 6. Find the **Parameter Name** in the URL, ex. **file_extension**. Replace **file_extension** with **parameter_name** as shown in the **Formula** above.
 
 If you want to learn more about this solution, here is a video about the subject:
