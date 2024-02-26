@@ -151,8 +151,8 @@ The different columns in the Sheet are described below.
 At the time of writing, GA4 doesn't have annotations, so this solutio is trying to fill the blanks for that.
 ![Annotations](Google-Sheet/images/google-sheet-annotations.png)
 
-The reason for adding Annotations to this Sheet, is that if you create/delete a Conversion Event, Dimension or Metric, that affects your data, and should be documented. Other things that may affect your data are changes made in **Google Tag Manager**.
-To simplify this, you can download **GA4 Change History** for the property to the Sheet as annotations. The same goes with GTM, you can download GTM Container Versions as Annotations. Annotations can also be added manually in the Sheet.
+The reason for adding Annotations to this Sheet, is that if you create/delete a Conversion Event, Dimension or Metric, this may affect your data, and should therefore be documented. Other things that may affect your data are changes made in **Google Tag Manager**.
+To simplify this, you can download **GA4 Change History** for the property to the Sheet as annotations. The same goes with GTM, you can download **GTM Container Versions** as Annotations. Annotations can also be added manually in the Sheet.
 
 ### GA4 Change History
 **GA4 Account** and **Property** must have been selected in the **Settings** Sheet. In the Settings Sheet there is also **Annotation Settings**. Here you can select if the email of the user that made a change to something in the property should be written to the Sheet.
