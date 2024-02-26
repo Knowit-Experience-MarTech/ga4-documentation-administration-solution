@@ -41,7 +41,7 @@ function checkForUpdates() {
     ).getContentText());
   const latestGithubRelease = releases[0];
   const latestGithubVersion = parseFloat(
-    latestGithubRelease.tag_name.split('v')[1]);
+    latestGithubRelease.tag_name);
   
   if (sheetReleaseVersion < latestGithubVersion) {
     const title = 'Update Avilable';
