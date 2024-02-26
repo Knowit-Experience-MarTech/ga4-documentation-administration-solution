@@ -99,7 +99,7 @@ The different columns in the Sheet are described below.
 | Website / iOS / Android | If the Event is used on a Website, tick the Website **checkbox**, and vice versa for iOS/Android. If neither Website, iOS or Android is selected, the Event will not be exported to BigQuery. |
 | Edit | Tick this checkbox for functionally related to that Event (see [Buttons in Event Sheet](#buttons-in-event-sheet)) |
 | Resource Name | Resource Name ID will be added be added to this column if the Event is a Conversion Event in GA4 |
-| GTM Setup & Comment | If you are using GTM/sGTM, add relevant information here. Ex. name of the Tag in GTM, and a link to the Tag in (s)GTM. |
+| GTM Setup & Comment | If you are using GTM/sGTM, add relevant information here. Ex. name of the Tag in GTM/sGTM. |
 
 ### Image Documentation
 Sometimes words can't describe the Event good enough, and you need image(s)/illustration(s) to document the Event. Where to store those images is up to you, but if you are going to export the documentation to [**Looker Studio**](Looker-Studio) via [**BigQuery**](BigQuery), images needs to be publicly available.
@@ -119,10 +119,10 @@ All buttons will trigger an Apps Script function.
 
 | Button  | Description |
 | ------------- | ------------- |
-| Get Custom Dimensions & Metrics | If **API** is selected in **Settings** Sheet, Parameters (Custom Dimensions & Metrics) will be downloaded from GA4. If the Parameter exist in the Sheet, corresponding row in **Resource Name** column will be highlighted in green, and a Resource Name will be added. **Parameter Display Name** and **Description** will not be updated, **unless** you tick the **Edit** checkbox. This is to prevent overriding existing documentation by accident. If **BigQuery** is selected Parameters from BigQuery including a Parameter Count will be downloaded. Use the setting **Get GA4 Event & Parameters from** in the **Settings** Sheet to select API or BigQuery. If there is no match between Parameters in the Sheet and Parameters being downloaded, these Parameters will be added after the last row in the Sheet. |
+| Get Custom Dimensions & Metrics | If **API** is selected in **Settings** Sheet, Parameters (Custom Dimensions & Metrics) will be downloaded from GA4. If the Parameter exist in the Sheet, corresponding row in **Resource Name** column will be highlighted in green, and a Resource Name will be added. **Parameter Display Name** and **Description** will not be updated, **unless** you tick the **Edit** checkbox. This is to prevent overriding existing documentation by accident. If **BigQuery** is selected Parameters from BigQuery including a Parameter Count will be downloaded. Use the setting **Get GA4 Event & Parameters from** in the **Settings** Sheet to select **API** or **BigQuery**. If there is no match between Parameters in the Sheet and Parameters being downloaded, these Parameters will be added after the last row in the Sheet. |
 | Greate Custom Dimension or Metric | Fill out necessary information for the Parameter, select the corresponding **checkbox** in the **Edit** column, and click the button. It's possible to bulk create Custom Dimensions or Metrics, but beware of the API quota. |
-| Update  Custom Dimension or Metric | Fill out necessary information for the Parameter, select the corresponding **checkbox** in the **Edit** column, and click the button. It's possible to bulk update Custom Dimensions or Metrics, but beware of the API quota. It's not possible to **Edit CURRENCY Custom Metrics** from the Sheet. |
-| Archive / Delete  Parameter | Use this to **delete Custom Dimensions & Metrics**. Select the corresponding **checkbox** in the **Edit** column, and click the button. Bulk deletes is possible, but use that with caution. |
+| Update  Custom Dimension or Metric | Fill out necessary information for the Parameter, select the corresponding **checkbox** in the **Edit** column, and click the button. It's possible to bulk update Custom Dimensions or Metrics, but beware of the API quota. It's not possible to **edit CURRENCY Custom Metrics** from the Sheet. |
+| Archive / Delete  Parameter | Use this to **delete Custom Dimensions & Metrics**. Select the corresponding **checkbox** in the **Edit** column, and click the button. Bulk deletes are possible, but use that with caution. |
 | Is Parameter Used on Events? | Use this funcionality to check if Parameters in the Parameters Sheet are being used in the Events Sheet. Tick **checkboxes** for the **corresponding Parameter** that you want to check. If unused Parameters are found, you will get the option to delete them. Use bulk deleting with caution. |
 | Tick Edit Checkboxes | This will **select ALL** checkboxes. |
 | Untick Edit Checkboxes| This will **deselect ALL** checkboxes. |
@@ -151,8 +151,10 @@ The different columns in the Sheet are described below.
 At the time of writing, GA4 doesn't have annotations, so this solution is trying to fill the blanks for that.
 ![Annotations](Google-Sheet/images/google-sheet-annotations.png)
 
-The reason for adding Annotations to this Sheet, is that if you create/delete a Conversion Event, Dimension or Metric - this may affect your data, and should therefore be documented. Other things that may affect your data are changes made in **Google Tag Manager**.
-To simplify this, you can download **GA4 Change History** for the property to the Sheet as annotations. The same goes with GTM, you can download **GTM Container Versions** as Annotations. Annotations can also be added manually in the Sheet.
+The reason for adding Annotations to this Sheet, is that if you create/delete a Conversion Event, Dimension or Metric - this may affect your data and should therefore be documented. Other things that may affect your data are changes made in **Google Tag Manager**.
+To simplify this, you can download **GA4 Change History** for the property to the Sheet as annotations. The same goes with GTM, you can download **GTM Container Versions** as Annotations.
+
+Annotations can also be added manually in the Sheet.
 
 ### GA4 Change History
 **GA4 Account** and **Property** must have been selected in the **Settings** Sheet. In the Settings Sheet there is also **Annotation Settings**. Here you can select if the email of the user that made a change to something in the property should be written to the Sheet.
@@ -175,9 +177,9 @@ GTM Container Version info that will be downloaded are:
 
 The [**GTM API**](https://developers.google.com/tag-platform/tag-manager/api/v2) have for some reason no information about **who** made the change/published the container, so the text **Not Available from API** will be returned instead.
 Information about **when** the **Container Version** was created (date/time) **is not available** either. Because of this, use this suggested solution:
-* Download Container Versions manually the first time, using the **Get GTM Container Versions** button.
+* **Download Container Versions manually** the first time, using the **Get GTM Container Versions** button.
   * 3 latest versions will be downloaded. Since there isn't any date/time information in the API, todays date will be written to the Sheet. Change the dates manually in the Sheet to reflect the correct date.
-* Add a [**Trigger**](#triggers) that from now on and moving forward downloads new GTM Container Versions automatically. This will ensure that new container versions will be added to the correct date.
+* Add a [**Timer Trigger**](#triggers) that from now on and moving forward downloads new GTM Container Versions automatically. This will ensure that new container versions will be added to the correct date.
 
 ## Settings
 Description of the Settings sheet.
@@ -202,18 +204,18 @@ Description of the Settings sheet.
 | Exclude Params from SQL Query | If you are getting parameters  from BigQuery instead of API, not all Event & User Scoped Parameters are relevant. Exclude these parameters separated by comma. Parameters are queried from key (event_params.key, user_properties.key & items.item_params.key) and items (item_name, item_id etc.). |
 | Include Ecom Params in SQL query | If "Yes" is selected, Ecommerce parameters will also be included in the SQL query. |
 | **Annotation Settings** |  |
-| Log "Added by" Email | Should Added by in Annotations log email of who made the annnotation? **Yes** = Logged, **No** = Not logged, **Redacted** = x*****@domain.com (where x is the first letter in email address). |
+| Log "Added by" Email | Should **Added by** in Annotations log email of who made the annnotation? **Yes** = Logged, **No** = Not logged, **Redacted** = x*****@domain.com (where x is the first letter in email address). |
 | **Firestore Settings** | See documentation in **Settings in the Sheet** and the [**Firestore documentation**](Firestore) |
 | **RegEx Validation** |  |
-| Enforce snake_case | RegEx for enforcing "snake_case". |
+| Enforce snake_case | RegEx for enforcing **snake_case**. |
 | Parameter Display Name | Parameter Display Name in "Parameters" Tab can only contain text, underscore and spaces. This RegEx enforces that for the English language, but you may be able to use charachters from other alphabets as well. Change the RegEx to match your language if your documentation isn't in English. |
 
 
 ## Triggers
 If you want to automatically export documentation and annotations, and import GA4 Change History and GTM Container Versions, you must add some **Timer Triggers** to the Google Sheet.
 
-Triggers are added by going to Menu:
-* Extensions -> App Script -> Triggers
+Triggers are added by going to the Google Sheet Menu:
+* Extensions -> Apps Script -> Triggers
 
 Description of Trigger settings below, with suggested frequence.
 
