@@ -92,7 +92,7 @@ function listGTMContainers() {
 // **** END LIST GTM CONTAINERS
 
 // Maximum number of iterations
-let maxIterations = 1;
+let maxIterations = 2;
 // **** LIST GTM CONTAINERS
 let manualGTMAnnotationTrigger = false;
 
