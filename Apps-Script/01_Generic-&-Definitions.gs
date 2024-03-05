@@ -23,6 +23,8 @@ function onOpen() {
         .addItem('Export Annotations', 'uploadAnnotationsToBigQueryManually'))
     .addSubMenu(ui.createMenu('Firestore')
       .addItem('Export Event Documentation', 'uploadToFirestoreManually'))
+     .addSubMenu(ui.createMenu('Use Sheet as Data Source')
+      .addItem('Write Events & Parameters to Data Source Sheets', 'writeEventsToSheetManually')) 
     .addItem('Check for Updates', 'checkForUpdates')
     .addToUi();
 }
@@ -42,6 +44,10 @@ const helperGTMTab = "HelperGTM"; // GTM Tab with Accounts & Containers
 const helperGA4EventDataTab = "HelperGA4EventData"; // GA4 Tab with Event Data from API
 const helperGA4EventDataFromBigQueryTab = "HelperGA4EventDataFromBigQuery"; // GA4 Tab with Event Data from BigQuery
 const helperGA4ParameterDataFromBigQueryTab = "HelperGA4ParameterDataFromBigQuery"; // GA4 Tab with Event Data from BigQuery
+const annotationsDataSourceTab = "AnnotationsDataSource"; // Annotations Data Source Sheet
+const eventDataSourceTab = "EventDataSource"; // Event Data Source Sheet
+const eventImagesDataSourceTab = "EventImagesDataSource"; // Event Images Data Source Sheet
+const parameterDataSourceTab = "ParameterDataSource"; // Parameter Data Source Sheet
 const utilitieSleep = 300; // Global Utilities.sleep setting, except for BigQuery script.
 
 // Save settings to PropertiesService
@@ -315,6 +321,26 @@ function clearSettingsFields() {
     const numRowsGA4ParameterDataBQTab = sheetGA4ParameterDataBQTab.getLastRow(); // The number of rows to clear
     sheetGA4ParameterDataBQTab.getRange(2, 1, numRowsGA4ParameterDataBQTab+1, sheetGA4ParameterDataBQTab.getLastColumn()).clearContent();
 
+   // Clear Annotations Data Source Sheet
+    const sheetAnnotationsSourceTab = ss.getSheetByName(annotationsDataSourceTab);
+    const numRowsAnnotationsSourceTab = sheetAnnotationsSourceTab.getLastRow(); // The number of rows to clear
+    sheetAnnotationsSourceTab.getRange(2, 1, numRowsAnnotationsSourceTab+1, sheetAnnotationsSourceTab.getLastColumn()).clearContent();
+
+   // Clear Event Data Source Sheet
+    const sheetEventSourceTab = ss.getSheetByName(eventDataSourceTab);
+    const numRowsEventSourceTab = sheetEventSourceTab.getLastRow(); // The number of rows to clear
+    sheetEventSourceTab.getRange(2, 1, numRowsEventSourceTab+1, sheetEventSourceTab.getLastColumn()).clearContent();
+
+   // Clear Event Images Data Source Sheet
+    const sheetEventImagesSourceTab = ss.getSheetByName(eventImagesDataSourceTab);
+    const numRowsEventImagesSourceTab = sheetEventImagesSourceTab.getLastRow(); // The number of rows to clear
+    sheetEventImagesSourceTab.getRange(2, 1, numRowsEventImagesSourceTab+1, sheetEventImagesSourceTab.getLastColumn()).clearContent();
+
+   // Clear Parameter Data Source Sheet
+    const sheetParameterSourceTab = ss.getSheetByName(parameterDataSourceTab);
+    const numRowsParameterSourceTab = sheetParameterSourceTab.getLastRow(); // The number of rows to clear
+    sheetParameterSourceTab.getRange(2, 1, numRowsParameterSourceTab+1, sheetParameterSourceTab.getLastColumn()).clearContent();
+    
     // *** EVENTS SHEET ***
     // Clear Event Count from Event Sheet
     const sheetEventTab = ss.getSheetByName(eventTab);
@@ -327,7 +353,7 @@ function clearSettingsFields() {
     // Clear Resource Name (GA4 API) from 
     const sheetParameterTab = ss.getSheetByName(parameterTab);
     const numRowsParameterTab = sheetEventTab.getLastRow(); // The number of rows to clear
-    // Clear Parameter Count from Event Sheet
+    // Clear Parameter Count from Parameter Sheet
     sheetParameterTab.getRange(headerRowNumber+1, parameterCountColumn, numRowsParameterTab+1, 1).clearContent();
     // Clear Resource Name (GA4 API) from Parameters
     sheetParameterTab.getRange(headerRowNumber+1, parameterResourceNameColumn, numRowsParameterTab+1, 1).clearContent();
