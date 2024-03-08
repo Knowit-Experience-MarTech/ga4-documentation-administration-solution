@@ -14,7 +14,7 @@ The solution contains 4 parts, but you can use only the Google Sheet if you want
 3. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation stored in BigQuery. This report will make it easy to identify if your documentation is aligned with the data you are collecting. You can for example easily spot if your data collection / implementation / documentation have issues.
 4. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **event_group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
 
-This solution is made by [**Eivind Savio**](https://wwww.savio.no) from [**Knowit Experience Oslo**](https://www.knowit.no/). It is not officially supported by Knowit Experience Oslo.
+This solution is made by [**Eivind Savio**](https://www.savio.no) from [**Knowit Experience Oslo**](https://www.knowit.no/). It is not officially supported by Knowit Experience Oslo.
 
 ## Intro to documentation
 The documentation is divided into 5 separate parts:
