@@ -3,10 +3,10 @@ Documentation for creating basic Looker Studio report for presenting Event & Par
 
 * Make a copy of the [**Looker Studio GA4 Basic Documentation report**](https://lookerstudio.google.com/s/k0NYnj-_FFw)
 * Add the following Google Sheet Worksheet Data Sources to Looker Studio:
-  1. AnnotationsDataSource
-  2. ParameterDataSource
-  3. EventDataSource
-  4. EventImagesDataSource
+  1. [ParameterDataSource](#ParameterDataSource)
+  2. [EventDataSource](#EventDataSource)
+  3. [EventImagesDataSource](#EventImagesDataSource)
+  4. [AnnotationsDataSource](#AnnotationsDataSource)
 
 ## Calculated Fields
 The solution contains several **Calculated Fields**. They are all documented below. 
@@ -181,3 +181,56 @@ HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/d6e751a9-c6f1-42
 
 If you want to learn more about this solution, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
+
+## EventImagesDataSource
+Make the following adjustment to the data source if the Calculated Fields aren't working correctly.
+
+### Calculated Fields
+
+#### Event Image \[Calc\]
+* **Field name:** Event Image \[Calc\]
+* **Field id:** event_image_calc
+
+**Formula:**
+```javascript
+HYPERLINK(Event Image Documentation URL,IMAGE(Event Image Documentation URL))
+```
+
+## ga4_documentation_annotations
+Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
+
+### Parameters
+#### Search Added By
+Create **Search Added By** parameter.
+
+* **Parameter name:** Search Added By
+* **Parameter ID:** search_added_by
+* **Data Type:** Text
+* **Permitted values:** Any value
+
+#### Search Annotations
+Create **Search Annotations** parameter.
+
+* **Parameter name:** Search Annotations
+* **Parameter ID:** search_annotations
+* **Data Type:** Text
+* **Permitted values:** Any value
+
+### Calculated Fields
+#### Added By Search \[Calc\]
+* **Field name:** Added By Search \[Calc\]
+* **Field id:** added_by_search_calc
+
+**Formula:**
+```javascript
+CONTAINS_TEXT(LOWER(Annotation Added By), LOWER(Search Added By))
+```
+
+#### Annotation Search \[Calc\]
+* **Field name:** Annotation Search \[Calc\]
+* **Field id:** annotation_search_calc
+
+**Formula:**
+```javascript
+CONTAINS_TEXT(LOWER(Annotation), LOWER(Search Annotations))
+```
