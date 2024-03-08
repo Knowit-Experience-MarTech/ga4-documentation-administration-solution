@@ -196,7 +196,7 @@ Make the following adjustment to the data source if the Calculated Fields aren't
 HYPERLINK(Event Image Documentation URL,IMAGE(Event Image Documentation URL))
 ```
 
-## ga4_documentation_annotations
+## AnnotationsDataSource
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
 
 ### Parameters
