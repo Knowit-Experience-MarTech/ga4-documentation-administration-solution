@@ -2,12 +2,12 @@
 Documentation for creating advanced Looker Studio report for presenting Event & Parameter Documentation with Status, in addition to Annotations. BigQuery will be used as Data Source.
 
 * Make sure you first have created the [**BigQuery tables**](../BigQuery#overview-over-tables-created-in-bigquery) that will be used as **Data Sources** in Looker Studio.
-* Make a copy of the [**Looker Studio GA4 Documentation report**](https://lookerstudio.google.com/s/ihyU84wd7uY)
+* Make a copy of the [**Looker Studio GA4 Advanced Documentation report**](https://lookerstudio.google.com/s/ihyU84wd7uY)
 * Add the following BigQuery Data Sources to Looker Studio:
   1. [ga4_documentation_parameters_and_documentation_status](#ga4_documentation_parameters_and_documentation_status)
   2. [ga4_documentation_events_and_documentation_status](#ga4_documentation_events_and_documentation_status)
-  3. [ga4_documentation_annotations](#ga4_documentation_annotations)
-  4. [ga4_documentation_events_and_images](#ga4_documentation_events_and_images)
+  3. [ga4_documentation_events_and_images](#ga4_documentation_events_and_images)
+  4. [ga4_documentation_annotations](#ga4_documentation_annotations)
 
 ## Calculated Fields
 The solution contains several **Calculated Fields**. They are all documented below. 
@@ -37,15 +37,26 @@ Create **Parameter Name Search** parameter.
 * **Permitted values:** Any value
 
 ### Calculated Fields
-#### Dashboard Title Label \[Calc\]
+#### Event Name Label \[Calc\]
 This becomes a metric.
 
-* **Field Name:** Dashboard Title Label \[Calc\]
-* **Field ID:** dashboard_title_label_calc
+* **Field Name:** Event Name Label \[Calc\]
+* **Field ID:** event_name_label_calc
 
 **Formula:**
 ```javascript
 IF(COUNT_DISTINCT(event_name)>1,"Multiple Event Names Selected",CONCAT("Event Name: ",MAX(event_name)))
+```
+
+#### Parameter Name Label \[Calc\]
+This becomes a metric.
+
+* **Field Name:** Parameter Name Label \[Calc\]
+* **Field ID:** parameter_name_label_calc
+
+**Formula:**
+```javascript
+IF(COUNT_DISTINCT(parameter_name)>1,"Multiple Parameters Selected",CONCAT("Parameter Name: ",MAX(parameter_name)))
 ```
 
 #### Parameter Documentation Status \[Calc\]
