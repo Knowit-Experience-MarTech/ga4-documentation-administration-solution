@@ -114,7 +114,7 @@ HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/d6e751a9-c6f1-42
 5. Find the **Parameter Scope** in the URL, ex. **EVENT**. Replace **EVENT** with **Parameter Scope** as shown in the **Formula** above.
 6. Find the **Parameter Name** in the URL, ex. **file_extension**. Replace **file_extension** with **Parameter Name** as shown in the **Formula** above.
 
-If you want to learn more about this solution, here is a video about the subject:
+If you want to learn more about creating custom URL links with Calculated Field, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
 
 ## EventDataSource
@@ -184,7 +184,7 @@ HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/d6e751a9-c6f1-42
 5. Copy the URL
 6. Find the **Event Name** in the URL, ex. **click**. Replace **click** with **Event Name** as shown in the **Formula** above.
 
-If you want to learn more about this solution, here is a video about the subject:
+If you want to learn more about creating custom URL links with Calculated Field, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
 
 ## EventImagesDataSource
