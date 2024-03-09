@@ -1,18 +1,21 @@
 # GA4 Events, Parameters & Annotations documentation & administration solution
-This is a solution in 4 parts that makes it easier to document and administrate **Events**, **Conversion Events**, **Parameters** (Dimensions & Metrics) for **Google Analytics 4 (GA4)**. Since the Google Sheet is integrated with several API's, you can (bulk) create/edit/delete Custom Dimensions & Metrics and Conversion Events. This means that you can document and administrate Custom Dimensions & Metrics and Conversion Events in the same operation.
+This is a solution that makes it easier to document and administrate **Events**, **Conversion Events**, **Parameters** (Dimensions & Metrics) for **Google Analytics 4 (GA4)**. 
 
-It also makes it easier for "non-technical" people to understand what a particular **event_name** is tracking, and what the different **parameters** connected to the **event_name** is tracking, by **presenting** the documentation in [**Looker Studio**](Looker-Studio). 
+A [**Google Sheet**](#google-sheet-documentation) is used for **doing the documentation**, and [**Looker Studio**](Looker-Studio) is used for **presenting the documentation**. Since the Google Sheet is integrated with several API's, you can (bulk) create/edit/delete Custom Dimensions & Metrics and Conversion Events. This means that you can document and administrate Custom Dimensions & Metrics and Conversion Events in the same operation.
+
+It also makes it easier for "non-technical" people to understand what a particular **event_name** is tracking, and what the different **parameters** connected to the **event_name** is tracking, by **presenting** the documentation in [**Looker Studio**](Looker-Studio). Looker Studio comes in **2 different versions**: **Basic** and **Advanced**. 
+
+The **Basic** version is using the **Google Sheet as a Data Source**, while the **Advanced** version is using **BigQuery as a Data Source**. The BigQuery solution will join the GA4 documentation with your GA4 BigQuery data, making it easy to identify if the documentation is aligned with data collected in GA4.
 
 The solution also includes [**Annotations**](#annotations), which can help you understand changes to your data. Annotations can either be added manually, or automatically created from **GA4 Change History** or **Google Tag Manager Container Versions**.
 
 ![GA4 Documentation illustration](Google-Sheet/images/ga4-documentation-illustration.png)
 
-The solution contains 4 parts, but you can use only the Google Sheet if you want:
+Overall functionality is listed below:
 
 1. [**Google Sheet**](https://docs.google.com/spreadsheets/d/1j0xGxwdyeYTTbr2mgcIRr_BsVOhzn_tZEZsV_x50hg4/copy) using [**Apps Script**](Apps-Script) for easier documentation and administration of Events, Parameters and Annotations. Everything starts with this Google Sheet.
-2. **Export** documentation from Google Sheet to [**BigQuery**](BigQuery). This export will join the GA4 documentation with your GA4 BigQuery data. Export can be both manual and automated.
-3. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation stored in BigQuery. This report will make it easy to identify if your documentation is aligned with the data you are collecting. You can for example easily spot if your data collection / implementation / documentation have issues.
-4. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **event_group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
+2. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation. The Advanced version using [**BigQuery**](BigQuery) will make it easy to identify if your documentation is aligned with the data you are collecting, or if the documentation or data collection is "broken".
+3. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **event_group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
 
 This solution is made by [**Eivind Savio**](https://www.savio.no) from [**Knowit Experience Oslo**](https://www.knowit.no/). It is not officially supported by Knowit Experience Oslo.
 
@@ -55,6 +58,7 @@ At the top of the sheet, you will find a custom menu called "**📈 GA4 Document
 | BigQuery -> Export Event & Parameter Documentation | This is a manual export of Event & Parameter documentation. Only Events with mandatory columns filled out will be exported, and the same goes for Parameters. In addition, only Parameters added to a Event will be exported. |
 | BigQuery -> Export Annotations | This is a manual export of Annotations from the Annontations Sheet. |
 | Firestore -> Export Event Documentation | This is a manual export of Event & Parameter documentation to Firestore. |
+| Use Sheet as Data Source -> Write Events & Parameters to Data Source Sheets | Writes Events & Parameter Documentation to some hidden Sheets using Apps Script in a format that Looker Studio can use as Data Source. |
 | Check for Updates | Check if there are any updates to the solution. If there is an update, follow the instructions. |
 
 ## Events
@@ -186,7 +190,7 @@ Description of the Settings sheet.
 
 | Function  | Comment | 
 | ------------- | ------------- |
-| Clear Settings Fields & Data | This will clear the following settings and data the Sheet: GA4 Settings, BigQuery Settings, GTM Settings, Firestore Settings, GA4 Account & Property helper Sheet, GTM Account & Container helper Sheet, GA4 API Event Data from helper Sheet, GA4 BigQuery Event Data from helper Sheet, GA4 BigQuery Parameter Data from helper Sheet, Event Count from Event Sheet, Resource Name (GA4 API) from Event Sheet, Parameter Resource Name (GA4 API) from Parameter Sheet, Parameter Count from Parameter Sheet & Annotations. |
+| Clear Settings Fields & Data | This will clear the following settings and data the Sheet: GA4 Settings, BigQuery Settings, GTM Settings, Firestore Settings, GA4 Account & Property helper Sheet, GTM Account & Container helper Sheet, GA4 API Event Data from helper Sheet, GA4 BigQuery Event Data from helper Sheet, GA4 BigQuery Parameter Data from helper Sheet, Event Data Source Sheet, Event Images Data Source Sheet, Parameters Data Source Sheet, Annotations Data Source Sheet, Event Count from Event Sheet, Resource Name (GA4 API) from Event Sheet, Parameter Resource Name (GA4 API) from Parameter Sheet, Parameter Count from Parameter Sheet & Annotations. |
 | **Sheet Settings** | |
 | Enforce snake_case | Enforce **snake_case** for Event Name & Parameter Name. Recommende setting is Yes, but if you download Events & Parameters from GA4 that isn't in this format, select No. |
 | Date Format | Date format used in exports, annotations etc. |
@@ -217,12 +221,23 @@ If you want to automatically export documentation and annotations, and import GA
 Triggers are added by going to the Google Sheet Menu:
 * Extensions -> Apps Script -> Triggers
 
+### Triggers for Advanced version using BigQuery as a Data Source
 Description of Trigger settings below, with suggested frequence.
 
 | Function  | Event Source | Time Based Trigger | interval | Comment |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | uploadEventsToBigQuery | Time-drive | Day timer | 7am to 8am | Uploads **Event & Parameter documentation** to BigQuery each morning between 7am and 8am. |
 | uploadAnnotationsToBigQuery | Time-drive | Hour timer | Every 4 hour | Uploads **Annotations** to BigQuery every 4 hour. |
+| uploadToFirestore | Time-drive | Hour timer | Every 4 hour | Uploads **Event documentation** to Firestore every 4 hour. |
+| getGA4ChangeHistory | Time-drive | Hour timer | Every 2 hour | Downloads **GA4 Change History** to the Google Sheet every 2 hour. |
+| listGTMContainerVersions | Time-drive | Minutes timer | Every 30 minutes | Downloads **GTM Container Versions** to the Google Sheet every 30 minutes. Since the GTM API doesn't have any date & time information, the download must happen so often that the Container Version is placed on the correct date in the Sheet. How often that is is up to you to decide, but there is also a [**API quota**](https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas) |
+
+### Triggers for Basic version using Google Sheet as a Data Source
+Description of Trigger settings below, with suggested frequence.
+
+| Function  | Event Source | Time Based Trigger | interval | Comment |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| eventDocumentationToSheet | Time-drive | Day timer | 7am to 8am | Writes **Event & Parameter documentation** to the Sheet each morning between 7am and 8am. This is just to ensure that if you forget to write the documentation manually to the Sheet, this will ensure that the latest version of the documentation is available in Looker Studio. |
 | uploadToFirestore | Time-drive | Hour timer | Every 4 hour | Uploads **Event documentation** to Firestore every 4 hour. |
 | getGA4ChangeHistory | Time-drive | Hour timer | Every 2 hour | Downloads **GA4 Change History** to the Google Sheet every 2 hour. |
 | listGTMContainerVersions | Time-drive | Minutes timer | Every 30 minutes | Downloads **GTM Container Versions** to the Google Sheet every 30 minutes. Since the GTM API doesn't have any date & time information, the download must happen so often that the Container Version is placed on the correct date in the Sheet. How often that is is up to you to decide, but there is also a [**API quota**](https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas) |
