@@ -154,7 +154,7 @@ HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/42a4e160-741d-481c-a
 5. Find the **Parameter Scope** in the URL, ex. **EVENT**. Replace **EVENT** with **parameter_scope** as shown in the **Formula** above.
 6. Find the **Parameter Name** in the URL, ex. **file_extension**. Replace **file_extension** with **parameter_name** as shown in the **Formula** above.
 
-If you want to learn more about this solution, here is a video about the subject:
+If you want to learn more about creating custom URL links with Calculated Field, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
 
 #### Parameter Last Seen Date \[Calc\]
@@ -303,7 +303,7 @@ HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/42a4e160-741d-481c-a
 5. Copy the URL
 6. Find the **Event Name** in the URL, ex. **click**. Replace **click** with **event_name** as shown in the **Formula** above.
 
-If you want to learn more about this solution, here is a video about the subject:
+If you want to learn more about creating custom URL links with Calculated Field, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
   
 #### Event Uploaded to BQ Time \[Calc\]
