@@ -8,6 +8,11 @@ Documentation for creating basic Looker Studio report for presenting Event & Par
   3. [EventImagesDataSource](#EventImagesDataSource)
   4. [AnnotationsDataSource](#AnnotationsDataSource)
 
+## Generate Google Sheet Data Source data
+At the top of the sheet, you will find a custom menu called "**📈 GA4 Documentation**".
+
+* **Go to the menu:** Use Sheet as Data Source -> Write Events & Parameters to Data Source Sheets
+
 ## Calculated Fields
 The solution contains several **Calculated Fields**. They are all documented below. 
 
