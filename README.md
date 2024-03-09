@@ -7,7 +7,7 @@ It also makes it easier for "non-technical" people to understand what a particul
 
 The **Basic** version is using the **Google Sheet as a Data Source**, while the **Advanced** version is using **BigQuery as a Data Source**. The BigQuery solution will join the GA4 documentation with your GA4 BigQuery data, making it easy to identify if the documentation is aligned with data collected in GA4.
 
-The solution also includes [**Annotations**](#annotations), which can help you understand changes to your data. Annotations can either be added manually, or automatically created from **GA4 Change History** or **Google Tag Manager Container Versions**.
+The solution also includes [**Annotations**](#annotations), which can help you understand changes to your data. Annotations can either be added manually, or automatically created from [**GA4 Property Change History**](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1beta/accounts/searchChangeHistoryEvents) or [**Google Tag Manager Container Versions**](https://developers.google.com/tag-platform/tag-manager/api/v2/reference/accounts/containers/versions).
 
 ![GA4 Documentation illustration](Google-Sheet/images/ga4-documentation-illustration.png)
 
