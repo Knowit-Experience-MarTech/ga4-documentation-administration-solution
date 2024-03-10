@@ -11,10 +11,10 @@ The solution also includes [**Annotations**](#annotations), which can help you u
 
 ![GA4 Documentation illustration](Google-Sheet/images/ga4-documentation-illustration.png)
 
-Overall functionality is listed below:
+**Overall functionality is listed below:**
 
-1. [**Google Sheet**](https://docs.google.com/spreadsheets/d/1j0xGxwdyeYTTbr2mgcIRr_BsVOhzn_tZEZsV_x50hg4/copy) using [**Apps Script**](Apps-Script) for easier documentation and administration of Events, Parameters and Annotations. Everything starts with this Google Sheet.
-2. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation. The Advanced version using [**BigQuery**](BigQuery) will make it easy to identify if your documentation is aligned with the data you are collecting, or if the documentation or data collection is "broken".
+1. [**Google Sheet**](#google-sheet-documentation) using [**Apps Script**](Apps-Script) for easier documentation and administration of Events, Parameters and Annotations. Everything starts with this Google Sheet.
+2. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation. The Advanced version using [**BigQuery**](BigQuery) will make it easier to identify if your documentation is aligned with the data you are collecting, or if the documentation or data collection is "broken".
 3. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **event_group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
 
 This solution is made by [**Eivind Savio**](https://www.savio.no) from [**Knowit Experience Oslo**](https://www.knowit.no/). It is not officially supported by Knowit Experience Oslo.
