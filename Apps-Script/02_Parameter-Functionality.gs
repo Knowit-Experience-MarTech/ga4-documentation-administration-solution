@@ -117,7 +117,7 @@ try {
 function showDialog() {
   const parameters = getParameters(); // Include parameters here
 
-  const html = HtmlService.createTemplateFromFile('12_Add-Edit-Parameters');
+  const html = HtmlService.createTemplateFromFile('13_Add-Edit-Parameters');
   html.parameters = parameters;
   html.arr1 = arr1;
   html.arr2 = arr2;
