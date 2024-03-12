@@ -33,7 +33,7 @@ Create **Parameter Name Search** parameter.
 * **Permitted values:** Any value
 
 #### Parameter Description Search
-Create **Parameter Name Search** parameter.
+Create **Parameter Description Search** parameter.
 
 * **Parameter name:** Parameter Description Search
 * **Parameter ID:** parameter_description_search
@@ -86,7 +86,7 @@ CONTAINS_TEXT(LOWER(Parameter Description), LOWER(Parameter Description Search))
 
 #### Parameter Name Search \[Calc\]
 
-* **Field Name:** Parameter Description Search \[Calc\]
+* **Field Name:** Parameter Name Search \[Calc\]
 * **Field ID:** parameter_name_search_calc
 
 **Formula:**
