@@ -1,7 +1,10 @@
 # Looker Studio - Overview
 Documentation for creating Looker Studio for presenting Event & Parameter Documentation with Status, in addition to Annotations.
 
-Looker Studio comes in 2 different versions: [**Advanced**](Advanced) and [**Basic**](Basic).
+Looker Studio comes in 2 different versions: [**Advanced**](Advanced) and [**Basic**](Basic). Video below demonstrates the Advanced version.
+
+[![GA4 Event & Parameter Documentation - Looker Studio - Advanced](images/ga4-event-parameter-documentation-thumbnail-youtube.png)](https://youtu.be/1j8h_VNe0Hk)
+
 
 | Functionality  | Advanced | Basic |
 | ------------- | ------------- | ------------- |
