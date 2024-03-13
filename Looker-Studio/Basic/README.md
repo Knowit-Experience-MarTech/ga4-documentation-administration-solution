@@ -21,7 +21,7 @@ You have to edit 2 Calculated Fields:
 2. [Parameter Name URL \[Calc\]](#parameter-name-url-calc)
 
 ## ParameterDataSource
-Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
+Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly/are missing.
 
 ### Parameters
 #### Parameter Name Search
@@ -118,7 +118,7 @@ If you want to learn more about creating custom URL links with Calculated Field,
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
 
 ## EventDataSource
-Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
+Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly/are missing.
 
 ### Parameters
 #### Event Name Search
@@ -163,6 +163,33 @@ CONTAINS_TEXT(LOWER(Event Description), LOWER(Event Description Search))
 **Formula:**
 ```javascript
 CONTAINS_TEXT(LOWER(Event Name), LOWER(Event Name Search))
+```
+
+#### Event Android App Bool \[Calc\]
+* **Field name:** Event Android App Bool \[Calc\]
+* **Field id:** event_android_app_bool_calc
+
+**Formula:**
+```javascript
+CASE WHEN Event Android App = 'TRUE' THEN true ELSE false END
+```
+
+#### Event iOS App Bool \[Calc\]
+* **Field name:** Event iOS App Bool \[Calc\]
+* **Field id:** event_ios_app_bool_calc
+
+**Formula:**
+```javascript
+CASE WHEN Event iOS App = 'TRUE' THEN true ELSE false END
+```
+
+#### Event Website Bool \[Calc\]
+* **Field name:** Event Website Bool \[Calc\]
+* **Field id:** event_website_bool_calc
+
+**Formula:**
+```javascript
+CASE WHEN Event Website = 'TRUE' THEN true ELSE false END
 ```
 
 #### Event Name URL \[Calc\]
