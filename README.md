@@ -3,7 +3,7 @@ This is a solution that makes it easier to document and administrate **Events**,
 
 [**Google Sheet**](#google-sheet-documentation) is used for **doing the documentation**, and [**Looker Studio**](Looker-Studio) is used for **presenting the documentation**. Since the Google Sheet is integrated with several API's, you can (bulk) create/edit/delete Custom Dimensions & Metrics and Conversion Events. This means that you can document and administrate Custom Dimensions & Metrics and Conversion Events in the same operation.
 
-It also makes it easier for "non-technical" people to understand what a particular **event_name** is tracking, and what the different **parameters** connected to the **event_name** is tracking, by **presenting** the documentation in [**Looker Studio**](Looker-Studio). Looker Studio comes in **2 different versions**: **Basic** and **Advanced**. 
+It also makes it easier for "non-technical" people to understand what a particular **Event Name** is tracking, and what the different **Parameters** connected to the **Event Name** is tracking, by **presenting** the documentation in [**Looker Studio**](Looker-Studio). Looker Studio comes in **2 different versions**: **Basic** and **Advanced**. 
 
 The **Basic** version is using the **Google Sheet as a Data Source**, while the **Advanced** version is using **BigQuery as a Data Source**. The BigQuery solution will join the GA4 documentation with your GA4 BigQuery data, making it easy to identify if the documentation is aligned with data collected in GA4.
 
@@ -15,7 +15,7 @@ The solution also includes [**Annotations**](#annotations), which can help you u
 
 1. [**Google Sheet**](#google-sheet-documentation) using [**Apps Script**](Apps-Script) for easier documentation and administration of Events, Parameters and Annotations. Everything starts with this Google Sheet.
 2. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation. The Advanced version using [**BigQuery**](BigQuery) will make it easier to identify if your documentation is aligned with the data you are collecting, or if the documentation or data collection is "broken".
-3. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **event_group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
+3. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **Event Group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
 
 This solution is made by [**Eivind Savio**](https://www.savio.no) from [**Knowit Experience Oslo**](https://www.knowit.no/). It is not officially supported by Knowit Experience Oslo.
 
@@ -58,7 +58,7 @@ At the top of the sheet, you will find a custom menu called "**📈 GA4 Document
 | BigQuery -> Export Event & Parameter Documentation | This is a manual export of Event & Parameter documentation. Only Events with mandatory columns filled out will be exported, and the same goes for Parameters. In addition, only Parameters added to a Event will be exported. |
 | BigQuery -> Export Annotations | This is a manual export of Annotations from the Annontations Sheet. |
 | Firestore -> Export Event Documentation | This is a manual export of Event & Parameter documentation to Firestore. |
-| Use Sheet as Data Source -> Write Events & Parameters to Data Source Sheets | Writes Events & Parameter Documentation to some hidden Sheets using Apps Script in a format that Looker Studio can use as Data Source. |
+| Use Sheet as Data Source -> Write Events & Parameters to Data Source Sheets | Writes Events & Parameter Documentation to some hidden Sheets using Apps Script in a format that Looker Studio can use as a Data Source. |
 | Check for Updates | Check if there are any updates to the solution. If there is an update, follow the instructions. |
 
 ## Events
@@ -87,7 +87,7 @@ The different columns in the Sheet are described below.
 | Column Name  | Description |
 | ------------- | ------------- |
 | Event Group | Grouping Events together with a event_group parameter is a good thing to do. It can make it easier to understand your Events, and do queries in BigQuery. The Event Group parameter will also be used in the Firestore to Server-side GTM integration. How to group the Events is up to you. Event Group **must be filled out** if you are going to export the documentation to BigQuery. |
-| Event Name | Type the **Event Name** here. If the Event Name is a **duplicate**, the cell will be highlighted with a red color. If the Event Name is written in a format that isn’t **snake_case**, input will be rejected. Enforcing **snake_case** can be turned off in the **Settings Sheet**. Event Name **must be filled out** if you are going to export the documentation to BigQuery. Automatically collected Events (first_visit, first_open, session_start and user_engagement) are excluded from the documentation. Also notice the "special" Event **ga4_config**. DO NOT DELETE this Event. This Event is for documenting global Parameters, and has some functionality in BigQuery. |
+| Event Name | Type the **Event Name** here. If the Event Name is a **duplicate**, the cell will be highlighted with a red color. If the Event Name is written in a format that isn’t **snake_case**, input will be rejected. Enforcing **snake_case** can be turned off in the **Settings Sheet**. Event Name **must be filled out** if you are going to export the documentation to BigQuery. Automatically collected Events (first_visit, first_open, session_start and user_engagement) are excluded from the documentation. Also notice the "special" Event **ga4_config**. DO NOT DELETE this Event. This Event is for documenting global Parameters, and has some functionality attached to it. |
 | Data Colletion | Select from a drop-down list how this Event is generated. This is just for your own documentation. |
 | Event Type | Select from a drop-down list what kind of Event this is. This is just for your own documentation. |
 | Conversion | Tick the **checkbox** if this Event is a **conversion**. |
@@ -106,12 +106,12 @@ The different columns in the Sheet are described below.
 | GTM Setup & Comment | If you are using GTM/sGTM, add relevant information here. Ex. name of the Tag in GTM/sGTM. |
 
 ### Image Documentation
-Sometimes words can't describe the Event good enough, and you need image(s)/illustration(s) to document the Event. Where to store those images is up to you, but if you are going to export the documentation to [**Looker Studio**](Looker-Studio) via [**BigQuery**](BigQuery), images needs to be publicly available.
+Sometimes words can't describe the Event good enough, and you need image(s)/illustration(s) to document the Event. Where to store those images is up to you, but if you are going to export the documentation to [**Looker Studio**](Looker-Studio), images needs to be publicly available.
 
 #### Google Drive
 If you are storing the images in **Google Drive**, store them in a folder with the settings **Anyone on the Internet with the link can view**.
 * Select the image you want to add to the documentation, and click **Share**, and **Copy link**, and add that link to **URL to Image(s)** cell.
- * Since Google Drive image URL's doesn't work in Looker Studio, URLs will automatically be rewritten before stored in BigQuery.
+ * Since Google Drive image URL's doesn't work in Looker Studio, URLs will automatically be rewritten to a usable format before they are stored.
  * Separate several image URLs with new line (line break). Alt or Ctrl + Enter (Windows) or Cmd + Enter (Mac). 
 
 ## Parameters
@@ -148,11 +148,11 @@ The different columns in the Sheet are described below.
 | BQ Count | BigQuery Count of how many times this Parameter has been requested. Choose **BigQuery** in the **Get GA4 Event & Parameters from** settings in the **Settings** Sheet. |
 | Description | Write a description of the parameter. Max length of 150 characters if this is a Custom Metric or Dimension. |
 | Edit | Checkboxes that are used together with the **buttons**. |
-| Resource Name | It's an kiind of ID returned from the API, and will be automatically filled out for Custom Dimensions and Metrics (list, create, update). Use this to identify if the Custom Dimension or Metrics exists in GA4. |
+| Resource Name | It's an kind of ID returned from the API, and will be automatically filled out for Custom Dimensions and Metrics (list, create, update). Use this to identify if the Custom Dimension or Metrics exists in GA4. |
 | GTM Setup & Comment | Use this to describe the Parameter in GTM/SGTM. Ex. name of Variable, how the value is created (Data Layer) etc. How detailed this description should be is up to you. |
 
 ## Annotations
-At the time of writing, GA4 doesn't have annotations, so this solution is trying to fill the blanks for that.
+At the time of writing, GA4 doesn't have annotations, so this is an attempt to at least present an alternative.
 ![Annotations](Google-Sheet/images/google-sheet-annotations.png)
 
 The reason for adding Annotations to this Sheet, is that if you create/delete a Conversion Event, Dimension or Metric - this may affect your data and should therefore be documented. Other things that may affect your data are changes made in **Google Tag Manager**.
@@ -212,7 +212,7 @@ Description of the Settings sheet.
 | **Firestore Settings** | See documentation in **Settings in the Sheet** and the [**Firestore documentation**](Firestore) |
 | **RegEx Validation** |  |
 | Enforce snake_case | RegEx for enforcing **snake_case**. |
-| Parameter Display Name | Parameter Display Name in "Parameters" Tab can only contain text, underscore and spaces. This RegEx enforces that for the English language, but you may be able to use charachters from other alphabets as well. Change the RegEx to match your language if your documentation isn't in English. |
+| Parameter Display Name | Parameter Display Name in "Parameters" Tab can only contain text, underscore and spaces. This RegEx enforces that for the English language, but you may be able to use characters from other alphabets as well. Change the RegEx to match your language if your documentation isn't in English. |
 
 
 ## Triggers
