@@ -14,7 +14,7 @@ Looker Studio comes in 2 different versions; [**Advanced**](Advanced) and [**Bas
 | Event & Parameter Documentation Overview | Yes | No |
 | Event Search & Filtering | Yes | Yes |
 | Parameter Search & Filtering | Yes | Yes |
-| See relationship between Parameters & Events | Yes | Yes |
+| See relationship between Events & Parameters | Yes | Yes |
 | See relationship between Parameters & Events | Yes | Yes |
 | Differentiate between global parameters (GA4 Config Parameters) and Event specific parameters | Yes | Yes |
 | Identify if documentation is aligned with data collected | Yes | No |
