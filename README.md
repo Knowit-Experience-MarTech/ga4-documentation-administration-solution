@@ -17,7 +17,7 @@ The solution also includes [**Annotations**](#annotations), which can help you u
 2. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation. The Advanced version using [**BigQuery**](BigQuery) will make it easier to identify if your documentation is aligned with the data you are collecting, or if the documentation or data collection is "broken".
 3. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **Event Group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
 
-This solution is made by [**Eivind Savio**](https://www.savio.no) from [**Knowit Experience Oslo**](https://www.knowit.no/). It is not officially supported by Knowit Experience Oslo.
+This solution is made by [**Eivind Savio**](https://www.savio.no/google-analytics/ga4-documentation-events-parameters-annotations) from [**Knowit Experience**](https://www.knowit.no/om-oss/experience/) (Oslo). It is not officially supported by Knowit Experience.
 
 ## Intro to documentation
 The documentation is divided into 5 separate parts:
