@@ -158,7 +158,8 @@ function listGTMContainerVersions() {
                                                 '. \n\nDescription: ' + containerVersions.description +
                                                 '. \n\nGTM URL: ' + containerVersions.tagManagerUrl,
               containerVersion.id = containerVersions.path,
-              containerVersion.annotationCategory = annotationCategory
+              containerVersion.annotationCategory = annotationCategory,
+              containerVersion.annotationDate = Number(containerVersions.fingerprint)
 
               containerVersionResult.push(containerVersion)
             }
@@ -204,7 +205,7 @@ function listGTMContainerVersions() {
     // Add undocumented Annotations to the end of the Annotation Sheet
     undocumentedAnnotations.forEach((annotation) => {
       const annotationCategory = annotation.annotationCategory;
-      const annotationDate = Utilities.formatDate(new Date(), timezone, dateFormat);
+      const annotationDate = Utilities.formatDate(new Date(annotation.annotationDate), timezone, dateFormat);
       const annotationAddedBy = 'Not Available from API';
       const annotationText = annotation.annotationText;
       const gtmContainer = annotation.container;
