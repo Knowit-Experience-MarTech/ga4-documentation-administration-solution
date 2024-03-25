@@ -176,14 +176,16 @@ To download **GTM Container Versions** as Annotations, **GTM Account** and **Con
 GTM Container Version info that will be downloaded are:
 * Version ID
 * Version Name
+* Version Date
 * Version Description
 * URL to the Version
 
 The [**GTM API**](https://developers.google.com/tag-platform/tag-manager/api/v2) have for some reason no information about **who** made the change/published the container, so the text **Not Available from API** will be returned instead.
-Information about **when** the **Container Version** was created (date/time) **is not available** either. Because of this, use this suggested solution:
+
+Suggested solution for downloading **GTM Container Versions** as Annotations:
 * **Download Container Versions manually** the first time, using the **Get GTM Container Versions** button.
-  * 3 latest versions will be downloaded. Since there isn't any date/time information in the API, todays date will be written to the Sheet. Change the dates manually in the Sheet to reflect the correct date.
-* Add a [**Timer Trigger**](#triggers) that from now on and moving forward downloads new GTM Container Versions automatically. This will ensure that new container versions will be added to the correct date.
+  * 3 latest versions will be downloaded.
+* Add a [**Timer Trigger**](#triggers) that from now on and moving forward downloads new GTM Container Versions automatically.
 
 ## Settings
 Description of the Settings sheet.
@@ -230,7 +232,7 @@ Description of Trigger settings below, with suggested frequence.
 | uploadAnnotationsToBigQuery | Time-drive | Hour timer | Every 4 hour | Uploads **Annotations** to BigQuery every 4 hour. |
 | uploadToFirestore | Time-drive | Hour timer | Every 4 hour | Uploads **Event documentation** to Firestore every 4 hour. |
 | getGA4ChangeHistory | Time-drive | Hour timer | Every 2 hour | Downloads **GA4 Change History** to the Google Sheet every 2 hour. |
-| listGTMContainerVersions | Time-drive | Minutes timer | Every 30 minutes | Downloads **GTM Container Versions** to the Google Sheet every 30 minutes. Since the GTM API doesn't have any date & time information, the download must happen so often that the Container Version is placed on the correct date in the Sheet. How often that is is up to you to decide, but there is also a [**API quota**](https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas) |
+| listGTMContainerVersions | Time-drive | Hour timer | Every 2 hour | Downloads **GTM Container Versions** to the Google Sheet every 2 hour. |
 
 ### Triggers for Basic version using Google Sheet as a Data Source
 Description of Trigger settings below, with suggested frequence.
