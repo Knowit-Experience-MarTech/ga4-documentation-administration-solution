@@ -4,11 +4,11 @@ Apps Script used in the [Google Sheet](https://github.com/Knowit-Experience-MarT
 Beware that all scripts that interacts with the GA4 API ([Reporting API](https://developers.google.com/analytics/devguides/reporting/data/v1/quotas) & [Admin API](https://developers.google.com/analytics/devguides/config/admin/v1/quotas)), there are **Limits and Quotas on API Requests**.
 
 The Google Sheet integrates with several API's & Libraries:
-* FirestoreApp Library
-* BigQuery API
-* Google Analytics Admin API
-* Google Analytics Reporting API
-* Google Tag Manager API
+* [Google Analytics Admin API](https://developers.google.com/analytics/devguides/config/admin/v1)
+* [Google Analytics Reporting API](https://developers.google.com/analytics/devguides/reporting/data/v1)
+* [BigQuery API](https://cloud.google.com/bigquery/docs/reference/rest)
+* [FirestoreApp Library](https://github.com/grahamearley/FirestoreGoogleAppsScript)
+* [Google Tag Manager API](https://developers.google.com/tag-platform/tag-manager/api/v2)
 
 The first time you use an Apps Script function, Google will throw several warnings about safety: 
 > **Google hasn’t verified this app**
