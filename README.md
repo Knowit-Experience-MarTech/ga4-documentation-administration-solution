@@ -1,7 +1,7 @@
 # GA4 Events, Parameters & Annotations documentation & administration solution
-This is a solution that makes it easier to document and administrate **Events**, **Conversion Events**, **Parameters** (Dimensions & Metrics) for **Google Analytics 4 (GA4)**. 
+This is a solution that makes it easier to document and administrate **Events**, **Key Events**, **Parameters** (Dimensions & Metrics) for **Google Analytics 4 (GA4)**. 
 
-[**Google Sheet**](#google-sheet-documentation) is used for **doing the documentation**, and [**Looker Studio**](Looker-Studio) is used for **presenting the documentation**. Since the Google Sheet is integrated with several API's, you can (bulk) create/edit/delete Custom Dimensions & Metrics and Conversion Events. This means that you can document and administrate Custom Dimensions & Metrics and Conversion Events in the same operation.
+[**Google Sheet**](#google-sheet-documentation) is used for **doing the documentation**, and [**Looker Studio**](Looker-Studio) is used for **presenting the documentation**. Since the Google Sheet is integrated with several API's, you can (bulk) create/edit/delete Custom Dimensions & Metrics and Key Events. This means that you can document and administrate Custom Dimensions & Metrics and Key Events in the same operation.
 
 It also makes it easier for "non-technical" people to understand what a particular **Event Name** is tracking, and what the different **Parameters** connected to the **Event Name** is tracking, by **presenting** the documentation in [**Looker Studio**](Looker-Studio). Looker Studio comes in **2 different versions**: **Basic** and **Advanced**. 
 
@@ -44,7 +44,7 @@ The documentation is divided into 5 separate parts:
 | [Events](#events) | In this sheet you edit and document Events. |
 | [Parameters](#parameters)  | In this sheet you edit and document Parameters (Standard Dimensions, Custom Dimensions, Standard Metrics, Custom Metrics). |
 | [Annotations](#annotations)  | Annotations can be added manually, you can import GA4 Property Change History (if something is changed in the property, this is logged in the Change History), and you can import Google Tag Manager Container Versions (name & description).  |
-| Conversion Events | Listing Events from the Events Sheet where the Event is marked as a Conversion Event. No functionality in this sheet. |
+| Key Events | Listing Events from the Events Sheet where the Event is marked as a Key Event. No functionality in this sheet. |
 | Event Parameters | This Sheet is listing Parameters from the Parameters Sheet where the Scope of the Parameter is set to EVENT. No functionality in this sheet. |
 | Item Parameters | This Sheet is listing Parameters from the Parameters Sheet where the Scope of the Parameter is set to ITEM. No functionality in this sheet. |
 | User Properties | This Sheet is listing Parameters from the Parameters Sheet where the Scope of the Parameter is set to USER. No functionality in this sheet. |
@@ -72,12 +72,12 @@ All buttons will trigger an Apps Script function. If you are doing bulk editing 
 | ------------- | ------------- |
 | Add/Edit Parameters | This button is for adding/editing Parameters (Event, Item or User Scoped). If you want to add Item Parameters to an Event, select the corresponding **Item Parameters** cell, and click the **Add/Edit Parameters** button. In the popup, select the Parameters you want to add to the Event, and click **Fill Current Cell**. |
 | Get Events & Event Count | Events & Event Count can either be downloaded from the **API**, or from **BigQuery**. Use the setting **Get GA4 Event & Parameters from** in the **Settings** Sheet to select API or BigQuery. Use BigQuery if you experience **(other)** issues, or if you want todays data included (**Streaming** export must be actived in GA4). |
-| Get Conversion Events | This will download Conversion Events from GA4. If this/these Conversion Event(s) doesn't exist in the Event Sheet, they will be added after the last row in the Sheet. If the Event exist in the Sheet, corresponding row in **Resource Name** column will be highlighted green, and a Resource Name will be added. **Conversion** checkbox and **Counting Method** will not be updated, **unless** you tick the **Edit** checkbox. This is to prevent overriding existing documentation by accident. |
-| Create Conversion Event | Select Event(s) (**Edit** checkbox) that you want make a Conversion Event. |
-| Update Conversion Event | Select Conversion Event(s) (**Edit** checkbox) that you want to update. Updates you can do to a Conversion Event is to select either **ONCE_PER_EVENT** or **ONCE_PER_SESSION**. |
-| Delete Conversion from Event | Select Conversion Event(s) (**Edit** checkbox) that you want to delete. This will delete / archive the Conversion Event in GA4. You will be prompted to verify that you want to delete these Conversion Events before the deletion happens.  |
+| Get Key Events | This will download Key Events from GA4. If this/these Key Event(s) doesn't exist in the Event Sheet, they will be added after the last row in the Sheet. If the Event exist in the Sheet, corresponding row in **Resource Name** column will be highlighted green, and a Resource Name will be added. **Key Event** checkbox and **Counting Method** will not be updated, **unless** you tick the **Edit** checkbox. This is to prevent overriding existing documentation by accident. |
+| Create Key Event | Select Event(s) (**Edit** checkbox) that you want make a Key Event. |
+| Update Key Event | Select Key Event(s) (**Edit** checkbox) that you want to update. Updates you can do to a Key Event is to select either **ONCE_PER_EVENT** or **ONCE_PER_SESSION**. |
+| Delete Key Event from Event | Select Key Event(s) (**Edit** checkbox) that you want to delete. This will delete / archive the Key Event in GA4. You will be prompted to verify that you want to delete these Key Events before the deletion happens.  |
 | Are Parameters Documented? | Select Events (**Edit** checkbox) that you want to check. Event, Item & User Parameters for that/these Event(s) will be checked against the Parameter documentation. If undocumented Parameters in the Event Sheet is found, you will get the option to delete those Parameters from ALL Events. Bulk deletion is not a problem. |
-| Delete Selected Events | All Events selected in the **Edit** column will be deleted (rows will be deleted). If the Event is also a **Conversion Event**, the Conversion Event in GA4 will also be deleted / archived. Be careful with bulk deletion. You will be prompted to verify that you want to delete this/these Event(s) before the deletion happens. |
+| Delete Selected Events | All Events selected in the **Edit** column will be deleted (rows will be deleted). If the Event is also a **Key Event**, the Key Event in GA4 will also be deleted / archived. Be careful with bulk deletion. You will be prompted to verify that you want to delete this/these Event(s) before the deletion happens. |
 | Tick Edit Checkboxes | This will **select ALL** checkboxes. |
 | Untick Edit Checkboxes| This will **deselect ALL** checkboxes. |
 
@@ -90,8 +90,8 @@ The different columns in the Sheet are described below.
 | Event Name | Type the **Event Name** here. If the Event Name is a **duplicate**, the cell will be highlighted with a red color. If the Event Name is written in a format that isn’t **snake_case**, input will be rejected. Enforcing **snake_case** can be turned off in the **Settings Sheet**. Event Name **must be filled out** if you are going to export the documentation to BigQuery. Automatically collected Events (first_visit, first_open, session_start and user_engagement) are excluded from the documentation. Also notice the "special" Event **ga4_config**. DO NOT DELETE this Event. This Event is for documenting global Parameters, and has some functionality attached to it. |
 | Data Colletion | Select from a drop-down list how this Event is generated. This is just for your own documentation. |
 | Event Type | Select from a drop-down list what kind of Event this is. This is just for your own documentation. |
-| Conversion | Tick the **checkbox** if this Event is a **conversion**. |
-| Counting Method | After you have ticked the **checkbox**, you can select if the conversion is **ONCE_PER_EVENT** or **ONCE_PER_SESSION**. |
+| Key Event | Tick the **checkbox** if this Event is a **Key Event**. |
+| Counting Method | After you have ticked the **checkbox**, you can select if the Key Event is **ONCE_PER_EVENT** or **ONCE_PER_SESSION**. |
 | Event Count | If you click on the **Get Events & Event Count** button, Event Count will be written to this column. Event Count can either be downloaded from the **API** or **BigQuery**. |
 | Event Description | Write a description for the Event here. Event Description **must be filled out** if you are going to export the documentation to BigQuery. |
 | Event Parameters | Event Parameters are added here. Do not Edit cells manually, since this may break some functionality. Only add Parameters to a cell by using the Apps Script application, or copy + paste from another Event Parameter cell. |
@@ -102,7 +102,7 @@ The different columns in the Sheet are described below.
 | Autofilled Time | If any cell is changed to the left of the **Autofilled Time** column, this column will be autofilled with the time the change was made. |
 | Website / iOS / Android | If the Event is used on a Website, tick the Website **checkbox**, and vice versa for iOS/Android. If neither Website, iOS or Android is selected, the Event will not be exported to BigQuery. |
 | Edit | Tick this checkbox for functionally related to that Event (see [Buttons in Event Sheet](#buttons-in-event-sheet)) |
-| Resource Name | Resource Name ID will be added be added to this column if the Event is a Conversion Event in GA4 |
+| Resource Name | Resource Name ID will be added be added to this column if the Event is a Key Event in GA4 |
 | GTM Setup & Comment | If you are using GTM/sGTM, add relevant information here. Ex. name of the Tag in GTM/sGTM. |
 
 ### Image Documentation
@@ -155,7 +155,7 @@ The different columns in the Sheet are described below.
 At the time of writing, GA4 doesn't have annotations, so this is an attempt to at least present an alternative.
 ![Annotations](Google-Sheet/images/google-sheet-annotations.png)
 
-The reason for adding Annotations to this Sheet, is that if you create/delete a Conversion Event, Dimension or Metric - this may affect your data and should therefore be documented. Other things that may affect your data are changes made in **Google Tag Manager**.
+The reason for adding Annotations to this Sheet, is that if you create/delete a Key Event, Dimension or Metric - this may affect your data and should therefore be documented. Other things that may affect your data are changes made in **Google Tag Manager**.
 To simplify this, you can download **GA4 Change History** for the property to the Sheet as annotations. The same goes with GTM, you can download **GTM Container Versions** as Annotations.
 
 Annotations can also be added manually in the Sheet.
