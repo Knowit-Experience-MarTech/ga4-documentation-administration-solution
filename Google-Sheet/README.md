@@ -2,7 +2,7 @@
 
 ## How to use the Google Sheet
 * [**Make a copy of the Google Sheet**](https://docs.google.com/spreadsheets/d/162QAnKN7nBgRxOzsisKLlqzdAsGOk4r2wDe6lzBFbks/copy)
-
+  * If you are a consultant and are doing the documentation on behalf of a client, it's recommended to copy the Google Sheet with an email belonging to the clients organization. This way ownership to the Google Sheet can be transferred within the clients organization.
 * The Google Sheet comes prefilled with most common **GA4 Event Names** and **Parameters** (Dimensions / Metrics).
   * **Delete** Event Names and Parameters you don't need in your documentation.
 * Go to [**Settings Sheet**](#settings) and input your settings.
