@@ -42,12 +42,15 @@ function checkForUpdates() {
   const latestGithubRelease = releases[0];
   const latestGithubVersion = parseFloat(
     latestGithubRelease.tag_name);
+	
+  const maxCharacters = 200;
+  let truncatedBody = latestGithubRelease.body.length > maxCharacters 
+    ? latestGithubRelease.body.substring(0, maxCharacters) + '...'
+    : latestGithubRelease.body;
   
   if (sheetReleaseVersion < latestGithubVersion) {
     const title = 'Update Avilable';
-    const message = messageText.newRelease + latestGithubRelease.body + `
-  
-  ` + latestGithubRelease.html_url;
+    const message = messageText.newRelease + truncatedBody + `\n\n` + 'Link to release: ' + `\n` + latestGithubRelease.html_url;
     ui.alert(title, message, ui.ButtonSet.OK);
   } else {
     ui.alert('No updates avaialable.');
