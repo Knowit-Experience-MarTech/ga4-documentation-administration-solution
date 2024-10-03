@@ -11,23 +11,25 @@ Looker Studio comes in 2 different versions; [**Advanced**](Advanced) and [**Bas
 | Functionality  | Advanced | Basic |
 | ------------- | ------------- | ------------- |
 | Data Source | BigQuery | Google Sheet |
-| Event & Parameter Documentation Overview | Yes | No |
-| Event Search & Filtering | Yes | Yes |
-| Parameter Search & Filtering | Yes | Yes |
-| See relationship between Events & Parameters | Yes | Yes |
-| See relationship between Parameters & Events | Yes | Yes |
-| Differentiate between global parameters (GA4 Config Parameters) and Event specific parameters | Yes | Yes |
-| Identify if documentation is aligned with data collected | Yes | No |
-| Identify undocumented Events collecting data, broken down on web, iOS and Android streams | Yes | No |
-| Identify undocumented Parameters collecting data, broken down on Events + web, iOS and Android streams | Yes | No |
-| Identify documented Events that isn't collecting data, broken down on web, iOS and Android streams | Yes | No |
-| Identify documented Parameters that isn't collecting data, broken down on Events + web, iOS and Android streams | Yes | No |
-| Event count broken down on web, iOS and Android streams | Yes | No |
-| Parameter count broken down on Events + web, iOS and Android streams | Yes | No |
-| Days since Event was _last seen_, broken down on web, iOS and Android streams | Yes | No |
-| Days since Parameter was _last seen_, broken down on Events + web, iOS and Android streams | Yes | No |
-| Google Cloud costs may occur | Yes | No |
-| Annotation report | Yes | Yes |
+| Event & Parameter Documentation Overview | <span class="checked">✔</span> | :x: |
+| Event Search & Filtering | <span class="checked">✔</span> | <span class="checked">✔</span> |
+| Parameter Search & Filtering | <span class="checked">✔</span> | <span class="checked">✔</span> |
+| See relationship between Events & Parameters | <span class="checked">✔</span> | <span class="checked">✔</span> |
+| See relationship between Parameters & Events | <span class="checked">✔</span> | <span class="checked">✔</span> |
+| Differentiate between global parameters (GA4 Config Parameters) and Event specific parameters | <span class="checked">✔</span> | <span class="checked">✔</span> |
+| Identify if documentation is aligned with data collected | <span class="checked">✔</span> | :x: |
+| Identify undocumented Events collecting data, broken down on web, iOS and Android streams | <span class="checked">✔</span> | :x: |
+| Identify undocumented Parameters collecting data, broken down on Events + web, iOS and Android streams | <span class="checked">✔</span> | :x: |
+| Identify documented Events that isn't collecting data, broken down on web, iOS and Android streams | <span class="checked">✔</span> | :x: |
+| Identify documented Parameters that isn't collecting data, broken down on Events + web, iOS and Android streams | <span class="checked">✔</span> | :x: |
+| Event count broken down on web, iOS and Android streams | <span class="checked">✔</span> | :x: |
+| Parameter count broken down on Events + web, iOS and Android streams | <span class="checked">✔</span> | :x: |
+| Days since Event was _last seen_, broken down on web, iOS and Android streams | <span class="checked">✔</span> | :x: |
+| Date Event was _first seen_, broken down on web, iOS and Android streams | <span class="checked">✔</span> | :x: |
+| Days since Parameter was _last seen_, broken down on Events + web, iOS and Android streams | <span class="checked">✔</span> | :x: |
+| Date Parameter was _first seen_, broken down on Events + web, iOS and Android streams | <span class="checked">✔</span> | :x: |
+| Google Cloud costs may occur | <span class="checked">✔</span> | :x: |
+| Annotation report | <span class="checked">✔</span> | <span class="checked">✔</span> |
 
 <table>
   <tr>
