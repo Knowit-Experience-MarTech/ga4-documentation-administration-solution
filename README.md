@@ -1,7 +1,7 @@
 # GA4 Events, Parameters & Annotations documentation & administration solution
 This is a solution that makes it easier to document and administrate **Events**, **Key Events**, **Parameters** (Dimensions & Metrics) for **Google Analytics 4 (GA4)**. 
 
-[**Google Sheet**](#google-sheet-documentation) is used for **doing the documentation**, and [**Looker Studio**](Looker-Studio) is used for **presenting the documentation**. Since the Google Sheet is integrated with several API's, you can (bulk) create/edit/delete Custom Dimensions & Metrics and Key Events. This means that you can document and administrate Custom Dimensions & Metrics and Key Events in the same operation.
+[**Google Sheet**](Google-Sheet) is used for **doing the documentation**, and [**Looker Studio**](Looker-Studio) is used for **presenting the documentation**. Since the Google Sheet is integrated with several API's, you can (bulk) create/edit/delete Custom Dimensions & Metrics and Key Events. This means that you can document and administrate Custom Dimensions & Metrics and Key Events in the same operation.
 
 It also makes it easier for "non-technical" people to understand what a particular **Event Name** is tracking, and what the different **Parameters** connected to the **Event Name** is tracking, by **presenting** the documentation in [**Looker Studio**](Looker-Studio). Looker Studio comes in **2 different versions**: **Basic** and **Advanced**. 
 
@@ -13,7 +13,7 @@ The solution also includes [**Annotations**](#annotations), which can help you u
 
 **Overall functionality is listed below:**
 
-1. [**Google Sheet**](#google-sheet-documentation) using [**Apps Script**](Apps-Script) for easier documentation and administration of Events, Parameters and Annotations. Everything starts with this Google Sheet.
+1. [**Google Sheet**](Google-Sheet) using [**Apps Script**](Apps-Script) for easier documentation and administration of Events, Parameters and Annotations. Everything starts with this Google Sheet.
 2. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation. The Advanced version using [**BigQuery**](BigQuery) will make it easier to identify if your documentation is aligned with the data you are collecting, or if the documentation or data collection is "broken".
 3. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **Event Group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
 
