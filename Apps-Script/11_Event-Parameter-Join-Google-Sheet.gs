@@ -38,7 +38,7 @@ function eventDocumentationToSheet() {
   }
     // Clear existing content and set headers
     eventDocumentationSheet.clear();
-    eventDocumentationSheet.getRange('A1:M1').setValues([['Event Group', 'Event Name', 'Event Method', 'Event Type', 'Event Conversion', 'Event Conversion Counting', 'Event Description', 'Event Comment', 'Event Time Edited', 'Event Website', 'Event iOS App', 'Event Android App', 'Event GTM Comment']]);
+    eventDocumentationSheet.getRange('A1:M1').setValues([['Event Group', 'Event Name', 'Event Method', 'Event Type', 'Key Event', 'Key Event Counting', 'Event Description', 'Event Comment', 'Event Time Edited', 'Event Website', 'Event iOS App', 'Event Android App', 'Event GTM Comment']]);
 
     const eventDocumentation = [];
   
@@ -48,8 +48,8 @@ function eventDocumentationToSheet() {
         const event_name = row[eventNameColumn - 1].trim();
         const event_method = row[eventMethodColumn - 1].trim();
         const event_type = row[eventTypeColumn - 1].trim();
-        const event_conversion = row[eventConversionColumn - 1];
-        const event_conversion_counting = row[eventConversionCountingColumn - 1].trim();
+        const event_key_event = row[keyEventColumn - 1];
+        const event_key_event_counting = row[keyEventCountingColumn - 1].trim();
         const event_description = row[eventDescriptionColumn - 1].trim();
         const event_comment = row[eventCommentColumn - 1].trim();
         const event_time_edited = row[eventEditedTimeColumn- 1] ? Utilities.formatDate(row[eventEditedTimeColumn- 1], timezone, dateFormat+"' 'HH:mm:ss") : '';
@@ -60,7 +60,7 @@ function eventDocumentationToSheet() {
       
         if((event_group && event_name && event_description) && (event_website || event_ios_app || event_android_app)) {
           eventDocumentation.push([
-            event_group,event_name,event_method,event_type,event_conversion,event_conversion_counting,event_description,event_comment,event_time_edited,event_website,event_ios_app,event_android_app,event_gtm_comment
+            event_group,event_name,event_method,event_type,event_key_event,event_key_event_counting,event_description,event_comment,event_time_edited,event_website,event_ios_app,event_android_app,event_gtm_comment
           ]);
         }
       }
