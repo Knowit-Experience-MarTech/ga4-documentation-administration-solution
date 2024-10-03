@@ -145,8 +145,8 @@ The following BigQuery tables will be used in **Looker Studio**:
 | event_name | STRING | Event Name |
 | event_method | STRING | Method |
 | event_type | STRING | Type |
-| event_conversion | BOOLEAN | Is the Event Name an Conversion |
-| event_conversion_counting | STRING | How is the conversion counted (event/session) |
+| key_event | BOOLEAN | Is the Event Name a Key Event |
+| key_event_counting | STRING | How is the Key Event counted (event/session) |
 | event_description | STRING | Event Description |
 | event_comment | STRING | Event Comment |
 | event_gtm_comment | STRING | Comment related to Google Tag Manager setup |
@@ -167,6 +167,10 @@ The following BigQuery tables will be used in **Looker Studio**:
 | event_last_seen_date_web | DATE | Date showing the last date the Event Name was "seen" in the **web platform** |
 | event_last_seen_date_android | DATE | Date showing the last date the Event Name was "seen" in the **Android platform** |
 | event_last_seen_date_ios | DATE | Date showing the last date the Event Name was "seen" in the **iOS platform** |
+| event_first_seen_date_total | DATE | Date showing the first date the Event Name was "seen". In the SQL query you have the option to detect "true" first seen, or first seen in the documentation (query is limited to a shorter time period). "True" first seen can be a costly query, but you have the option. |
+| event_first_seen_date_web | DATE | Date showing the first date the Event Name was "seen" in the **web platform**. "True" first seen or first seen in the documentation. |
+| event_first_seen_date_android | DATE | Date showing the first date the Event Name was "seen" in the **Android platform**. "True" first seen or first seen in the documentation. |
+| event_first_seen_date_ios | DATE | Date showing the first date the Event Name was "seen" in the **iOS platform**. "True" first seen or first seen in the documentation. |
 
 ## ga4_documentation_events_and_images
 * This query will generate the table: [ga4_documentation_events_and_images.sql](ga4_documentation_events_and_images.sql)
@@ -208,6 +212,10 @@ The following BigQuery tables will be used in **Looker Studio**:
 | parameter_last_seen_date_web | DATE | Date showing the last date the Parameter was "seen" in the **web platform** |
 | parameter_last_seen_date_android | DATE | Date showing the last date the Parameter was "seen" in the **Android platform** |
 | parameter_last_seen_date_ios | DATE | Date showing the last date the Parameter was "seen" in the **iOS platform** |
+| parameter_first_seen_date_total | DATE | Date showing the first date the Parameter was "seen" in the documentation ("true" first seen is not an option in the query) |
+| parameter_first_seen_date_web | DATE | Date showing the first date the Parameter was "seen" in the **web platform** documentation ("true" first seen is not an option in the query)  |
+| parameter_first_seen_date_android | DATE | Date showing the first date the Parameter was "seen" in the **Android platform** documentation ("true" first seen is not an option in the query) |
+| parameter_first_seen_date_ios | DATE | Date showing the first date the Parameter was "seen" in the **iOS platform** documentation ("true" first seen is not an option in the query) |
 
 ## ga4_documentation_annotations
 This table is created when you upload **Annotations** from **Google Sheet** to BigQuery.
