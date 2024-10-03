@@ -117,7 +117,7 @@ PreparedData as (
     coalesce(ed.event_first_seen_date_ios, fa.event_first_seen_date_ios_calculated) as event_first_seen_date_ios
   from
     `your-project.analytics_XXX.ga4_documentation_events_and_documentation_status` ed
-  left join 
+  full join 
     EventCount ec 
     on ec.event_name = ed.event_name
   left join 
