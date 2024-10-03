@@ -205,6 +205,14 @@ function getGA4ChangeHistory() {
             resource: '\nEvent Name: ' + resourceAfterChange.conversionEvent.eventName,
             itemType: 'Conversion Event',
           };
+        } else if ( // Handling key event
+          resourceAfterChange && resourceAfterChange.keyEvent
+        ) {
+          resourceData = {
+            action: change.action,
+            resource: '\nEvent Name: ' + resourceAfterChange.keyEvent.eventName,
+            itemType: 'Key Event',
+          };
         } else if( // Handling custom dimensions
           resourceAfterChange && resourceAfterChange.customDimension
         ) {
@@ -410,6 +418,7 @@ function getGA4ChangeHistory() {
               'customDimensions': 'Custom Dimension',
               'customMetrics': 'Custom Metric',
               'conversionEvents': 'Conversion Events',
+              'keyEvents': 'Key Events',
               'calculatedMetrics': 'Calculated Metric',
               'googleSignalsSettings': 'Google Signals Settings',
               'dataRetentionSettings': 'Data Retention Settings',
@@ -528,4 +537,3 @@ function getGA4ChangeHistory() {
     }
   } 
 }
-
