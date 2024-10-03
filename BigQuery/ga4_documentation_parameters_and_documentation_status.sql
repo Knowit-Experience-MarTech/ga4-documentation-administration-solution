@@ -47,10 +47,14 @@ create table if not exists `your-project.analytics_XXX.ga4_documentation_paramet
   parameter_last_seen_date_total date,
   parameter_last_seen_date_web date,
   parameter_last_seen_date_android date,
-  parameter_last_seen_date_ios date
+  parameter_last_seen_date_ios date,
+  parameter_first_seen_date_total date,
+  parameter_first_seen_date_web date,
+  parameter_first_seen_date_android date,
+  parameter_first_seen_date_ios date
 );
 
-create temp table TempPreparedData as
+create temp table TempPreparedParameterData as
 with DocumentationEvents as (
   select
     event_name,
@@ -97,7 +101,6 @@ with DocumentationEvents as (
 ),
 
 ParameterCounts as (
-
 -- Query for event_params
 select 
   event_params.key as parameter_name,
@@ -692,7 +695,11 @@ select
   max(cast(event_date as date format 'YYYYMMDD')) as parameter_last_seen_date_total,
   case when platform = 'WEB' then max(cast(event_date as date format 'YYYYMMDD')) end as parameter_last_seen_date_web,
   case when platform = 'ANDROID' then max(cast(event_date as date format 'YYYYMMDD')) end as parameter_last_seen_date_android,
-  case when platform = 'IOS' then max(cast(event_date as date format 'YYYYMMDD')) end as parameter_last_seen_date_ios
+  case when platform = 'IOS' then max(cast(event_date as date format 'YYYYMMDD')) end as parameter_last_seen_date_ios,
+  min(cast(event_date as date format 'YYYYMMDD')) as parameter_first_seen_date_total_calculated,
+  case when platform = 'WEB' then min(cast(event_date as date format 'YYYYMMDD')) end as parameter_first_seen_date_web_calculated,
+  case when platform = 'ANDROID' then min(cast(event_date as date format 'YYYYMMDD')) end as parameter_first_seen_date_android_calculated,
+  case when platform = 'IOS' then min(cast(event_date as date format 'YYYYMMDD')) end as parameter_first_seen_date_ios_calculated
 
 from
   ParameterCounts pc
@@ -741,7 +748,11 @@ select distinct
   parameter_last_seen_date_total,
   parameter_last_seen_date_web,
   parameter_last_seen_date_android,
-  parameter_last_seen_date_ios
+  parameter_last_seen_date_ios,
+  parameter_first_seen_date_total_calculated,
+  parameter_first_seen_date_web_calculated,
+  parameter_first_seen_date_android_calculated,
+  parameter_first_seen_date_ios_calculated
 
 from
   Count c
@@ -778,14 +789,19 @@ select distinct
   coalesce(pd.parameter_last_seen_date_total, pc.parameter_last_seen_date_total) as parameter_last_seen_date_total,
   coalesce(pd.parameter_last_seen_date_web, pc.parameter_last_seen_date_web) as parameter_last_seen_date_web,
   coalesce(pd.parameter_last_seen_date_android, pc.parameter_last_seen_date_android) as parameter_last_seen_date_android,
-  coalesce(pd.parameter_last_seen_date_ios, pc.parameter_last_seen_date_ios) as parameter_last_seen_date_ios
+  coalesce(pd.parameter_last_seen_date_ios, pc.parameter_last_seen_date_ios) as parameter_last_seen_date_ios,
+  ifnull(pd.parameter_first_seen_date_total_calculated, pc.parameter_first_seen_date_total) as parameter_first_seen_date_total,
+  ifnull(pd.parameter_first_seen_date_web_calculated, pc.parameter_first_seen_date_web) as parameter_first_seen_date_web,
+  ifnull(pd.parameter_first_seen_date_android_calculated, pc.parameter_first_seen_date_android) as parameter_first_seen_date_android,
+  ifnull(pd.parameter_first_seen_date_ios_calculated, pc.parameter_first_seen_date_ios) as parameter_first_seen_date_ios
+
 from
     `your-project.analytics_XXX.ga4_documentation_parameters_and_documentation_status` pc
-    left join PreparedData pd on pd.event_name = pc.event_name and pd.parameter_name = pc.parameter_name and pd.parameter_scope = pc.parameter_scope
+    right join PreparedData pd on pd.event_name = pc.event_name and pd.parameter_name = pc.parameter_name and pd.parameter_scope = pc.parameter_scope
 ;
 
 merge into `your-project.analytics_XXX.ga4_documentation_parameters_and_documentation_status` as target
-using TempPreparedData as source
+using TempPreparedParameterData as source
 on target.event_name = source.event_name and target.parameter_name = source.parameter_name and target.parameter_scope = source.parameter_scope
 
 when matched then
@@ -815,68 +831,80 @@ when matched then
     parameter_last_seen_date_total = source.parameter_last_seen_date_total,
     parameter_last_seen_date_web = source.parameter_last_seen_date_web,
     parameter_last_seen_date_android = source.parameter_last_seen_date_android,
-    parameter_last_seen_date_ios = source.parameter_last_seen_date_ios
+    parameter_last_seen_date_ios = source.parameter_last_seen_date_ios,
+    parameter_first_seen_date_total = source.parameter_first_seen_date_total,
+    parameter_first_seen_date_web = source.parameter_first_seen_date_web,
+    parameter_first_seen_date_android = source.parameter_first_seen_date_android,
+    parameter_first_seen_date_ios = source.parameter_first_seen_date_ios
 
 when not matched then
-    insert (
-      event_name,
-      parameter_group,
-      parameter_display_name,
-      parameter_name,
-      parameter_scope,
-      parameter_type,
-      parameter_format,
-      parameter_disallow_ads_personalization,
-      parameter_example_value, 
-      parameter_description,
-      parameter_gtm_comment,
-      ga4_config_parameter,
-      parameter_count_total,
-      parameter_count_web,
-      parameter_count_android,
-      parameter_count_ios,
-      event_website,
-      event_ios_app,
-      event_android_app,
-      platform_web,
-      platform_android,
-      platform_ios,
-      parameter_last_seen_date_total,
-      parameter_last_seen_date_web,
-      parameter_last_seen_date_android,
-      parameter_last_seen_date_ios)
+  insert (
+    event_name,
+    parameter_group,
+    parameter_display_name,
+    parameter_name,
+    parameter_scope,
+    parameter_type,
+    parameter_format,
+    parameter_disallow_ads_personalization,
+    parameter_example_value, 
+    parameter_description,
+    parameter_gtm_comment,
+    ga4_config_parameter,
+    parameter_count_total,
+    parameter_count_web,
+    parameter_count_android,
+    parameter_count_ios,
+    event_website,
+    event_ios_app,
+    event_android_app,
+    platform_web,
+    platform_android,
+    platform_ios,
+    parameter_last_seen_date_total,
+    parameter_last_seen_date_web,
+    parameter_last_seen_date_android,
+    parameter_last_seen_date_ios,
+    parameter_first_seen_date_total,
+    parameter_first_seen_date_web,
+    parameter_first_seen_date_android,
+    parameter_first_seen_date_ios)
 
-    values (
-      source.event_name,
-      source.parameter_group,
-      source.parameter_display_name,
-      source.parameter_name,
-      source.parameter_scope,
-      source.parameter_type,
-      source.parameter_format,
-      source.parameter_disallow_ads_personalization,
-      source.parameter_example_value,
-      source.parameter_description,
-      source.parameter_gtm_comment,
-      source.ga4_config_parameter,
-      source.parameter_count_total,
-      source.parameter_count_web,
-      source.parameter_count_android,
-      source.parameter_count_ios,
-      source.event_website,
-      source.event_ios_app,
-      source.event_android_app,
-      source.platform_web,
-      source.platform_android,
-      source.platform_ios,
-      source.parameter_last_seen_date_total,
-      source.parameter_last_seen_date_web,
-      source.parameter_last_seen_date_android,
-      source.parameter_last_seen_date_ios);
+  values (
+    source.event_name,
+    source.parameter_group,
+    source.parameter_display_name,
+    source.parameter_name,
+    source.parameter_scope,
+    source.parameter_type,
+    source.parameter_format,
+    source.parameter_disallow_ads_personalization,
+    source.parameter_example_value,
+    source.parameter_description,
+    source.parameter_gtm_comment,
+    source.ga4_config_parameter,
+    source.parameter_count_total,
+    source.parameter_count_web,
+    source.parameter_count_android,
+    source.parameter_count_ios,
+    source.event_website,
+    source.event_ios_app,
+    source.event_android_app,
+    source.platform_web,
+    source.platform_android,
+    source.platform_ios,
+    source.parameter_last_seen_date_total,
+    source.parameter_last_seen_date_web,
+    source.parameter_last_seen_date_android,
+    source.parameter_last_seen_date_ios,
+    source.parameter_first_seen_date_total,
+    source.parameter_first_seen_date_web,
+    source.parameter_first_seen_date_android,
+    source.parameter_first_seen_date_ios);
 
 delete from `your-project.analytics_XXX.ga4_documentation_parameters_and_documentation_status` as target
 where not exists (
     select 1
-    from TempPreparedData as source
+    from TempPreparedParameterData as source
     where target.event_name = source.event_name and target.parameter_name = source.parameter_name and target.parameter_scope = source.parameter_scope
 );
