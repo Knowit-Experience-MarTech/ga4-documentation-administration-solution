@@ -145,8 +145,8 @@ const eventGroupColumn = 1 // Event Group Column in Event Tab
 const eventNameColumn = 2; // Event Name Column in Event Tab
 const eventMethodColumn = 3; // Event Method Column in Event Tab
 const eventTypeColumn = 4; // Event Type Column in Event Tab
-const eventConversionColumn = 5; // Event Conversion Column in Event Tab
-const eventConversionCountingColumn = 6; // Event Conversion Type Column in Event Tab
+const keyEventColumn = 5; // KeyEvent Column in Event Tab
+const keyEventCountingColumn = 6; // Key Event Type Column in Event Tab
 const eventEventCountColumn = 8; // Event Count Column in Event Tab
 const eventDescriptionColumn = 9; // Event Description Column in Event Tab
 const eventParametersColumn = 10; // Event Parameter Column in Event Tab
@@ -190,12 +190,12 @@ function onEdit() {
               let dateTimeCell = activeCell.offset(0,dateTimeLocation);
               dateTimeCell.setValue(new Date());
             }
-          // **** Event Conversion Count 
-          if(activeCell.getColumn() === eventConversionColumn) {
+          // **** Event KeyEvent Count 
+          if(activeCell.getColumn() === keyEventColumn) {
             const cell = activeCell.offset(0, 1);
             if(activeCell.getValue() === true) {
-              const range = ss.getSheetByName(helperDropDownTab).getRange('HelperEventConversionType');
-              const defaultValue = ss.getSheetByName(helperDropDownTab).getRange('HelperEventConversionTypeDefault').getValue();
+              const range = ss.getSheetByName(helperDropDownTab).getRange('HelperKeyEventType');
+              const defaultValue = ss.getSheetByName(helperDropDownTab).getRange('HelperKeyEventTypeDefault').getValue();
               const rule = SpreadsheetApp.newDataValidation().requireValueInRange(range).build();
               cell.setDataValidation(rule);
               cell.setValue(defaultValue);
