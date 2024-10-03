@@ -49,8 +49,8 @@ function getTableSchema(sheetName) {
       {name: 'event_name', type: 'STRING'},
       {name: 'event_method', type: 'STRING'},
       {name: 'event_type', type: 'STRING'},
-      {name: 'event_conversion', type: 'BOOL'},
-      {name: 'event_conversion_counting', type: 'STRING'},
+      {name: 'key_event', type: 'BOOL'},
+      {name: 'key_event_counting', type: 'STRING'},
       {name: 'event_description', type: 'STRING'},
       {name: 'event_parameters', type: 'STRING'},
       {name: 'event_item_parameters', type: 'STRING'},
@@ -118,8 +118,8 @@ function buildReport(rows, sheetName) {
       const event_name = rows[i][eventNameColumn-1].trim();
       const event_method = rows[i][eventMethodColumn-1].trim();
       const event_type = rows[i][eventTypeColumn-1].trim();
-      const event_conversion = rows[i][eventConversionColumn-1];
-      const event_conversion_counting = rows[i][eventConversionCountingColumn-1].trim();
+      const key_event = rows[i][keyEventColumn-1];
+      const key_event_counting = rows[i][keyEventCountingColumn-1].trim();
       const event_description = rows[i][eventDescriptionColumn-1].trim();
       const event_parameters = rows[i][eventParametersColumn-1].replace(/\r\n|\n|' '/g, ',');
       const event_item_parameters = rows[i][eventItemParametersColumn-1].replace(/\r\n|\n|' '/g, ',');
@@ -136,7 +136,7 @@ function buildReport(rows, sheetName) {
 
       if((event_group && event_name && event_description) && (event_website || event_ios_app || event_android_app)) {
         report.push([
-          event_group,event_name,event_method,event_type,event_conversion,event_conversion_counting,event_description,event_parameters,event_item_parameters,event_user_parameters,event_comment,event_image_documentation,event_time_edited,event_website,event_ios_app,event_android_app,event_ga4_api_resource_name,event_gtm_comment,event_uploaded_to_bq_time
+          event_group,event_name,event_method,event_type,key_event,key_event_counting,event_description,event_parameters,event_item_parameters,event_user_parameters,event_comment,event_image_documentation,event_time_edited,event_website,event_ios_app,event_android_app,event_ga4_api_resource_name,event_gtm_comment,event_uploaded_to_bq_time
         ]);
       }
     }
