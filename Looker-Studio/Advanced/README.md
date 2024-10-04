@@ -4,10 +4,10 @@ Documentation for creating advanced Looker Studio report for presenting Event & 
 * Make sure you first have created the [**BigQuery tables**](../BigQuery#overview-over-tables-created-in-bigquery) that will be used as **Data Sources** in Looker Studio.
 * Make a copy of the [**Looker Studio GA4 Advanced Documentation report**](https://lookerstudio.google.com/s/ihyU84wd7uY)
 * **Add the following BigQuery Data Sources to Looker Studio:**
-  1. [ga4_documentation_parameters_and_documentation_status](#ga4_documentation_parameters_and_documentation_status)
-  2. [ga4_documentation_events_and_documentation_status](#ga4_documentation_events_and_documentation_status)
-  3. [ga4_documentation_events_and_images](#ga4_documentation_events_and_images)
-  4. [ga4_documentation_annotations](#ga4_documentation_annotations)
+  1. [ga4_documentation_parameters_and_documentation_status](#data-source-ga4_documentation_parameters_and_documentation_status)
+  2. [ga4_documentation_events_and_documentation_status](#data-source-ga4_documentation_events_and_documentation_status)
+  3. [ga4_documentation_events_and_images](#data-source-ga4_documentation_events_and_images)
+  4. [ga4_documentation_annotations](#data-source-ga4_documentation_annotations)
 
 ## Calculated Fields
 The solution contains several **Calculated Fields**. They are all documented below. 
