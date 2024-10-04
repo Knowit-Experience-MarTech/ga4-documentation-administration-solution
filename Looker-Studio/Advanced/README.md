@@ -1,7 +1,7 @@
 # Looker Studio - Advanced - Using BigQuery as Data Source
 Documentation for creating advanced Looker Studio report for presenting Event & Parameter Documentation with Status, in addition to Annotations. BigQuery will be used as Data Source.
 
-* Make sure you first have created the [**BigQuery tables**](../BigQuery#overview-over-tables-created-in-bigquery) that will be used as **Data Sources** in Looker Studio.
+* Make sure you first have created the [**BigQuery tables**](/BigQuery#overview-over-tables-created-in-bigquery) that will be used as **Data Sources** in Looker Studio.
 * Make a copy of the [**Looker Studio GA4 Advanced Documentation report**](https://lookerstudio.google.com/s/ihyU84wd7uY)
   * If you are a consultant and are doing the documentation on behalf of a client, it's recommended to copy Looker Studio with an email belonging to the clients organization. This way ownership to Looker Studio can be transferred within the clients organization.
 * **Add the following BigQuery Data Sources to Looker Studio:**
