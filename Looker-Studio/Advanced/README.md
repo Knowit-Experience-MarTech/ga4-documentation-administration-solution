@@ -407,6 +407,11 @@ REPLACE(REPLACE(REPLACE(annotation_description,r"\r\n","\n"),r"\n","\n"),r"\n\n"
 CONTAINS_TEXT(LOWER(annotation_description), LOWER(Search Annotations))
 ```
 ## Looker Studio Fields Placement and Settings
+This section contains information about **Fields** used in Looker Studio (not all fields available are used).
+
+### Things to be aware of
+Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Date Range Dimensions are only used in the **Annotations page**, not in other pages.
+
 ### GA4 Documentation Overview
 ![GA4 Documentation Overview](/Looker-Studio/images/GA4-Documentation-BigQuery-GA4-Documentation-Overview.png)
 
