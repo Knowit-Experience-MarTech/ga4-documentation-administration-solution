@@ -11,7 +11,8 @@ Documentation for creating basic Looker Studio report for presenting Event & Par
 ## Generate Google Sheet Data Source data
 At the top of the sheet, you will find a custom menu called "**📈 GA4 Documentation**".
 
-* **Go to the menu:** Use Sheet as Data Source -> Write Events & Parameters to Data Source Sheets
+* **Go to the menu:**
+  * Use Sheet as Data Source -> Write Events & Parameters to Data Source Sheets
 
 ## Calculated Fields
 The solution contains several **Calculated Fields**. They are all documented below. 
@@ -104,9 +105,12 @@ The URL must be edited to match your Looker Studio URLs.
 
 **Formula:**
 ```javascript
-HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/d6e751a9-c6f1-4244-8ae2-26af7225c5a4/page/p_1ads1jvted?params=%7B%22df69%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Parameter Scope,"%22,%22df73%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Parameter Name,"%22%7D"),Parameter Name)
+HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/XXX/page/p_1ads1jvted?params=%7B%22df69%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Parameter Scope,"%22,%22df73%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Parameter Name,"%22%7D"),Parameter Name)
 ```
 ##### How to create the URL
+Replace the **XXX** part of URL in the formula above with the **ID** found in YOUR Looker Studio URL.
+If that doesn't work, this is how to recreate the URL from scratch:
+
 1. Navigate to the **Parameter & Event Documentation** report
 2. **Parameter Scope** filter: Select a single Scope (ex. **EVENT**)
 3. **Parameter Name** filter: Select a single Parameter (ex. **file_extension**)
@@ -202,9 +206,12 @@ The URL must be edited to match your Looker Studio URLs.
 
 **Formula:**
 ```javascript
-HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/d6e751a9-c6f1-4244-8ae2-26af7225c5a4/page/p_nm474cc5cd?params=%7B%22df62%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580FALSE%22,%22df63%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Event Name,"%22%7D"),Event Name)
+HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/XXX/page/p_nm474cc5cd?params=%7B%22df62%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580FALSE%22,%22df63%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Event Name,"%22%7D"),Event Name)
 ```
 ##### How to create the URL
+Replace the **XXX** part of URL in the formula above with the **ID** found in YOUR Looker Studio URL.
+If that doesn't work, this is how to recreate the URL from scratch:
+
 1. Navigate to the **Event & Parameter Documentation** report
 2. **GA4 Config Parameter** filter: **FALSE** (only)
 3. **Event Name** filter: Select a single Event Name (ex. **click**)
