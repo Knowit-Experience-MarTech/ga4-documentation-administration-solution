@@ -3,7 +3,7 @@ Documentation for creating advanced Looker Studio report for presenting Event & 
 
 * Make sure you first have created the [**BigQuery tables**](../BigQuery#overview-over-tables-created-in-bigquery) that will be used as **Data Sources** in Looker Studio.
 * Make a copy of the [**Looker Studio GA4 Advanced Documentation report**](https://lookerstudio.google.com/s/ihyU84wd7uY)
-* Add the following BigQuery Data Sources to Looker Studio:
+* **Add the following BigQuery Data Sources to Looker Studio:**
   1. [ga4_documentation_parameters_and_documentation_status](#ga4_documentation_parameters_and_documentation_status)
   2. [ga4_documentation_events_and_documentation_status](#ga4_documentation_events_and_documentation_status)
   3. [ga4_documentation_events_and_images](#ga4_documentation_events_and_images)
@@ -12,11 +12,7 @@ Documentation for creating advanced Looker Studio report for presenting Event & 
 ## Calculated Fields
 The solution contains several **Calculated Fields**. They are all documented below. 
 
-You have to edit 2 Calculated Fields:
-1. [Event Name URL \[Calc\]](#event-name-url-calc)
-2. [Parameter Name URL \[Calc\]](#parameter-name-url-calc)
-
-## ga4_documentation_parameters_and_documentation_status
+## Data Source: ga4_documentation_parameters_and_documentation_status
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
 
 ### Parameters
@@ -144,9 +140,12 @@ The URL must be edited to match your Looker Studio URLs.
 
 **Formula:**
 ```javascript
-HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/42a4e160-741d-481c-a5a6-5e154e738c8c/page/p_1ads1jvted?s=ihyU84wd7uY&params=%7B%22df69%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",parameter_scope,"%22,%22df73%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",parameter_name,"%22%7D"),parameter_name)
+HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/XXX/page/p_1ads1jvted?s=ihyU84wd7uY&params=%7B%22df69%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",parameter_scope,"%22,%22df73%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",parameter_name,"%22%7D"),parameter_name)
 ```
 ##### How to create the URL
+Replace the **XXX** part of URL in the formula above with the **ID** found in YOUR Looker Studio URL.
+If that doesn't work, this is how to recreate the URL from scratch:
+
 1. Navigate to the **Parameter & Event Documentation** report
 2. **Parameter Scope** filter: Select a single Scope (ex. **EVENT**)
 3. **Parameter Name** filter: Select a single Parameter (ex. **file_extension**)
@@ -156,6 +155,15 @@ HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/42a4e160-741d-481c-a
 
 If you want to learn more about creating custom URL links with Calculated Field, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
+
+#### Parameter First Seen Date \[Calc\]
+* **Field name:** Parameter First Seen Date \[Calc\]
+* **Field ID:** parameter_first_seen_date_calc
+
+**Formula:**
+```javascript
+MIN(parameter_first_seen_date_total)
+```
 
 #### Parameter Last Seen Date \[Calc\]
 * **Field name:** Parameter Last Seen Date \[Calc\]
@@ -214,7 +222,7 @@ REPLACE(REPLACE(REPLACE(parameter_gtm_comment,r"\r\n","\n"),r"\n","\n"),r"\n\n",
 CONTAINS_TEXT(LOWER(parameter_name), LOWER(Parameter Name Search))
 ```
 
-## ga4_documentation_events_and_documentation_status
+## Data Source: ga4_documentation_events_and_documentation_status
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
 
 ### Parameters
@@ -293,9 +301,12 @@ The URL must be edited to match your Looker Studio URLs.
 
 **Formula:**
 ```javascript
-HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/42a4e160-741d-481c-a5a6-5e154e738c8c/page/p_nm474cc5cd?params=%7B%22df62%22:%22include%25EE%2580%25803%25EE%2580%2580F%22,%22df61%22:%22ORexclude%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580Not%2520Documented%25EE%2580%2581include%25EE%2580%25803%25EE%2580%2580NU%25EE%2580%2582%22,%22df63%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",event_name,"%22%7D"),event_name)
+HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/XXX/page/p_nm474cc5cd?params=%7B%22df62%22:%22include%25EE%2580%25803%25EE%2580%2580F%22,%22df61%22:%22ORexclude%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580Not%2520Documented%25EE%2580%2581include%25EE%2580%25803%25EE%2580%2580NU%25EE%2580%2582%22,%22df63%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",event_name,"%22%7D"),event_name)
 ```
 ##### How to create the URL
+Replace the **XXX** part of URL in the formula above with the **ID** found in YOUR Looker Studio URL.
+If that doesn't work, this is how to recreate the URL from scratch:
+
 1. Navigate to the **Event & Parameter Documentation** report
 2. **GA4 Config Parameter** filter: **false** (only)
 3. **Documentation Status** filter: Untick **Not Documented** (if you have this choice)
@@ -333,7 +344,7 @@ CONCAT(DATE_DIFF(TODAY(), event_last_seen_date_total),' day(s) ago')
 CONCAT("Last Updated: ",MAX(Event Uploaded to BQ Time [Calc]))
 ```
 
-## ga4_documentation_events_and_images
+## Data Source: ga4_documentation_events_and_images
 Make the following adjustment to the data source if the Calculated Fields aren't working correctly.
 
 ### Calculated Fields
@@ -347,7 +358,7 @@ Make the following adjustment to the data source if the Calculated Fields aren't
 HYPERLINK(event_image_documentation,IMAGE(event_image_documentation))
 ```
 
-## ga4_documentation_annotations
+## Data Source: ga4_documentation_annotations
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
 
 ### Parameters
