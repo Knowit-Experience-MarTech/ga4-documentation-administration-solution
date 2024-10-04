@@ -431,7 +431,29 @@ CONTAINS_TEXT(LOWER(annotation_description), LOWER(Search Annotations))
 | annotation_time | annotation_time | annotation_category | Record Count | annotation_time |
 
 ### GA4 Event Documentation
+![GA4 Event Documentation](/Looker-Studio/images/GA4-Documentation-BigQuery-GA4-Event-Documentation.png)
 
+| Number  | Field | Data Type |
+| ------------- | ------------- | ------------- |
+| 1 | Total Events \[Calc\] | Text |
+| 2 | event_group | Text |
+| 3 | event_method | Text |
+| 4 | key_event | Boolean |
+| 5 | Event Name Search |  |
+| 6 | Event Description Search |  |
+| 7 | event_type | Text |
+| 8 | event_documentation_status | Text |
+| 9 | event_website | Boolean |
+| 10 | event_ios_app | Boolean |
+| 11 | event_android_app | Boolean |
+| 12 | event_group | Text |
+| 13 | Event Name URL \[Calc\] | Hyperlink |
+| 14 | event_type | Text |
+| 15 | event_method | Text |
+| 16 | key_event | Boolean |
+| 17 | Event Description \[Calc\] | Text |
+| 18 | Event Last Seen Days \[Calc\] | Text |
+| 19 | event_count_total | Number |
 
 ### GA4 Parameter Documentation
 
