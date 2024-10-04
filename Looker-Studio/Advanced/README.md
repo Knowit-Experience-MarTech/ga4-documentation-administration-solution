@@ -405,3 +405,37 @@ REPLACE(REPLACE(REPLACE(annotation_description,r"\r\n","\n"),r"\n","\n"),r"\n\n"
 ```javascript
 CONTAINS_TEXT(LOWER(annotation_description), LOWER(Search Annotations))
 ```
+## Looker Studio Fields Placement and Settings
+### GA4 Documentation Overview
+![GA4 Documentation Overview](/Looker-Studio/images/GA4-Documentation-BigQuery-GA4-Documentation-Overview.png)
+
+| Number  | Field | Data Type | Filter On This Chart |
+| ------------- | ------------- | ------------- | ------------- |
+| 1 | Event Documentation Last Updated \[Calc\] | Text |  |
+| 2 | event_name | Number |  |
+| 3 | event_documentation_status | Number | Documented Events and Data |
+| 4 | event_documentation_status | Number | Events not Documented |
+| 5 | event_documentation_status | Number | Documented Events no Data |
+| 6 | Parameter Count Total \[Calc\] | Number |  |
+| 7 | Parameter Count Documented and Data \[Calc\] | Number |  |
+| 8 | Parameter Count Not Documented \[Calc\] | Number |  |
+| 9 | Parameter Count Documented no Data \[Calc\] | Number |  |
+| 10 | event_documentation_status <br> event_documentation_status <br> event_count_total | Text <br> Number <br> Number |  |
+| 11 | parameter_scope <br> Parameter Count Documented and Data \[Calc\] <br> Parameter Count Not Documented \[Calc\] <br> Parameter Count Documented no Data \[Calc\] | Text <br> Number <br> Number <br> Number |
+
+#### Annotations
+![GA4 Documentation Overview - Annotations](/Looker-Studio/images/GA4-Documentation-BigQuery-GA4-Documentation-Overview-Annotations.png)
+
+| Date Range Dimension  | Dimension | Break Down Dimension | Metric | Sort |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| annotation_time | annotation_time | annotation_category | Record Count | annotation_time |
+
+### GA4 Event Documentation
+
+
+### GA4 Parameter Documentation
+
+### GA4 Event & Parameter Documentation
+
+
+### GA4 Parameter & Event Documentation
