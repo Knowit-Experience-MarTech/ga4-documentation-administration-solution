@@ -2,11 +2,11 @@
 Documentation for creating basic Looker Studio report for presenting Event & Parameter Documentation without Status, in addition to Annotations. Google Sheet will be used as Data Source.
 
 * Make a copy of the [**Looker Studio GA4 Basic Documentation report**](https://lookerstudio.google.com/s/k0NYnj-_FFw)
-* Add the following Google Sheet Worksheet Data Sources to Looker Studio:
-  1. [ParameterDataSource](#ParameterDataSource)
-  2. [EventDataSource](#EventDataSource)
-  3. [EventImagesDataSource](#EventImagesDataSource)
-  4. [AnnotationsDataSource](#AnnotationsDataSource)
+* **Add the following Google Sheet Worksheet Data Sources to Looker Studio:**
+  1. [ParameterDataSource](#data-source-parameterdatasource)
+  2. [EventDataSource](#data-source-eventdatasource)
+  3. [EventImagesDataSource](#data-source-eventimagesdatasource)
+  4. [AnnotationsDataSource](#data-source-annotationsdatasource)
 
 ## Generate Google Sheet Data Source data
 At the top of the sheet, you will find a custom menu called "**📈 GA4 Documentation**".
@@ -15,13 +15,9 @@ At the top of the sheet, you will find a custom menu called "**📈 GA4 Document
   * Use Sheet as Data Source -> Write Events & Parameters to Data Source Sheets
 
 ## Calculated Fields
-The solution contains several **Calculated Fields**. They are all documented below. 
+The solution contains several **Calculated Fields**. They are all documented below.
 
-You have to edit 2 Calculated Fields:
-1. [Event Name URL \[Calc\]](#event-name-url-calc)
-2. [Parameter Name URL \[Calc\]](#parameter-name-url-calc)
-
-## ParameterDataSource
+## Data Source: ParameterDataSource
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly/are missing.
 
 ### Parameters
@@ -121,7 +117,7 @@ If that doesn't work, this is how to recreate the URL from scratch:
 If you want to learn more about creating custom URL links with Calculated Field, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
 
-## EventDataSource
+## Data Source: EventDataSource
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly/are missing.
 
 ### Parameters
@@ -221,7 +217,7 @@ If that doesn't work, this is how to recreate the URL from scratch:
 If you want to learn more about creating custom URL links with Calculated Field, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
 
-## EventImagesDataSource
+## Date Source: EventImagesDataSource
 Make the following adjustment to the data source if the Calculated Fields aren't working correctly.
 
 ### Calculated Fields
@@ -235,7 +231,7 @@ Make the following adjustment to the data source if the Calculated Fields aren't
 HYPERLINK(Event Image Documentation URL,IMAGE(Event Image Documentation URL))
 ```
 
-## AnnotationsDataSource
+## Data Source: AnnotationsDataSource
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
 
 ### Parameters
