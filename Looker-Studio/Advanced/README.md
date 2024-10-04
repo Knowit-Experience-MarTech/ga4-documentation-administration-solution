@@ -3,6 +3,7 @@ Documentation for creating advanced Looker Studio report for presenting Event & 
 
 * Make sure you first have created the [**BigQuery tables**](../BigQuery#overview-over-tables-created-in-bigquery) that will be used as **Data Sources** in Looker Studio.
 * Make a copy of the [**Looker Studio GA4 Advanced Documentation report**](https://lookerstudio.google.com/s/ihyU84wd7uY)
+  * If you are a consultant and are doing the documentation on behalf of a client, it's recommended to copy Looker Studio with an email belonging to the clients organization. This way ownership to Looker Studio can be transferred within the clients organization.
 * **Add the following BigQuery Data Sources to Looker Studio:**
   1. [ga4_documentation_parameters_and_documentation_status](#data-source-ga4_documentation_parameters_and_documentation_status)
   2. [ga4_documentation_events_and_documentation_status](#data-source-ga4_documentation_events_and_documentation_status)
