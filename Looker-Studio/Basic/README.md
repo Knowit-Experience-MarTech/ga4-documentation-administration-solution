@@ -217,7 +217,7 @@ If that doesn't work, this is how to recreate the URL from scratch:
 If you want to learn more about creating custom URL links with Calculated Field, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
 
-## Date Source: EventImagesDataSource
+## Data Source: EventImagesDataSource
 Make the following adjustment to the data source if the Calculated Fields aren't working correctly.
 
 ### Calculated Fields
