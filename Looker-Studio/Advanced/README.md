@@ -467,7 +467,7 @@ Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Dat
 | Number  | Field | Data Type | Field Type |
 | ------------- | ------------- | ------------- | ------------- |
 | 1 | Parameter Name Label \[Calc\] | Text | Metric |
-| 2 | Parameter Name Label \[Calc\] | Text | Metric |
+| 2 | Event Name Label \[Calc\] | Text | Metric |
 | 3 | ga4_config_parameter | Boolean | Control Field |
 | 4 | parameter_group | Text | Control Field |
 | 5 | parameter_scope | Text | Control Field |
@@ -528,4 +528,41 @@ Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Dat
 | 30 | Parameter Last Seen Days \[Calc\] | Text | Metric |
 | 31 | parameter_count_total | Number | Metric |
 
+#### Image Documentation for Events
+![GA4 Event & Parameter Documentation - Images](/Looker-Studio/images/GA4-Documentation-BigQuery-Event-Parameter-Documentation-Images.png)
+
+| Number  | Field | Data Type | Field Type |
+| ------------- | ------------- | ------------- | ------------- |
+| 1 | event_name | Text | Dimension |
+| 2 | Event Image \[Calc\] | Image Link | Dimension |
+
 ### GA4 Parameter & Event Documentation
+![GA4 Parameter & Event Documentation - Images](/Looker-Studio/images/GA4-Documentation-BigQuery-Parameter-Event-Documentation.png)
+
+| Number  | Field | Data Type | Field Type |
+| ------------- | ------------- | ------------- | ------------- |
+| 1 | Parameter Name Label \[Calc\] | Text | Metric |
+| 2 | Event Name Search | | Control Field |
+| 3 | event_group | Text | Control Field |
+| 4 | parameter_scope | Text | Control Field |
+| 5 | Event Description Search | | Control Field |
+| 6 | event_documentation_status | Text | Control Field |
+| 7 | parameter_name | Text | Control Field |
+| 8 | event_website | Boolean | Control Field |
+| 9 | event_ios_app | Boolean | Control Field |
+| 10 | event_android_app | Boolean | Control Field |
+| 11 | parameter_display_name | Text | Dimension |
+| 12 | parameter_scope | Text | Dimension |
+| 13 | Parameter Description \[Calc\] | Hyperlink | Dimension |
+| 14 | parameter_example_value | Text | Dimension |
+| 15 | Parameter GTM Comment \[Calc\] | Text | Dimension |
+| 16 | Parameter Documentation Status \[Calc\] | Text | Dimension |
+| 17 | parameter_first_seen_date_total | Date | Dimension |
+| 18 | Parameter Last Seen Days \[Calc\] | Text | Metric |
+| 19 | event_group | Text | Dimension |
+| 20 | Event Name URL \[Calc\] | Text | Dimension |
+| 21 | Event Description \[Calc\] | Text | Dimension |
+| 22 | Event Comment \[Calc\] | Text | Dimension |
+| 23 | Event GTM Comment \[Calc\] | Text | Dimension |
+| 24 | event_count_total | Number | Dimension |
+| 25 | Event Last Seen Days \[Calc\] | Text | Dimension |
