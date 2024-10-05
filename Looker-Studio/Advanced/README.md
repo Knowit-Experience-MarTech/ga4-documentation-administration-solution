@@ -439,57 +439,92 @@ Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Dat
 ### GA4 Event Documentation
 ![GA4 Event Documentation](/Looker-Studio/images/GA4-Documentation-BigQuery-GA4-Event-Documentation.png)
 
-| Number  | Field | Data Type |
-| ------------- | ------------- | ------------- |
-| 1 | Total Events \[Calc\] | Text |
-| 2 | event_group | Text |
-| 3 | event_method | Text |
-| 4 | key_event | Boolean |
-| 5 | Event Name Search |  |
-| 6 | Event Description Search |  |
-| 7 | event_type | Text |
-| 8 | event_documentation_status | Text |
-| 9 | event_website | Boolean |
-| 10 | event_ios_app | Boolean |
-| 11 | event_android_app | Boolean |
-| 12 | event_group | Text |
-| 13 | Event Name URL \[Calc\] | Hyperlink |
-| 14 | event_type | Text |
-| 15 | event_method | Text |
-| 16 | key_event | Boolean |
-| 17 | Event Description \[Calc\] | Text |
-| 18 | Event Last Seen Days \[Calc\] | Text |
-| 19 | event_count_total | Number |
+| Number  | Field | Data Type | Field Type |
+| ------------- | ------------- | ------------- | ------------- |
+| 1 | Total Events \[Calc\] | Text | Metric |
+| 2 | event_group | Text | Control Field |
+| 3 | event_method | Text | Control Field |
+| 4 | key_event | Boolean | Control Field |
+| 5 | Event Name Search |  | Control Field |
+| 6 | Event Description Search |  | Control Field |
+| 7 | event_type | Text | Control Field |
+| 8 | event_documentation_status | Text | Control Field |
+| 9 | event_website | Boolean | Control Field |
+| 10 | event_ios_app | Boolean | Control Field |
+| 11 | event_android_app | Boolean | Control Field |
+| 12 | event_group | Text | Dimension |
+| 13 | Event Name URL \[Calc\] | Hyperlink | Dimension |
+| 14 | event_type | Text | Dimension |
+| 15 | event_method | Text | Dimension |
+| 16 | key_event | Boolean | Dimension |
+| 17 | Event Description \[Calc\] | Text | Dimension |
+| 18 | Event Last Seen Days \[Calc\] | Text | Dimension |
+| 19 | event_count_total | Number | Metric |
 
 ### GA4 Parameter Documentation
 ![GA4 Parameter Documentation](/Looker-Studio/images/GA4-Documentation-BigQuery-Parameter-Documentation.png)
 
-| Number  | Field | Data Type |
-| ------------- | ------------- | ------------- |
-| 1 | Parameter Name Label \[Calc\] | Text |
-| 2 | Parameter Name Label \[Calc\] | Text |
-| 3 | ga4_config_parameter | Boolean |
-| 4 | parameter_group | Text |
-| 5 | parameter_scope | Text |
-| 6 | parameter_type | Text |
-| 7 | Parameter Name Search | |
-| 8 | Parameter Description Search | |
-| 9 | Parameter Documentation Status \[Calc\] | Text |
-| 10 | event_name | Text |
-| 11 | event_website | Boolean |
-| 12 | event_ios_app | Boolean |
-| 13 | event_android_app | Boolean |
-| 14 | parameter_group | Text |
-| 15 | parameter_display_name | Text |
-| 16 | Parameter Name URL \[Calc\] | Hyperlink |
-| 17 | parameter_scope | Text |
-| 18 | parameter_type | Text |
-| 19 | parameter_format | Text |
-| 20 | parameter_disallow_ads_personalization | Boolean |
-| 21 | Parameter Description \[Calc\] | Text |
-| 22 | Parameter GTM Comment \[Calc\] | Text |
+| Number  | Field | Data Type | Field Type |
+| ------------- | ------------- | ------------- | ------------- |
+| 1 | Parameter Name Label \[Calc\] | Text | Metric |
+| 2 | Parameter Name Label \[Calc\] | Text | Metric |
+| 3 | ga4_config_parameter | Boolean | Control Field |
+| 4 | parameter_group | Text | Control Field |
+| 5 | parameter_scope | Text | Control Field |
+| 6 | parameter_type | Text | Control Field |
+| 7 | Parameter Name Search | | Control Field |
+| 8 | Parameter Description Search | | Control Field |
+| 9 | Parameter Documentation Status \[Calc\] | Text | Control Field |
+| 10 | event_name | Text | Control Field |
+| 11 | event_website | Boolean | Control Field |
+| 12 | event_ios_app | Boolean | Control Field |
+| 13 | event_android_app | Boolean | Control Field |
+| 14 | parameter_group | Text | Dimension |
+| 15 | parameter_display_name | Text | Dimension |
+| 16 | Parameter Name URL \[Calc\] | Hyperlink | Dimension |
+| 17 | parameter_scope | Text | Dimension |
+| 18 | parameter_type | Text | Dimension |
+| 19 | parameter_format | Text | Dimension |
+| 20 | parameter_disallow_ads_personalization | Boolean | Dimension |
+| 21 | Parameter Description \[Calc\] | Text | Dimension |
+| 22 | Parameter GTM Comment \[Calc\] | Text | Dimension |
+| 23 | Parameter Last Seen Days \[Calc\] | Text | Metric |
+| 24 | parameter_count_total | Number | Metric |
 
 ### GA4 Event & Parameter Documentation
 
+| Number  | Field | Data Type | Field Type |
+| ------------- | ------------- | ------------- | ------------- |
+| 1 | Total Parameters \[Calc\] | Text | Metric |
+| 2 | Event Name Label \[Calc\] | Text | Metric |
+| 3 | ga4_config_parameter | Boolean | Control Field |
+| 4 | parameter_group | Text | Control Field |
+| 5 | parameter_scope | Text | Control Field |
+| 6 | parameter_type | Text | Control Field |
+| 7 | Parameter Name Search | | Control Field |
+| 8 | Parameter Description Search | | Control Field |
+| 9 | Parameter Documentation Status \[Calc\] | Text | Control Field |
+| 10 | event_name | Text | Control Field |
+| 11 | event_website | Boolean | Control Field |
+| 12 | event_ios_app | Boolean | Control Field |
+| 13 | event_android_app | Boolean | Control Field |
+| 14 | Event Description \[Calc\] | Text | Dimension |
+| 15 | Event Comment \[Calc\] | Text | Dimension |
+| 16 | Event GTM Comment \[Calc\] | Text | Dimension |
+| 17 | key_event | Boolean | Dimension |
+| 18 | event_count_total | Number | Dimension |
+| 19 | event_first_seen_date_total | Date | Dimension |
+| 20 | Event Last Seen Days \[Calc\] | Text | Dimension |
+| 21 | parameter_group | Text | Dimension |
+| 22 | parameter_display_name | Text | Dimension |
+| 23 | Parameter Name URL \[Calc\] | Hyperlink | Dimension |
+| 24 | parameter_scope | Text | Dimension |
+| 25 | parameter_type | Text | Dimension |
+| 26 | parameter_format | Text | Dimension |
+| 27 | parameter_disallow_ads_personalization | Boolean | Dimension |
+| 28 | Parameter Description \[Calc\] | Text | Dimension |
+| 29 | Parameter GTM Comment \[Calc\] | Text | Dimension |
+| 30 | Parameter Last Seen Days \[Calc\] | Text | Metric |
+| 31 | parameter_count_total | Number | Metric |
 
 ### GA4 Parameter & Event Documentation
