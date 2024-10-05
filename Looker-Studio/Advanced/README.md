@@ -462,6 +462,7 @@ Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Dat
 | 19 | event_count_total | Number |
 
 ### GA4 Parameter Documentation
+![GA4 Parameter Documentation](/Looker-Studio/images/GA4-Documentation-BigQuery-Parameter-Documentation.png)
 
 | Number  | Field | Data Type |
 | ------------- | ------------- | ------------- |
