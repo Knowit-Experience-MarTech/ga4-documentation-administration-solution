@@ -463,6 +463,31 @@ Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Dat
 
 ### GA4 Parameter Documentation
 
+| Number  | Field | Data Type |
+| ------------- | ------------- | ------------- |
+| 1 | Parameter Name Label \[Calc\] | Text |
+| 2 | Parameter Name Label \[Calc\] | Text |
+| 3 | ga4_config_parameter | Boolean |
+| 4 | parameter_group | Text |
+| 5 | parameter_scope | Text |
+| 6 | parameter_type | Text |
+| 7 | Parameter Name Search | |
+| 8 | Parameter Description Search | |
+| 9 | Parameter Documentation Status \[Calc\] | Text |
+| 10 | event_name | Text |
+| 11 | event_website | Boolean |
+| 12 | event_ios_app | Boolean |
+| 13 | event_android_app | Boolean |
+| 14 | parameter_group | Text |
+| 15 | parameter_display_name | Text |
+| 16 | Parameter Name URL \[Calc\] | Hyperlink |
+| 17 | parameter_scope | Text |
+| 18 | parameter_type | Text |
+| 19 | parameter_format | Text |
+| 20 | parameter_disallow_ads_personalization | Boolean |
+| 21 | Parameter Description \[Calc\] | Text |
+| 22 | Parameter GTM Comment \[Calc\] | Text |
+
 ### GA4 Event & Parameter Documentation
 
 
