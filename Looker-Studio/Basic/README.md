@@ -270,3 +270,113 @@ CONTAINS_TEXT(LOWER(Annotation Added By), LOWER(Search Added By))
 ```javascript
 CONTAINS_TEXT(LOWER(Annotation), LOWER(Search Annotations))
 ```
+## Looker Studio Fields Placement and Settings
+This section contains information about **Fields** used in Looker Studio (not all fields available are used).
+
+### Things to be aware of
+Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Date Range Dimensions are only used in the **Annotations page**, not in other pages.
+
+### GA4 Event Documentation
+![GA4 Event Documentation](/Looker-Studio/images/GA4-Documentation-Google-Sheet-GA4-Event-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Total Events \[Calc\] | Text | Metric | EventDataSource |
+| 2 | Event Group | Text | Control Field | EventDataSource |
+| 3 | Event Method | Text | Control Field | EventDataSource |
+| 4 | Key Event | Boolean | Control Field | EventDataSource |
+| 5 | Event Name Search |  | Control Field | EventDataSource |
+| 6 | Event Description Search |  | Control Field | EventDataSource |
+| 7 | Event Type | Text | Control Field | EventDataSource |
+| 8 | Event Website Bool \[Calc\] | Boolean | Control Field | EventDataSource |
+| 9 | Event iOS App Bool \[Calc\] | Boolean | Control Field | EventDataSource |
+| 10 | Event Android App Bool \[Calc\] | Boolean | Control Field | EventDataSource |
+| 11 | Event Group | Text | Dimension | EventDataSource |
+| 12 | Event Name URL \[Calc\] | Hyperlink | Dimension | EventDataSource |
+| 13 | Event Type | Text | Dimension | EventDataSource |
+| 14 | Event Method | Text | Dimension | EventDataSource |
+| 15 | Key Event | Text | Dimension | EventDataSource |
+| 16 | Event Description | Text | Dimension | EventDataSource |
+
+### GA4 Parameter Documentation
+![GA4 Parameter Documentation](/Looker-Studio/images/GA4-Documentation-Google-Sheet-Parameter-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Total Parameters \[Calc\] | Text | Metric | ParameterDataSource |
+| 2 | Event Name Label \[Calc\] | Text | Metric | ParameterDataSource |
+| 3 | GA4 Config Parameter | Boolean | Control Field | ParameterDataSource |
+| 4 | Parameter Group | Text | Control Field | ParameterDataSource |
+| 5 | Parameter Type | Text | Control Field | ParameterDataSource |
+| 6 | Parameter Name Search | | Control Field | ParameterDataSource |
+| 7 | Parameter Description Search | | Control Field | ParameterDataSource |
+| 8 | Parameter Scope | Text | Control Field | ParameterDataSource |
+| 9 | Event Name | Text | Control Field | ParameterDataSource |
+| 10 | Parameter Group | Text | Dimension | ParameterDataSource |
+| 11 | Parameter Display Name | Text | Dimension | ParameterDataSource |
+| 12 | Parameter Name URL \[Calc\] | Hyperlink | Dimension | ParameterDataSource |
+| 13 | Parameter Scope | Text | Dimension | ParameterDataSource |
+| 14 | Parameter Type | Text | Dimension | ParameterDataSource |
+| 15 | Parameter Format | Text | Dimension | ParameterDataSource |
+| 16 | Parameter NPA | Boolean | Dimension | ParameterDataSource |
+| 17 | Parameter Description | Text | Dimension | ParameterDataSource |
+| 18 | Parameter GTM Comment | Text | Dimension | ParameterDataSource |
+
+### GA4 Event & Parameter Documentation
+![GA4 Event & Parameter Documentation](/Looker-Studio/images/GA4-Documentation-Google-Sheet-Event-Parameter-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Total Parameters \[Calc\] | Text | Metric | ParameterDataSource |
+| 2 | Event Name Label \[Calc\] | Text | Metric | ParameterDataSource |
+| 3 | GA4 Config Parameter | Boolean | Control Field | ParameterDataSource |
+| 4 | Parameter Group | Text | Control Field | ParameterDataSource |
+| 5 | Parameter Type | Text | Control Field | ParameterDataSource |
+| 6 | Parameter Name Search | | Control Field | ParameterDataSource |
+| 7 | Parameter Description Search | | Control Field | ParameterDataSource |
+| 8 | Parameter Scope | Text | Control Field | ParameterDataSource |
+| 9 | Event Name | Text | Control Field | EventDataSource |
+| 10 | Event Description | Text | Dimension | EventDataSource |
+| 11 | Event Comment | Text | Dimension | EventDataSource |
+| 12 | Event GTM Comment | Text | Dimension | EventDataSource |
+| 13 | Key Event | Text | Dimension | EventDataSource |
+| 14 | Parameter Group | Text | Dimension | ParameterDataSource |
+| 15 | Parameter Display Name | Text | Dimension | ParameterDataSource |
+| 16 | Parameter Name URL \[Calc\] | Hyperlink | Dimension | ParameterDataSource |
+| 17 | Parameter Scope | Text | Dimension | ParameterDataSource |
+| 18 | Parameter Type | Text | Dimension | ParameterDataSource |
+| 19 | Parameter Format | Text | Dimension | ParameterDataSource |
+| 20 | Parameter NPA | Boolean | Dimension | ParameterDataSource |
+| 21 | Parameter Description | Text | Dimension | ParameterDataSource |
+| 22 | Parameter GTM Comment | Text | Dimension | ParameterDataSource |
+
+#### Image Documentation for Events
+![GA4 Event & Parameter Documentation - Images](/Looker-Studio/images/GA4-Documentation-BigQuery-Event-Parameter-Documentation-Images.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | event_name | Text | Dimension | GA4 Image and Event Name Blend |
+| 2 | Event Image \[Calc\] | Image Link | Dimension | GA4 Image and Event Name Blend |
+
+### GA4 Parameter & Event Documentation
+![GA4 Parameter & Event Documentation - Images](/Looker-Studio/images/GA4-Documentation-Google-Sheet-Parameter-Event-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- |------------- |
+| 1 | Parameter Name Label \[Calc\] | Text | Metric | ParameterDataSource |
+| 2 | Event Name Search | | Control Field | ParameterDataSource |
+| 3 | Event Group | Text | Control Field | EventDataSource |
+| 4 | Parameter Scope | Text | Control Field | ParameterDataSource |
+| 5 | Event Description Search | | Control Field | EventDataSource |
+| 6 | Event Type | Text | Control Field | EventDataSource |
+| 7 | Parameter Name | Text | Control Field | ParameterDataSource |
+| 8 | Parameter Display Name | Text | Dimension | ParameterDataSource |
+| 9 | Parameter Scope | Text | Dimension | ParameterDataSource |
+| 10 | Parameter Description | Text | Dimension | ParameterDataSource |
+| 11 | Parameter Example Value | Text | Dimension | ParameterDataSource |
+| 12 | Parameter GTM Comment | Text | Dimension | ParameterDataSource |
+| 13 | Event Group | Text | Dimension | GA4 Event & Parameter Blend |
+| 14 | Event Name URL \[Calc\] | Hyperlink | Dimension | GA4 Event & Parameter Blend |
+| 15 | Event Description | Text | Dimension | GA4 Event & Parameter Blend |
+| 16 | Event Comment | Text | Dimension | GA4 Event & Parameter Blend |
+| 17 | Event GTM Comment | Text | Dimension | GA4 Event & Parameter Blend |
