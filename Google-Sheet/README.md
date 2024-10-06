@@ -34,7 +34,7 @@ At the top of the sheet, you will find a custom menu called "**📈 GA4 Document
 
 ## Events
 Here you document your Events. The most common GA4 Event Names are prefilled and described. 
-![Events Sheet](Google-Sheet/images/google-sheet-events.png)
+![Events Sheet](/Google-Sheet/images/google-sheet-events.png)
 
 ### Buttons in Event Sheet
 All buttons will trigger an Apps Script function. If you are doing bulk editing where the GA4 Admin API is "in play", beware that there are [**Limits and Quotas on API Requests**](https://developers.google.com/analytics/devguides/config/admin/v1/quotas).
@@ -87,7 +87,7 @@ If you are storing the images in **Google Drive**, store them in a folder with t
 
 ## Parameters
 Description of the Parameters sheet.
-![Parameters Sheet](Google-Sheet/images/google-sheet-parameters.png)
+![Parameters Sheet](/Google-Sheet/images/google-sheet-parameters.png)
 
 ### Buttons in Parameter Sheet
 All buttons will trigger an Apps Script function.
@@ -124,7 +124,7 @@ The different columns in the Sheet are described below.
 
 ## Annotations
 At the time of writing, GA4 doesn't have annotations, so this is an attempt to at least present an alternative.
-![Annotations](Google-Sheet/images/google-sheet-annotations.png)
+![Annotations](/Google-Sheet/images/google-sheet-annotations.png)
 
 The reason for adding Annotations to this Sheet, is that if you create/delete a Key Event, Dimension or Metric - this may affect your data and should therefore be documented. Other things that may affect your data are changes made in **Google Tag Manager**.
 To simplify this, you can download **GA4 Change History** for the property to the Sheet as annotations. The same goes with GTM, you can download **GTM Container Versions** as Annotations.
