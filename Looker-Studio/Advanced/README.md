@@ -542,27 +542,28 @@ Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Dat
 | Number  | Field | Data Type | Field Type | Data Source |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | 1 | Parameter Name Label \[Calc\] | Text | Metric | ga4_documentation_parameters_and_documentation_status |
-| 2 | Event Name Search | | Control Field | ga4_documentation_events_and_documentation_status |
-| 3 | event_group | Text | Control Field | ga4_documentation_events_and_documentation_status |
+| 2 | event_group | Text | Control Field | ga4_documentation_events_and_documentation_status |
+| 3 | event_type | Text | Control Field | ga4_documentation_events_and_documentation_status |
 | 4 | parameter_scope | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
-| 5 | Event Description Search | | Control Field | ga4_documentation_events_and_documentation_status |
-| 6 | event_documentation_status | Text | Control Field | ga4_documentation_events_and_documentation_status |
-| 7 | parameter_name | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
-| 8 | event_website | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
-| 9 | event_ios_app | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
-| 10 | event_android_app | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
-| 11 | parameter_display_name | Text | Dimension | GA4 Event & Parameter Blend |
-| 12 | parameter_scope | Text | Dimension | GA4 Event & Parameter Blend |
-| 13 | Parameter Description \[Calc\] | Hyperlink | Dimension | GA4 Event & Parameter Blend |
-| 14 | parameter_example_value | Text | Dimension | GA4 Event & Parameter Blend |
-| 15 | Parameter GTM Comment \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
-| 16 | Parameter Documentation Status \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
-| 17 | parameter_first_seen_date_total | Date | Dimension | GA4 Event & Parameter Blend |
-| 18 | Parameter Last Seen Days \[Calc\] | Text | Metric | GA4 Event & Parameter Blend |
-| 19 | event_group | Text | Dimension | GA4 Event & Parameter Blend |
-| 20 | Event Name URL \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
-| 21 | Event Description \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
-| 22 | Event Comment \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
-| 23 | Event GTM Comment \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
-| 24 | event_count_total | Number | Dimension | GA4 Event & Parameter Blend |
-| 25 | Event Last Seen Days \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 5 | Event Name Search | | Control Field | ga4_documentation_events_and_documentation_status |
+| 6 | Event Description Search | | Control Field | ga4_documentation_events_and_documentation_status |
+| 7 | event_documentation_status | Text | Control Field | ga4_documentation_events_and_documentation_status |
+| 8 | parameter_name | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 9 | event_website | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 10 | event_ios_app | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 11 | event_android_app | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 12 | parameter_display_name | Text | Dimension | GA4 Event & Parameter Blend |
+| 13 | parameter_scope | Text | Dimension | GA4 Event & Parameter Blend |
+| 14 | Parameter Description \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 15 | parameter_example_value | Text | Dimension | GA4 Event & Parameter Blend |
+| 16 | Parameter GTM Comment \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 17 | Parameter Documentation Status \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 18 | parameter_first_seen_date_total | Date | Dimension | GA4 Event & Parameter Blend |
+| 19 | Parameter Last Seen Days \[Calc\] | Text | Metric | GA4 Event & Parameter Blend |
+| 20 | event_group | Text | Dimension | GA4 Event & Parameter Blend |
+| 21 | Event Name URL \[Calc\] | Hyperlink | Dimension | GA4 Event & Parameter Blend |
+| 22 | Event Description \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 23 | Event Comment \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 24 | Event GTM Comment \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 25 | event_count_total | Number | Dimension | GA4 Event & Parameter Blend |
+| 26 | Event Last Seen Days \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
