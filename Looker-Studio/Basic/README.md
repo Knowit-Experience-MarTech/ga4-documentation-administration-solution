@@ -1,7 +1,7 @@
 # Looker Studio - Basic - Using Google Sheet as Data Source
 Documentation for creating basic Looker Studio report for presenting Event & Parameter Documentation without Status, in addition to Annotations. Google Sheet will be used as Data Source.
 
-* Make a copy of the [**Looker Studio GA4 Basic Documentation report**](https://lookerstudio.google.com/s/h7LX5UFLAGA) 
+* Make a copy of the [**Looker Studio GA4 Basic Documentation report**](https://lookerstudio.google.com/reporting/2ed8b691-8c1d-4aa8-9634-b7d332cf83f9/page/p_nkztye53cd) 
   * If you are a consultant and are doing the documentation on behalf of a client, it's recommended to copy Looker Studio with an email belonging to the clients organization. This way ownership to Looker Studio can be transferred within the clients organization.
 * **Add the following Google Sheet Worksheet Data Sources to Looker Studio:**
   1. [ParameterDataSource](#data-source-parameterdatasource)
