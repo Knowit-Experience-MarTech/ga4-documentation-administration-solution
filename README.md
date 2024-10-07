@@ -13,7 +13,7 @@ The solution also includes [**Annotations**](Google-Sheet#annotations), which ca
 
 **Overall functionality is listed below:**
 
-1. [**Google Sheet**](Google-Sheet) using [**Apps Script**](Apps-Script) for easier documentation and administration of Events, Parameters and Annotations. Everything starts with this Google Sheet.
+1. [**Google Sheet**](Google-Sheet) using [**Apps Script**](Google-Sheet/Apps-Script) for easier documentation and administration of Events, Parameters and Annotations. Everything starts with this Google Sheet.
 2. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation. The Advanced version using [**BigQuery**](BigQuery) will make it easier to identify if your documentation is aligned with the data you are collecting, or if the documentation or data collection is "broken".
 3. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **Event Group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
 
@@ -22,7 +22,7 @@ This solution is made by [**Eivind Savio**](https://www.savio.no/google-analytic
 ## Intro to documentation
 The documentation is divided into 5 separate parts:
 1. [Google Sheet](Google-Sheet) (Everything starts with the Google Sheet)
-2. [Apps Script](Apps-Script) (used in the Google Sheet)
+	* [Apps Script](Google-Sheet/Apps-Script) (used in the Google Sheet)
 3. [BigQuery](BigQuery) (for integrating the documentation with GA4 Data so you can understand if the documentation or tracking is broken)
 4. [Looker Studio](Looker-Studio) (for presenting Events, Parameters and Annotations in a way that is easier to understand)
 5. [Firestore](Firestore) (for flagging or blocking undocumented GA4 Events)
