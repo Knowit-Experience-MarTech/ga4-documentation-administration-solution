@@ -18,6 +18,8 @@ At the top of the sheet, you will find a custom menu called "**📈 GA4 Document
 ## Calculated Fields
 The solution contains several **Calculated Fields**. They are all documented below.
 
+It's recommended to add the Calculated Fields to the Data Source _before_ you click on the **Finished** button.
+
 ## Data Source: ParameterDataSource
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly/are missing.
 
