@@ -130,10 +130,10 @@ These tables (in addition to the ga4_documentation_annotations table) are your B
 
 # Overview over tables created in BigQuery
 The following BigQuery tables will be used in **Looker Studio**:
-1. [ga4_documentation_events_and_documentation_status](#ga4_documentation_events_and_documentation_status)
-2. [ga4_documentation_events_and_images](#ga4_documentation_events_and_images)
-3. [ga4_documentation_parameters_and_documentation_status](#ga4_documentation_parameters_and_documentation_status)
-4. [ga4_documentation_annotations](#ga4_documentation_annotations)
+1. [ga4_documentation_events_and_documentation_status](#table-ga4_documentation_events_and_documentation_status)
+2. [ga4_documentation_events_and_images](#table-ga4_documentation_events_and_images)
+3. [ga4_documentation_parameters_and_documentation_status](#table-ga4_documentation_parameters_and_documentation_status)
+4. [ga4_documentation_annotations](#table-ga4_documentation_annotations)
 
 ## Table: ga4_documentation_events_and_documentation_status
 * Most of these field are also described in the **Google Sheet** documentation.
@@ -217,7 +217,7 @@ The following BigQuery tables will be used in **Looker Studio**:
 | parameter_first_seen_date_android | DATE | Date showing the first date the Parameter was "seen" in the **Android platform** period queried ("true" first seen is not an option in the query) |
 | parameter_first_seen_date_ios | DATE | Date showing the first date the Parameter was "seen" in the **iOS platform** period queried ("true" first seen is not an option in the query) |
 
-## ga4_documentation_annotations
+## Table: ga4_documentation_annotations
 This table is created when you upload **Annotations** from **Google Sheet** to BigQuery.
 
 | Field name  | Type | Comment |
