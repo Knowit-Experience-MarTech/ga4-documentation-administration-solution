@@ -3,7 +3,7 @@ Looker Studio documentation for presenting Event & Parameter Documentation, in a
 
 Looker Studio comes in 2 different versions; [**Advanced**](Advanced) and [**Basic**](Basic).
 1. Video below demonstrates the **Looker Studio Advanced version**
-2. Demo of [**Looker Studio Basic version**](https://lookerstudio.google.com/reporting/2ed8b691-8c1d-4aa8-9634-b7d332cf83f9/page/p_nkztye53cd)
+2. Demo of [**Looker Studio Basic version**](https://lookerstudio.google.com/reporting/43387b12-cfe6-43ba-8e0c-afcf1a46a0f8/page/p_nkztye53cd)
 
 [![GA4 Event & Parameter Documentation - Looker Studio - Advanced](images/ga4-event-parameter-documentation-thumbnail-youtube.png)](https://youtu.be/1j8h_VNe0Hk)
 
