@@ -13,6 +13,8 @@ Documentation for creating advanced Looker Studio report for presenting Event & 
 ## Calculated Fields
 The solution contains several **Calculated Fields**. They are all documented below. 
 
+It's recommended to add the Calculated Fields to the Data Source _before_ you click on the **Finished** button.
+
 ## Data Source: ga4_documentation_parameters_and_documentation_status
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
 
