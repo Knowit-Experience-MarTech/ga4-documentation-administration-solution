@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
--- Replace your-project.analytics_123 with your project and data set
+-- Replace your-project.analytics_XXX with your project and data set
 
 -- Step 1: Create the table if not exists
-create table if not exists `your-project.analytics_123.ga4_documentation_events_and_images` (
+create table if not exists `your-project.analytics_XXX.ga4_documentation_events_and_images` (
     event_name string,
     event_image_documentation string
 );
 
 -- Step 2: Delete existing data from the table
-delete from `your-project.analytics_123.ga4_documentation_events_and_images` WHERE true;
+delete from `your-project.analytics_XXX.ga4_documentation_events_and_images` WHERE true;
 
 -- Step 3: Insert new data into the table
-insert into `your-project.analytics_123.ga4_documentation_events_and_images`
+insert into `your-project.analytics_XXX.ga4_documentation_events_and_images`
 select 
   event_name,
   case -- Fix Google Drive Image URL so it can be used in ex. Looker Studio
@@ -37,7 +37,7 @@ select
     event_image
   end as event_image_documentation
 from
-  `your-project.analytics_123.ga4_documentation_events`,
+  `your-project.analytics_XXX.ga4_documentation_events`,
   unnest(split(event_image_documentation)) as event_image
 where
   event_image_documentation is not null and event_image_documentation != '';
