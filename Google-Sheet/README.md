@@ -9,6 +9,8 @@
   * You should at least fill out **GA4 Settings**, but it's highly recommended to fill out **BigQuery Settings** as well since some functionality only works with BigQuery.
 * First, document all your [**Parameters**](#parameters) , then document your [**Events**](#events). How to do that is explained below.
 
+The Google Sheet is using **Apps Script** for much of the functionality. See the [**Apps Script documentation**](Apps-Script) for more information.
+
 ## Sheets
 | Sheet  | Comment |
 | ------------- | ------------- |
