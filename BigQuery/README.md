@@ -130,12 +130,12 @@ These tables (in addition to the ga4_documentation_annotations table) are your B
 
 # Overview over tables created in BigQuery
 The following BigQuery tables will be used in **Looker Studio**:
-1. [ga4_documentation_events_and_documentation_status](#ga4_documentation_events_and_documentation_status)
-2. [ga4_documentation_events_and_images](#ga4_documentation_events_and_images)
-3. [ga4_documentation_parameters_and_documentation_status](#ga4_documentation_parameters_and_documentation_status)
-4. [ga4_documentation_annotations](#ga4_documentation_annotations)
+1. [ga4_documentation_events_and_documentation_status](#table-ga4_documentation_events_and_documentation_status)
+2. [ga4_documentation_events_and_images](#table-ga4_documentation_events_and_images)
+3. [ga4_documentation_parameters_and_documentation_status](#table-ga4_documentation_parameters_and_documentation_status)
+4. [ga4_documentation_annotations](#table-ga4_documentation_annotations)
 
-## ga4_documentation_events_and_documentation_status
+## Table: ga4_documentation_events_and_documentation_status
 * Most of these field are also described in the **Google Sheet** documentation.
 * This query will generate the table: [ga4_documentation_events_and_documentation_status query](ga4_documentation_events_and_documentation_status.sql) 
 
@@ -145,8 +145,8 @@ The following BigQuery tables will be used in **Looker Studio**:
 | event_name | STRING | Event Name |
 | event_method | STRING | Method |
 | event_type | STRING | Type |
-| event_conversion | BOOLEAN | Is the Event Name an Conversion |
-| event_conversion_counting | STRING | How is the conversion counted (event/session) |
+| key_event | BOOLEAN | Is the Event Name a Key Event |
+| key_event_counting | STRING | How is the Key Event counted (event/session) |
 | event_description | STRING | Event Description |
 | event_comment | STRING | Event Comment |
 | event_gtm_comment | STRING | Comment related to Google Tag Manager setup |
@@ -167,8 +167,12 @@ The following BigQuery tables will be used in **Looker Studio**:
 | event_last_seen_date_web | DATE | Date showing the last date the Event Name was "seen" in the **web platform** |
 | event_last_seen_date_android | DATE | Date showing the last date the Event Name was "seen" in the **Android platform** |
 | event_last_seen_date_ios | DATE | Date showing the last date the Event Name was "seen" in the **iOS platform** |
+| event_first_seen_date_total | DATE | Date showing the first date the Event Name was "seen". In the SQL query you have the option to detect "true" first seen, or first seen in the period queried (3 days as standard). "True" first seen can be a costly query, but you have the option. |
+| event_first_seen_date_web | DATE | Date showing the first date the Event Name was "seen" in the **web platform**. "True" first seen or first seen in the period queried. |
+| event_first_seen_date_android | DATE | Date showing the first date the Event Name was "seen" in the **Android platform**. "True" first seen or first seen in the period queried. |
+| event_first_seen_date_ios | DATE | Date showing the first date the Event Name was "seen" in the **iOS platform**. "True" first seen or first seen in the period queried. |
 
-## ga4_documentation_events_and_images
+## Table: ga4_documentation_events_and_images
 * This query will generate the table: [ga4_documentation_events_and_images.sql](ga4_documentation_events_and_images.sql)
 
 | Field name  | Type | Comment |
@@ -176,7 +180,7 @@ The following BigQuery tables will be used in **Looker Studio**:
 | event_name | STRING | Event Name |
 | event_image_documentation | STRING | URL to image |
 
-## ga4_documentation_parameters_and_documentation_status
+## Table: ga4_documentation_parameters_and_documentation_status
 * Most of these field are also described in the **Google Sheet** documentation.
 * This query will generate the table: [ga4_documentation_parameters_and_documentation_status query](ga4_documentation_parameters_and_documentation_status.sql)
 
@@ -208,8 +212,12 @@ The following BigQuery tables will be used in **Looker Studio**:
 | parameter_last_seen_date_web | DATE | Date showing the last date the Parameter was "seen" in the **web platform** |
 | parameter_last_seen_date_android | DATE | Date showing the last date the Parameter was "seen" in the **Android platform** |
 | parameter_last_seen_date_ios | DATE | Date showing the last date the Parameter was "seen" in the **iOS platform** |
+| parameter_first_seen_date_total | DATE | Date showing the first date the Parameter was "seen" in the period queried ("true" first seen is not an option in the query) |
+| parameter_first_seen_date_web | DATE | Date showing the first date the Parameter was "seen" in the **web platform** period queried ("true" first seen is not an option in the query)  |
+| parameter_first_seen_date_android | DATE | Date showing the first date the Parameter was "seen" in the **Android platform** period queried ("true" first seen is not an option in the query) |
+| parameter_first_seen_date_ios | DATE | Date showing the first date the Parameter was "seen" in the **iOS platform** period queried ("true" first seen is not an option in the query) |
 
-## ga4_documentation_annotations
+## Table: ga4_documentation_annotations
 This table is created when you upload **Annotations** from **Google Sheet** to BigQuery.
 
 | Field name  | Type | Comment |

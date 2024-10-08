@@ -1,26 +1,27 @@
 # Looker Studio - Basic - Using Google Sheet as Data Source
-Documentation for creating basic Looker Studio report for presenting Event & Parameter Documentation without Status, in addition to Annotations. Google Sheet will be used as Data Source.
+Documentation for creating basic Looker Studio report for presenting Event & Parameter Documentation without Documentation Status, in addition to Annotations. 
+Google Sheet will be used as Data Source.
 
-* Make a copy of the [**Looker Studio GA4 Basic Documentation report**](https://lookerstudio.google.com/s/k0NYnj-_FFw)
-* Add the following Google Sheet Worksheet Data Sources to Looker Studio:
-  1. [ParameterDataSource](#ParameterDataSource)
-  2. [EventDataSource](#EventDataSource)
-  3. [EventImagesDataSource](#EventImagesDataSource)
-  4. [AnnotationsDataSource](#AnnotationsDataSource)
+* Make a copy of the [**Looker Studio GA4 Basic Documentation report**](https://lookerstudio.google.com/reporting/43387b12-cfe6-43ba-8e0c-afcf1a46a0f8/page/p_nkztye53cd) 
+  * If you are a consultant and are doing the documentation on behalf of a client, it's recommended to copy Looker Studio with an email belonging to the clients organization. This way ownership to Looker Studio can be transferred within the clients organization.
+* **Add the following Google Sheet Worksheet Data Sources to Looker Studio:**
+  1. [ParameterDataSource](#data-source-parameterdatasource)
+  2. [EventDataSource](#data-source-eventdatasource)
+  3. [EventImagesDataSource](#data-source-eventimagesdatasource)
+  4. [AnnotationsDataSource](#data-source-annotationsdatasource)
 
 ## Generate Google Sheet Data Source data
 At the top of the sheet, you will find a custom menu called "**📈 GA4 Documentation**".
 
-* **Go to the menu:** Use Sheet as Data Source -> Write Events & Parameters to Data Source Sheets
+* **Go to the menu:**
+  * Use Sheet as Data Source -> Write Events & Parameters to Data Source Sheets
 
 ## Calculated Fields
-The solution contains several **Calculated Fields**. They are all documented below. 
+The solution contains several **Calculated Fields**. They are all documented below.
 
-You have to edit 2 Calculated Fields:
-1. [Event Name URL \[Calc\]](#event-name-url-calc)
-2. [Parameter Name URL \[Calc\]](#parameter-name-url-calc)
+It's recommended to add the Calculated Fields to the Data Source _before_ you click on the **Finished** button.
 
-## ParameterDataSource
+## Data Source: ParameterDataSource
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly/are missing.
 
 ### Parameters
@@ -104,9 +105,12 @@ The URL must be edited to match your Looker Studio URLs.
 
 **Formula:**
 ```javascript
-HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/d6e751a9-c6f1-4244-8ae2-26af7225c5a4/page/p_1ads1jvted?params=%7B%22df69%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Parameter Scope,"%22,%22df73%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Parameter Name,"%22%7D"),Parameter Name)
+HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/XXX/page/p_1ads1jvted?params=%7B%22df69%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Parameter Scope,"%22,%22df73%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Parameter Name,"%22%7D"),Parameter Name)
 ```
 ##### How to create the URL
+Replace the **XXX** part of URL in the formula above with the **ID** found in YOUR Looker Studio URL.
+If that doesn't work, this is how to recreate the URL from scratch:
+
 1. Navigate to the **Parameter & Event Documentation** report
 2. **Parameter Scope** filter: Select a single Scope (ex. **EVENT**)
 3. **Parameter Name** filter: Select a single Parameter (ex. **file_extension**)
@@ -117,7 +121,7 @@ HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/d6e751a9-c6f1-42
 If you want to learn more about creating custom URL links with Calculated Field, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
 
-## EventDataSource
+## Data Source: EventDataSource
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly/are missing.
 
 ### Parameters
@@ -202,9 +206,12 @@ The URL must be edited to match your Looker Studio URLs.
 
 **Formula:**
 ```javascript
-HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/d6e751a9-c6f1-4244-8ae2-26af7225c5a4/page/p_nm474cc5cd?params=%7B%22df62%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580FALSE%22,%22df63%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Event Name,"%22%7D"),Event Name)
+HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/XXX/page/p_nm474cc5cd?params=%7B%22df62%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580FALSE%22,%22df63%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",Event Name,"%22%7D"),Event Name)
 ```
 ##### How to create the URL
+Replace the **XXX** part of URL in the formula above with the **ID** found in YOUR Looker Studio URL.
+If that doesn't work, this is how to recreate the URL from scratch:
+
 1. Navigate to the **Event & Parameter Documentation** report
 2. **GA4 Config Parameter** filter: **FALSE** (only)
 3. **Event Name** filter: Select a single Event Name (ex. **click**)
@@ -214,7 +221,7 @@ HYPERLINK(CONCAT("https://lookerstudio.google.com/u/0/reporting/d6e751a9-c6f1-42
 If you want to learn more about creating custom URL links with Calculated Field, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
 
-## EventImagesDataSource
+## Data Source: EventImagesDataSource
 Make the following adjustment to the data source if the Calculated Fields aren't working correctly.
 
 ### Calculated Fields
@@ -228,7 +235,7 @@ Make the following adjustment to the data source if the Calculated Fields aren't
 HYPERLINK(Event Image Documentation URL,IMAGE(Event Image Documentation URL))
 ```
 
-## AnnotationsDataSource
+## Data Source: AnnotationsDataSource
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
 
 ### Parameters
@@ -266,3 +273,113 @@ CONTAINS_TEXT(LOWER(Annotation Added By), LOWER(Search Added By))
 ```javascript
 CONTAINS_TEXT(LOWER(Annotation), LOWER(Search Annotations))
 ```
+## Looker Studio Fields Placement and Settings
+This section contains information about **Fields** used in Looker Studio (not all fields available are used).
+
+### Things to be aware of
+Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Date Range Dimensions are only used in the **Annotations page**, not in other pages.
+
+### GA4 Event Documentation
+![GA4 Event Documentation](/Looker-Studio/images/GA4-Documentation-Google-Sheet-GA4-Event-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Total Events \[Calc\] | Text | Metric | EventDataSource |
+| 2 | Event Group | Text | Control Field | EventDataSource |
+| 3 | Event Method | Text | Control Field | EventDataSource |
+| 4 | Key Event | Boolean | Control Field | EventDataSource |
+| 5 | Event Name Search |  | Control Field | EventDataSource |
+| 6 | Event Description Search |  | Control Field | EventDataSource |
+| 7 | Event Type | Text | Control Field | EventDataSource |
+| 8 | Event Website Bool \[Calc\] | Boolean | Control Field | EventDataSource |
+| 9 | Event iOS App Bool \[Calc\] | Boolean | Control Field | EventDataSource |
+| 10 | Event Android App Bool \[Calc\] | Boolean | Control Field | EventDataSource |
+| 11 | Event Group | Text | Dimension | EventDataSource |
+| 12 | Event Name URL \[Calc\] | Hyperlink | Dimension | EventDataSource |
+| 13 | Event Type | Text | Dimension | EventDataSource |
+| 14 | Event Method | Text | Dimension | EventDataSource |
+| 15 | Key Event | Text | Dimension | EventDataSource |
+| 16 | Event Description | Text | Dimension | EventDataSource |
+
+### GA4 Parameter Documentation
+![GA4 Parameter Documentation](/Looker-Studio/images/GA4-Documentation-Google-Sheet-Parameter-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Total Parameters \[Calc\] | Text | Metric | ParameterDataSource |
+| 2 | Event Name Label \[Calc\] | Text | Metric | ParameterDataSource |
+| 3 | GA4 Config Parameter | Boolean | Control Field | ParameterDataSource |
+| 4 | Parameter Group | Text | Control Field | ParameterDataSource |
+| 5 | Parameter Type | Text | Control Field | ParameterDataSource |
+| 6 | Parameter Name Search | | Control Field | ParameterDataSource |
+| 7 | Parameter Description Search | | Control Field | ParameterDataSource |
+| 8 | Parameter Scope | Text | Control Field | ParameterDataSource |
+| 9 | Event Name | Text | Control Field | ParameterDataSource |
+| 10 | Parameter Group | Text | Dimension | ParameterDataSource |
+| 11 | Parameter Display Name | Text | Dimension | ParameterDataSource |
+| 12 | Parameter Name URL \[Calc\] | Hyperlink | Dimension | ParameterDataSource |
+| 13 | Parameter Scope | Text | Dimension | ParameterDataSource |
+| 14 | Parameter Type | Text | Dimension | ParameterDataSource |
+| 15 | Parameter Format | Text | Dimension | ParameterDataSource |
+| 16 | Parameter NPA | Boolean | Dimension | ParameterDataSource |
+| 17 | Parameter Description | Text | Dimension | ParameterDataSource |
+| 18 | Parameter GTM Comment | Text | Dimension | ParameterDataSource |
+
+### GA4 Event & Parameter Documentation
+![GA4 Event & Parameter Documentation](/Looker-Studio/images/GA4-Documentation-Google-Sheet-Event-Parameter-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Total Parameters \[Calc\] | Text | Metric | ParameterDataSource |
+| 2 | Event Name Label \[Calc\] | Text | Metric | ParameterDataSource |
+| 3 | GA4 Config Parameter | Boolean | Control Field | ParameterDataSource |
+| 4 | Parameter Group | Text | Control Field | ParameterDataSource |
+| 5 | Parameter Type | Text | Control Field | ParameterDataSource |
+| 6 | Parameter Name Search | | Control Field | ParameterDataSource |
+| 7 | Parameter Description Search | | Control Field | ParameterDataSource |
+| 8 | Parameter Scope | Text | Control Field | ParameterDataSource |
+| 9 | Event Name | Text | Control Field | EventDataSource |
+| 10 | Event Description | Text | Dimension | EventDataSource |
+| 11 | Event Comment | Text | Dimension | EventDataSource |
+| 12 | Event GTM Comment | Text | Dimension | EventDataSource |
+| 13 | Key Event | Text | Dimension | EventDataSource |
+| 14 | Parameter Group | Text | Dimension | ParameterDataSource |
+| 15 | Parameter Display Name | Text | Dimension | ParameterDataSource |
+| 16 | Parameter Name URL \[Calc\] | Hyperlink | Dimension | ParameterDataSource |
+| 17 | Parameter Scope | Text | Dimension | ParameterDataSource |
+| 18 | Parameter Type | Text | Dimension | ParameterDataSource |
+| 19 | Parameter Format | Text | Dimension | ParameterDataSource |
+| 20 | Parameter NPA | Boolean | Dimension | ParameterDataSource |
+| 21 | Parameter Description | Text | Dimension | ParameterDataSource |
+| 22 | Parameter GTM Comment | Text | Dimension | ParameterDataSource |
+
+#### Image Documentation for Events
+![GA4 Event & Parameter Documentation - Images](/Looker-Studio/images/GA4-Documentation-BigQuery-Event-Parameter-Documentation-Images.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | event_name | Text | Dimension | GA4 Image and Event Name Blend |
+| 2 | Event Image \[Calc\] | Image Link | Dimension | GA4 Image and Event Name Blend |
+
+### GA4 Parameter & Event Documentation
+![GA4 Parameter & Event Documentation - Images](/Looker-Studio/images/GA4-Documentation-Google-Sheet-Parameter-Event-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- |------------- |
+| 1 | Parameter Name Label \[Calc\] | Text | Metric | ParameterDataSource |
+| 2 | Event Name Search | | Control Field | ParameterDataSource |
+| 3 | Event Group | Text | Control Field | EventDataSource |
+| 4 | Parameter Scope | Text | Control Field | ParameterDataSource |
+| 5 | Event Description Search | | Control Field | EventDataSource |
+| 6 | Event Type | Text | Control Field | EventDataSource |
+| 7 | Parameter Name | Text | Control Field | ParameterDataSource |
+| 8 | Parameter Display Name | Text | Dimension | ParameterDataSource |
+| 9 | Parameter Scope | Text | Dimension | ParameterDataSource |
+| 10 | Parameter Description | Text | Dimension | ParameterDataSource |
+| 11 | Parameter Example Value | Text | Dimension | ParameterDataSource |
+| 12 | Parameter GTM Comment | Text | Dimension | ParameterDataSource |
+| 13 | Event Group | Text | Dimension | GA4 Event & Parameter Blend |
+| 14 | Event Name URL \[Calc\] | Hyperlink | Dimension | GA4 Event & Parameter Blend |
+| 15 | Event Description | Text | Dimension | GA4 Event & Parameter Blend |
+| 16 | Event Comment | Text | Dimension | GA4 Event & Parameter Blend |
+| 17 | Event GTM Comment | Text | Dimension | GA4 Event & Parameter Blend |

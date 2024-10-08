@@ -1,22 +1,21 @@
 # Looker Studio - Advanced - Using BigQuery as Data Source
-Documentation for creating advanced Looker Studio report for presenting Event & Parameter Documentation with Status, in addition to Annotations. BigQuery will be used as Data Source.
+Documentation for creating advanced Looker Studio report for presenting Event & Parameter Documentation with Documentation Status, in addition to Annotations. BigQuery will be used as Data Source.
 
-* Make sure you first have created the [**BigQuery tables**](../BigQuery#overview-over-tables-created-in-bigquery) that will be used as **Data Sources** in Looker Studio.
-* Make a copy of the [**Looker Studio GA4 Advanced Documentation report**](https://lookerstudio.google.com/s/ihyU84wd7uY)
-* Add the following BigQuery Data Sources to Looker Studio:
-  1. [ga4_documentation_parameters_and_documentation_status](#ga4_documentation_parameters_and_documentation_status)
-  2. [ga4_documentation_events_and_documentation_status](#ga4_documentation_events_and_documentation_status)
-  3. [ga4_documentation_events_and_images](#ga4_documentation_events_and_images)
-  4. [ga4_documentation_annotations](#ga4_documentation_annotations)
+* Make sure you first have created the [**BigQuery tables**](/BigQuery#overview-over-tables-created-in-bigquery) that will be used as **Data Sources** in Looker Studio.
+* Make a copy of the [**Looker Studio GA4 Advanced Documentation report**](https://lookerstudio.google.com/u/0/reporting/e34b56e3-55c1-450d-90f4-d6034adc5134/page/HMgiD)
+  * If you are a consultant and are doing the documentation on behalf of a client, it's recommended to copy Looker Studio with an email belonging to the clients organization. This way ownership to Looker Studio can be transferred within the clients organization.
+* **Add the following BigQuery Data Sources to Looker Studio:**
+  1. [ga4_documentation_parameters_and_documentation_status](#data-source-ga4_documentation_parameters_and_documentation_status)
+  2. [ga4_documentation_events_and_documentation_status](#data-source-ga4_documentation_events_and_documentation_status)
+  3. [ga4_documentation_events_and_images](#data-source-ga4_documentation_events_and_images)
+  4. [ga4_documentation_annotations](#data-source-ga4_documentation_annotations)
 
 ## Calculated Fields
 The solution contains several **Calculated Fields**. They are all documented below. 
 
-You have to edit 2 Calculated Fields:
-1. [Event Name URL \[Calc\]](#event-name-url-calc)
-2. [Parameter Name URL \[Calc\]](#parameter-name-url-calc)
+It's recommended to add the Calculated Fields to the Data Source _before_ you click on the **Finished** button.
 
-## ga4_documentation_parameters_and_documentation_status
+## Data Source: ga4_documentation_parameters_and_documentation_status
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
 
 ### Parameters
@@ -144,9 +143,12 @@ The URL must be edited to match your Looker Studio URLs.
 
 **Formula:**
 ```javascript
-HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/42a4e160-741d-481c-a5a6-5e154e738c8c/page/p_1ads1jvted?s=ihyU84wd7uY&params=%7B%22df69%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",parameter_scope,"%22,%22df73%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",parameter_name,"%22%7D"),parameter_name)
+HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/XXX/page/p_1ads1jvted?s=ihyU84wd7uY&params=%7B%22df69%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",parameter_scope,"%22,%22df73%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",parameter_name,"%22%7D"),parameter_name)
 ```
 ##### How to create the URL
+Replace the **XXX** part of URL in the formula above with the **ID** found in YOUR Looker Studio URL.
+If that doesn't work, this is how to recreate the URL from scratch:
+
 1. Navigate to the **Parameter & Event Documentation** report
 2. **Parameter Scope** filter: Select a single Scope (ex. **EVENT**)
 3. **Parameter Name** filter: Select a single Parameter (ex. **file_extension**)
@@ -156,6 +158,15 @@ HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/42a4e160-741d-481c-a
 
 If you want to learn more about creating custom URL links with Calculated Field, here is a video about the subject:
 * [https://www.youtube.com/watch?v=fGBsjgjjYWg](https://www.youtube.com/watch?v=fGBsjgjjYWg)
+
+#### Parameter First Seen Date \[Calc\]
+* **Field name:** Parameter First Seen Date \[Calc\]
+* **Field ID:** parameter_first_seen_date_calc
+
+**Formula:**
+```javascript
+MIN(parameter_first_seen_date_total)
+```
 
 #### Parameter Last Seen Date \[Calc\]
 * **Field name:** Parameter Last Seen Date \[Calc\]
@@ -214,7 +225,7 @@ REPLACE(REPLACE(REPLACE(parameter_gtm_comment,r"\r\n","\n"),r"\n","\n"),r"\n\n",
 CONTAINS_TEXT(LOWER(parameter_name), LOWER(Parameter Name Search))
 ```
 
-## ga4_documentation_events_and_documentation_status
+## Data Source: ga4_documentation_events_and_documentation_status
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
 
 ### Parameters
@@ -293,9 +304,12 @@ The URL must be edited to match your Looker Studio URLs.
 
 **Formula:**
 ```javascript
-HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/42a4e160-741d-481c-a5a6-5e154e738c8c/page/p_nm474cc5cd?params=%7B%22df62%22:%22include%25EE%2580%25803%25EE%2580%2580F%22,%22df61%22:%22ORexclude%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580Not%2520Documented%25EE%2580%2581include%25EE%2580%25803%25EE%2580%2580NU%25EE%2580%2582%22,%22df63%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",event_name,"%22%7D"),event_name)
+HYPERLINK(CONCAT("https://lookerstudio.google.com/reporting/XXX/page/p_nm474cc5cd?params=%7B%22df62%22:%22include%25EE%2580%25803%25EE%2580%2580F%22,%22df61%22:%22ORexclude%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580Not%2520Documented%25EE%2580%2581include%25EE%2580%25803%25EE%2580%2580NU%25EE%2580%2582%22,%22df63%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580",event_name,"%22%7D"),event_name)
 ```
 ##### How to create the URL
+Replace the **XXX** part of URL in the formula above with the **ID** found in YOUR Looker Studio URL.
+If that doesn't work, this is how to recreate the URL from scratch:
+
 1. Navigate to the **Event & Parameter Documentation** report
 2. **GA4 Config Parameter** filter: **false** (only)
 3. **Documentation Status** filter: Untick **Not Documented** (if you have this choice)
@@ -333,7 +347,7 @@ CONCAT(DATE_DIFF(TODAY(), event_last_seen_date_total),' day(s) ago')
 CONCAT("Last Updated: ",MAX(Event Uploaded to BQ Time [Calc]))
 ```
 
-## ga4_documentation_events_and_images
+## Data Source: ga4_documentation_events_and_images
 Make the following adjustment to the data source if the Calculated Fields aren't working correctly.
 
 ### Calculated Fields
@@ -347,7 +361,7 @@ Make the following adjustment to the data source if the Calculated Fields aren't
 HYPERLINK(event_image_documentation,IMAGE(event_image_documentation))
 ```
 
-## ga4_documentation_annotations
+## Data Source: ga4_documentation_annotations
 Make the following adjustment to the data source if the **Calculated Fields** aren't working correctly.
 
 ### Parameters
@@ -394,3 +408,164 @@ REPLACE(REPLACE(REPLACE(annotation_description,r"\r\n","\n"),r"\n","\n"),r"\n\n"
 ```javascript
 CONTAINS_TEXT(LOWER(annotation_description), LOWER(Search Annotations))
 ```
+## Looker Studio Fields Placement and Settings
+This section contains information about **Fields** used in Looker Studio (not all fields available are used).
+
+### Things to be aware of
+Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Date Range Dimensions are only used in the **Annotations page**, not in other pages.
+
+### GA4 Documentation Overview
+![GA4 Documentation Overview](/Looker-Studio/images/GA4-Documentation-BigQuery-GA4-Documentation-Overview.png)
+
+| Number  | Field | Data Type | Filter On This Chart | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Event Documentation Last Updated \[Calc\] | Text |  | ga4_documentation_events_and_documentation_status |
+| 2 | event_name | Number |  | ga4_documentation_events_and_documentation_status |
+| 3 | event_documentation_status | Number | Documented Events and Data | ga4_documentation_events_and_documentation_status |
+| 4 | event_documentation_status | Number | Events not Documented | ga4_documentation_events_and_documentation_status |
+| 5 | event_documentation_status | Number | Documented Events no Data | ga4_documentation_events_and_documentation_status |
+| 6 | Parameter Count Total \[Calc\] | Number |  | ga4_documentation_parameters_and_documentation_status |
+| 7 | Parameter Count Documented and Data \[Calc\] | Number |  | ga4_documentation_parameters_and_documentation_status |
+| 8 | Parameter Count Not Documented \[Calc\] | Number |  | ga4_documentation_parameters_and_documentation_status |
+| 9 | Parameter Count Documented no Data \[Calc\] | Number |  | ga4_documentation_parameters_and_documentation_status |
+| 10 | event_documentation_status <br> event_documentation_status <br> event_count_total | Text <br> Number <br> Number |  | ga4_documentation_events_and_documentation_status |
+| 11 | parameter_scope <br> Parameter Count Documented and Data \[Calc\] <br> Parameter Count Not Documented \[Calc\] <br> Parameter Count Documented no Data \[Calc\] | Text <br> Number <br> Number <br> Number |   | ga4_documentation_parameters_and_documentation_status |
+
+#### Annotations
+![GA4 Documentation Overview - Annotations](/Looker-Studio/images/GA4-Documentation-BigQuery-GA4-Documentation-Overview-Annotations.png)
+
+| Date Range Dimension  | Dimension | Break Down Dimension | Metric | Sort | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| annotation_time | annotation_time | annotation_category | Record Count | annotation_time | ga4_documentation_annotations
+
+### GA4 Event Documentation
+![GA4 Event Documentation](/Looker-Studio/images/GA4-Documentation-BigQuery-GA4-Event-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Total Events \[Calc\] | Text | Metric | ga4_documentation_events_and_documentation_status |
+| 2 | event_group | Text | Control Field | ga4_documentation_events_and_documentation_status |
+| 3 | event_method | Text | Control Field | ga4_documentation_events_and_documentation_status |
+| 4 | key_event | Boolean | Control Field | ga4_documentation_events_and_documentation_status |
+| 5 | Event Name Search |  | Control Field | ga4_documentation_events_and_documentation_status |
+| 6 | Event Description Search |  | Control Field | ga4_documentation_events_and_documentation_status |
+| 7 | event_type | Text | Control Field | ga4_documentation_events_and_documentation_status |
+| 8 | event_documentation_status | Text | Control Field | ga4_documentation_events_and_documentation_status |
+| 9 | event_website | Boolean | Control Field | ga4_documentation_events_and_documentation_status |
+| 10 | event_ios_app | Boolean | Control Field | ga4_documentation_events_and_documentation_status |
+| 11 | event_android_app | Boolean | Control Field | ga4_documentation_events_and_documentation_status |
+| 12 | event_group | Text | Dimension | ga4_documentation_events_and_documentation_status |
+| 13 | Event Name URL \[Calc\] | Hyperlink | Dimension | ga4_documentation_events_and_documentation_status |
+| 14 | event_type | Text | Dimension | ga4_documentation_events_and_documentation_status |
+| 15 | event_method | Text | Dimension | ga4_documentation_events_and_documentation_status |
+| 16 | key_event | Boolean | Dimension | ga4_documentation_events_and_documentation_status |
+| 17 | Event Description \[Calc\] | Text | Dimension | ga4_documentation_events_and_documentation_status |
+| 18 | Event Last Seen Days \[Calc\] | Text | Dimension | ga4_documentation_events_and_documentation_status |
+| 19 | event_count_total | Number | Metric | ga4_documentation_events_and_documentation_status |
+
+### GA4 Parameter Documentation
+![GA4 Parameter Documentation](/Looker-Studio/images/GA4-Documentation-BigQuery-Parameter-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Parameter Name Label \[Calc\] | Text | Metric | ga4_documentation_parameters_and_documentation_status |
+| 2 | Event Name Label \[Calc\] | Text | Metric | ga4_documentation_parameters_and_documentation_status |
+| 3 | ga4_config_parameter | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 4 | parameter_group | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 5 | parameter_scope | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 6 | parameter_type | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 7 | Parameter Name Search | | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 8 | Parameter Description Search | | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 9 | Parameter Documentation Status \[Calc\] | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 10 | event_name | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 11 | event_website | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 12 | event_ios_app | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 13 | event_android_app | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 14 | parameter_group | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 15 | parameter_display_name | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 16 | Parameter Name URL \[Calc\] | Hyperlink | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 17 | parameter_scope | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 18 | parameter_type | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 19 | parameter_format | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 20 | parameter_disallow_ads_personalization | Boolean | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 21 | Parameter Description \[Calc\] | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 22 | Parameter GTM Comment \[Calc\] | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 23 | Parameter Last Seen Days \[Calc\] | Text | Metric | ga4_documentation_parameters_and_documentation_status |
+| 24 | parameter_count_total | Number | Metric | ga4_documentation_parameters_and_documentation_status |
+
+### GA4 Event & Parameter Documentation
+![GA4 Event & Parameter Documentation](/Looker-Studio/images/GA4-Documentation-BigQuery-Event-Parameter-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Total Parameters \[Calc\] | Text | Metric | ga4_documentation_parameters_and_documentation_status |
+| 2 | Event Name Label \[Calc\] | Text | Metric | ga4_documentation_parameters_and_documentation_status |
+| 3 | ga4_config_parameter | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 4 | parameter_group | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 5 | parameter_scope | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 6 | parameter_type | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 7 | Parameter Name Search | | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 8 | Parameter Description Search | | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 9 | Parameter Documentation Status \[Calc\] | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 10 | event_name | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 11 | event_website | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 12 | event_ios_app | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 13 | event_android_app | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 14 | Event Description \[Calc\] | Text | Dimension | ga4_documentation_events_and_documentation_status |
+| 15 | Event Comment \[Calc\] | Text | Dimension | ga4_documentation_events_and_documentation_status |
+| 16 | Event GTM Comment \[Calc\] | Text | Dimension | ga4_documentation_events_and_documentation_status |
+| 17 | key_event | Boolean | Dimension | ga4_documentation_events_and_documentation_status |
+| 18 | event_count_total | Number | Dimension | ga4_documentation_events_and_documentation_status |
+| 19 | event_first_seen_date_total | Date | Dimension | ga4_documentation_events_and_documentation_status |
+| 20 | Event Last Seen Days \[Calc\] | Text | Dimension | ga4_documentation_events_and_documentation_status |
+| 21 | parameter_group | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 22 | parameter_display_name | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 23 | Parameter Name URL \[Calc\] | Hyperlink | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 24 | parameter_scope | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 25 | parameter_type | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 26 | parameter_format | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 27 | parameter_disallow_ads_personalization | Boolean | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 28 | Parameter Description \[Calc\] | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 29 | Parameter GTM Comment \[Calc\] | Text | Dimension | ga4_documentation_parameters_and_documentation_status |
+| 30 | Parameter Last Seen Days \[Calc\] | Text | Metric | ga4_documentation_parameters_and_documentation_status |
+| 31 | parameter_count_total | Number | Metric | ga4_documentation_parameters_and_documentation_status |
+
+#### Image Documentation for Events
+![GA4 Event & Parameter Documentation - Images](/Looker-Studio/images/GA4-Documentation-BigQuery-Event-Parameter-Documentation-Images.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | event_name | Text | Dimension | GA4 Image and Event Name Blend |
+| 2 | Event Image \[Calc\] | Image Link | Dimension | GA4 Image and Event Name Blend |
+
+### GA4 Parameter & Event Documentation
+![GA4 Parameter & Event Documentation - Images](/Looker-Studio/images/GA4-Documentation-BigQuery-Parameter-Event-Documentation.png)
+
+| Number  | Field | Data Type | Field Type | Data Source |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Parameter Name Label \[Calc\] | Text | Metric | ga4_documentation_parameters_and_documentation_status |
+| 2 | event_group | Text | Control Field | ga4_documentation_events_and_documentation_status |
+| 3 | event_type | Text | Control Field | ga4_documentation_events_and_documentation_status |
+| 4 | parameter_scope | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 5 | Event Name Search | | Control Field | ga4_documentation_events_and_documentation_status |
+| 6 | Event Description Search | | Control Field | ga4_documentation_events_and_documentation_status |
+| 7 | event_documentation_status | Text | Control Field | ga4_documentation_events_and_documentation_status |
+| 8 | parameter_name | Text | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 9 | event_website | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 10 | event_ios_app | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 11 | event_android_app | Boolean | Control Field | ga4_documentation_parameters_and_documentation_status |
+| 12 | parameter_display_name | Text | Dimension | GA4 Event & Parameter Blend |
+| 13 | parameter_scope | Text | Dimension | GA4 Event & Parameter Blend |
+| 14 | Parameter Description \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 15 | parameter_example_value | Text | Dimension | GA4 Event & Parameter Blend |
+| 16 | Parameter GTM Comment \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 17 | Parameter Documentation Status \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 18 | parameter_first_seen_date_total | Date | Dimension | GA4 Event & Parameter Blend |
+| 19 | Parameter Last Seen Days \[Calc\] | Text | Metric | GA4 Event & Parameter Blend |
+| 20 | event_group | Text | Dimension | GA4 Event & Parameter Blend |
+| 21 | Event Name URL \[Calc\] | Hyperlink | Dimension | GA4 Event & Parameter Blend |
+| 22 | Event Description \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 23 | Event Comment \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 24 | Event GTM Comment \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |
+| 25 | event_count_total | Number | Dimension | GA4 Event & Parameter Blend |
+| 26 | Event Last Seen Days \[Calc\] | Text | Dimension | GA4 Event & Parameter Blend |

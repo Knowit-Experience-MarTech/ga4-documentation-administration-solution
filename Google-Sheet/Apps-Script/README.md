@@ -1,5 +1,5 @@
 # Apps Script
-Apps Script used in the [Google Sheet](https://github.com/Knowit-Experience-MarTech/ga4-documentation-administration-solution) are found in this folder.
+Apps Script used in the [Google Sheet](/Google-Sheet) are found in this folder.
 
 Beware that all scripts that interacts with the GA4 API ([Reporting API](https://developers.google.com/analytics/devguides/reporting/data/v1/quotas) & [Admin API](https://developers.google.com/analytics/devguides/config/admin/v1/quotas)), there are **Limits and Quotas on API Requests**.
 

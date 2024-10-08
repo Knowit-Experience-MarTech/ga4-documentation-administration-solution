@@ -15,7 +15,7 @@
  */
 
 /* **** GOOGLE ANALYTICS 4 ADMIN API
-Create, update and delete Conversion Events
+Create, update and delete Key Events
 Developer documentation:
 https://developers.google.com/analytics/devguides/config/admin/v1
 */
@@ -49,7 +49,7 @@ function eventCheckBoxesTick() {
 }
 
 // *** GET GA4 EVENT INFORMATION
-function getGA4EventConversions() {
+function getGA4KeyEvents() {
   try {
     if (!ga4PropertyID) {
       SpreadsheetApp.getUi().alert("GA4 Property ID is not set in Settings Sheet.");
@@ -66,42 +66,42 @@ function getGA4EventConversions() {
       sheetData.push(event);
     });
 
-    const conversionEventAPI = AnalyticsAdmin.Properties.ConversionEvents;
+    const keyEventAPI = AnalyticsAdmin.Properties.KeyEvents;
     let pageToken;
-    let conversionEvents = [];
-    const eventConversionData = [];
-    const eventConversionDataDocumented = [];
-    const range = ss.getSheetByName(helperDropDownTab).getRange('HelperEventConversionType');
+    let keyEvents = [];
+    const keyEventData = [];
+    const keyEventDataDocumented = [];
+    const range = ss.getSheetByName(helperDropDownTab).getRange('HelperKeyEventType');
     const rule = SpreadsheetApp.newDataValidation().requireValueInRange(range).build();
 
     do {
-      const response = conversionEventAPI.list(
+      const response = keyEventAPI.list(
         `properties/${ga4PropertyID}`,
         {pageSize: 200, pageToken: pageToken}
       );
 
-      conversionEvents = conversionEvents.concat(response.conversionEvents || []);
+      keyEvents = keyEvents.concat(response.keyEvents || []);
 
-      if (!conversionEvents) {
-        SpreadsheetApp.getUi().alert("No Conversion Events were found in GA4 Property:\n" + ga4PropertyNameAndID);
+      if (!keyEvents) {
+        SpreadsheetApp.getUi().alert("No Key Events were found in GA4 Property:\n" + ga4PropertyNameAndID);
         return;
       }
 
       eventSheet.getRange(headerRowNumber + 1, eventResourceNameColumn, sheetData.length + 1, 1).clearContent();
 
-      conversionEvents.forEach((conversionEvent) => {
-        eventConversionData.push(conversionEvent);
+      keyEvents.forEach((keyEvent) => {
+        keyEventData.push(keyEvent);
         sheetData.forEach((row) => {
-          if (conversionEvent.eventName === row.eventName) {
+          if (keyEvent.eventName === row.eventName) {
             const rowIndex = row.length + headerRowNumber + 1;
-            eventSheet.getRange(rowIndex, eventResourceNameColumn).setValue(conversionEvent.name);
+            eventSheet.getRange(rowIndex, eventResourceNameColumn).setValue(keyEvent.name);
 
             if (row.checkbox) {
-              eventSheet.getRange(rowIndex, eventConversionColumn).insertCheckboxes().check();
-              eventSheet.getRange(rowIndex, eventConversionCountingColumn).setDataValidation(rule);
-              eventSheet.getRange(rowIndex, eventConversionCountingColumn).setValue(conversionEvent.countingMethod);
+              eventSheet.getRange(rowIndex, keyEventColumn).insertCheckboxes().check();
+              eventSheet.getRange(rowIndex, keyEventCountingColumn).setDataValidation(rule);
+              eventSheet.getRange(rowIndex, keyEventCountingColumn).setValue(keyEvent.countingMethod);
             }
-            eventConversionDataDocumented.push(conversionEvent);
+            keyEventDataDocumented.push(keyEvent);
           }
         });
       });
@@ -109,38 +109,38 @@ function getGA4EventConversions() {
       pageToken = response.nextPageToken;
     } while (pageToken); // Continue until there's no more pageToken
 
-    // Remove Conversion Events that are documented
-    const undocumentedConversionEvents = eventConversionData.filter(event => !eventConversionDataDocumented.includes(event));
+    // Remove Key Events that are documented
+    const undocumentedKeyEvents = keyEventData.filter(event => !keyEventDataDocumented.includes(event));
 
-    // Add undocumented Conversion Events to the end of the Events Sheet
-    undocumentedConversionEvents.forEach((event, index) => {
+    // Add undocumented Key Events to the end of the Events Sheet
+    undocumentedKeyEvents.forEach((event, index) => {
       const rowIndex = eventLastRow + 1 + index;
       eventSheet.getRange(rowIndex, eventNameColumn).setValue(event.eventName);
-      eventSheet.getRange(rowIndex, eventConversionColumn).insertCheckboxes().check();
-      eventSheet.getRange(rowIndex, eventConversionCountingColumn).setDataValidation(rule);
-      eventSheet.getRange(rowIndex, eventConversionCountingColumn).setValue(event.countingMethod);
+      eventSheet.getRange(rowIndex, keyEventColumn).insertCheckboxes().check();
+      eventSheet.getRange(rowIndex, keyEventCountingColumn).setDataValidation(rule);
+      eventSheet.getRange(rowIndex, keyEventCountingColumn).setValue(event.countingMethod);
       eventSheet.getRange(rowIndex, eventResourceNameColumn).setValue(event.name);
     });
   } catch (err) {
-    Logger.log('getGA4ConversionEvents: ' + err.stack);
-    SpreadsheetApp.getUi().alert('Error occurred in "getGA4ConversionEvents" function: \n' + err);
+    Logger.log('getGA4KeyEvents: ' + err.stack);
+    SpreadsheetApp.getUi().alert('Error occurred in "getGA4KeyEvents" function: \n' + err);
   }
 }
 
-// *** CREATE GA4 CONVERSION EVENT
-function createGA4ConversionEvent() {
+// *** CREATE GA4 KEY EVENT
+function createGA4KeyEvent() {
   try {
     if (!ga4PropertyID) {
       SpreadsheetApp.getUi().alert("GA4 Property ID is not set in Settings Sheet.");
       return;
     }
 
-    const conversionEventAPI = AnalyticsAdmin.Properties.ConversionEvents;
+    const keyEventAPI = AnalyticsAdmin.Properties.KeyEvents;
     const sheetData = [];
     eventRows.forEach((row, index) => {
       const event = {
         eventName: row[eventNameColumn - 1].trim(),
-        countingMethod: row[eventConversionCountingColumn - 1] ? row[eventConversionCountingColumn - 1].trim() : 'ONCE_PER_EVENT',
+        countingMethod: row[keyEventCountingColumn - 1] ? row[keyEventCountingColumn - 1].trim() : 'ONCE_PER_EVENT',
         checkbox: row[eventEditCheckboxColumn - 1],
         length: index
       }
@@ -150,52 +150,52 @@ function createGA4ConversionEvent() {
     sheetData
       .filter((row) => row.checkbox)
       .forEach((row) => {
-        conversionEventAPI.create({
+        keyEventAPI.create({
           "eventName": row.eventName,
           "countingMethod": row.countingMethod,
         }, `properties/${ga4PropertyID}`);
       });
 
     let pageToken; // Start with no pageToken
-    let conversionEvents = [];
-    const range = ss.getSheetByName(helperDropDownTab).getRange('HelperEventConversionType');
+    let keyEvents = [];
+    const range = ss.getSheetByName(helperDropDownTab).getRange('HelperKeyEventType');
     const rule = SpreadsheetApp.newDataValidation().requireValueInRange(range).build();
 
     do {
-      const response = conversionEventAPI.list(
+      const response = keyEventAPI.list(
         `properties/${ga4PropertyID}`,
         {pageSize: 200, pageToken: pageToken}
       );
 
-      conversionEvents = conversionEvents.concat(response.conversionEvents || []);
+      keyEvents = keyEvents.concat(response.keyEvents || []);
       pageToken = response.nextPageToken; // Update pageToken for the next iteration
 
       sheetData.forEach((sheetRow) => {
-        const matchingEvent = conversionEvents.find((event) => event.eventName === sheetRow.eventName);
+        const matchingEvent = keyEvents.find((event) => event.eventName === sheetRow.eventName);
 
         if (matchingEvent) {
           const rowIndex = sheetRow.length + headerRowNumber + 1;
 
           if (sheetRow.checkbox) {
             eventSheet.getRange(rowIndex, eventResourceNameColumn).setValue(matchingEvent.name);
-            eventSheet.getRange(rowIndex, eventConversionCountingColumn).setDataValidation(rule);
-            eventSheet.getRange(rowIndex, eventConversionColumn).insertCheckboxes().check();
-            eventSheet.getRange(rowIndex, eventConversionCountingColumn).setValue(matchingEvent.countingMethod);
+            eventSheet.getRange(rowIndex, keyEventCountingColumn).setDataValidation(rule);
+            eventSheet.getRange(rowIndex, keyEventColumn).insertCheckboxes().check();
+            eventSheet.getRange(rowIndex, keyEventCountingColumn).setValue(matchingEvent.countingMethod);
           }
         }
       });
 
     } while (pageToken); // Continue until there's no more pageToken
 
-    SpreadsheetApp.getUi().alert("Conversion Event(s) were created.");
+    SpreadsheetApp.getUi().alert("Key Event(s) were created.");
   } catch (err) {
-    Logger.log('createGA4ConversionEvent: ' + err.stack);
-    SpreadsheetApp.getUi().alert('Error occurred in "createGA4ConversionEvent" function: \n' + err);
+    Logger.log('createGA4KeyEvent: ' + err.stack);
+    SpreadsheetApp.getUi().alert('Error occurred in "createGA4KeyEvent" function: \n' + err);
   }
 }
 
-// *** UPDATE GA4 CONVERSION EVENT
-function updateGA4ConversionEvent() {
+// *** UPDATE GA4 KEY EVENT
+function updateGA4KeyEvent() {
   try {
     if (!ga4PropertyID) {
       SpreadsheetApp.getUi().alert("GA4 Property ID is not set in Settings Sheet.");
@@ -207,41 +207,41 @@ function updateGA4ConversionEvent() {
       if (row[eventEditCheckboxColumn - 1]) {
         const event = {
           eventName: row[eventNameColumn - 1].trim(),
-          eventConversionType: row[eventConversionCountingColumn - 1].trim(),
+          keyEventType: row[keyEventCountingColumn - 1].trim(),
           length: index
         };
         sheetData.push(event);
       }
     });
 
-    const conversionEventAPI = AnalyticsAdmin.Properties.ConversionEvents;
+    const keyEventAPI = AnalyticsAdmin.Properties.KeyEvents;
     let pageToken; // Start with no pageToken
-    let conversionEvents = [];
+    let keyEvents = [];
     let isUpdated = false; // Flag to track if any updates were made
 
     do {
-      const response = conversionEventAPI.list(
+      const response = keyEventAPI.list(
         `properties/${ga4PropertyID}`,
         {pageSize: 200, pageToken: pageToken}
       );
 
-      conversionEvents = conversionEvents.concat(response.conversionEvents || []);
+      keyEvents = keyEvents.concat(response.keyEvents || []);
       pageToken = response.nextPageToken; // Update pageToken for the next iteration
 
-      if(conversionEvents) {
-        conversionEvents.forEach((conversionEvent) => {
+      if(keyEvents) {
+        keyEvents.forEach((keyEvent) => {
           sheetData.forEach((sheetRow) => {
-            if (conversionEvent.eventName === sheetRow.eventName) {
+            if (keyEvent.eventName === sheetRow.eventName) {
               const rowIndex = sheetRow.length + headerRowNumber + 1;
 
-              eventSheet.getRange(rowIndex, eventResourceNameColumn).setValue(conversionEvent.name);
+              eventSheet.getRange(rowIndex, eventResourceNameColumn).setValue(keyEvent.name);
 
-              conversionEventAPI.patch(
+              keyEventAPI.patch(
                 {
                   "eventName": sheetRow.eventName,
-                  "countingMethod": sheetRow.eventConversionType,
+                  "countingMethod": sheetRow.keyEventType,
                 },
-                conversionEvent.name,
+                keyEvent.name,
                 { updateMask: "*" }
               );
               isUpdated = true; // Set the flag to true as an update is made
@@ -253,17 +253,17 @@ function updateGA4ConversionEvent() {
     } while (pageToken); // Continue until there's no more pageToken
 
     if (isUpdated) {
-      SpreadsheetApp.getUi().alert("Conversion Event(s) were updated.");
+      SpreadsheetApp.getUi().alert("Key Event(s) were updated.");
     } 
 
   } catch (err) {
-    Logger.log('updateGA4ConversionEvent: ' + err.stack);
-    SpreadsheetApp.getUi().alert('Error occurred in "updateGA4ConversionEvent" function: \n' + err);
+    Logger.log('updateGA4KeyEvent: ' + err.stack);
+    SpreadsheetApp.getUi().alert('Error occurred in "updateGA4KeyEvent" function: \n' + err);
   }
 }
 
-// *** DELETE/UNASSIGN GA4 CONVERSION EVENT
-function removeGA4ConversionFromEvent() {
+// *** DELETE/UNASSIGN GA4 KEY EVENT
+function removeGA4KeyEventFromEvent() {
   try {
     if (!ga4PropertyID) {
       SpreadsheetApp.getUi().alert("GA4 Property ID is not set in Settings Sheet.");
@@ -272,7 +272,7 @@ function removeGA4ConversionFromEvent() {
 
     const ui = SpreadsheetApp.getUi();
     const response = ui.alert(
-      'Are you sure you want to Remove Conversion from Event(s)?',
+      'Are you sure you want to Remove KeyEvent from Event(s)?',
       ui.ButtonSet.YES_NO
     );
 
@@ -291,29 +291,29 @@ function removeGA4ConversionFromEvent() {
       }
     });
 
-    const conversionEventAPI = AnalyticsAdmin.Properties.ConversionEvents;
+    const keyEventAPI = AnalyticsAdmin.Properties.KeyEvents;
     let pageToken; // Start with no pageToken
-    let conversionEvents = [];
+    let keyEvents = [];
     let isUpdated = false; // Flag to track if any updates were made
 
     do {
-      const response = conversionEventAPI.list(
+      const response = keyEventAPI.list(
         `properties/${ga4PropertyID}`,
         {pageSize: 200, pageToken: pageToken}
       );
 
-      conversionEvents = conversionEvents.concat(response.conversionEvents || []);
+      keyEvents = keyEvents.concat(response.keyEvents || []);
       pageToken = response.nextPageToken; // Update pageToken for the next iteration
 
-      if (conversionEvents) {
-        conversionEvents.forEach((conversionEvent) => {
+      if (keyEvents) {
+        keyEvents.forEach((keyEvent) => {
           sheetData.forEach((sheetRow) => {
-            if (conversionEvent.eventName === sheetRow.eventName) {
+            if (keyEvent.eventName === sheetRow.eventName) {
               const rowIndex = sheetRow.length + headerRowNumber + 1;
-              conversionEventAPI.remove(conversionEvent.name);
-              eventSheet.getRange(rowIndex, eventConversionColumn).insertCheckboxes().uncheck();
-              eventSheet.getRange(rowIndex, eventConversionCountingColumn).setDataValidation(null);
-              eventSheet.getRange(rowIndex, eventConversionCountingColumn).clearContent();
+              keyEventAPI.remove(keyEvent.name);
+              eventSheet.getRange(rowIndex, keyEventColumn).insertCheckboxes().uncheck();
+              eventSheet.getRange(rowIndex, keyEventCountingColumn).setDataValidation(null);
+              eventSheet.getRange(rowIndex, keyEventCountingColumn).clearContent();
               eventSheet.getRange(rowIndex, eventResourceNameColumn).clearContent();
               isUpdated = true; // Set the flag to true as an update is made
             }
@@ -324,11 +324,11 @@ function removeGA4ConversionFromEvent() {
     } while (pageToken); // Continue until there's no more pageToken
 
     if (isUpdated) {
-      SpreadsheetApp.getUi().alert("Conversion Event(s) were deleted.");
+      SpreadsheetApp.getUi().alert("Key Event(s) were deleted.");
     }
   } catch (err) {
-    Logger.log('removeGA4ConversionFromEvent: ' + err.stack);
-    SpreadsheetApp.getUi().alert('Error occurred in "removeGA4ConversionFromEvent" function: \n' + err);
+    Logger.log('removeGA4KeyEventFromEvent: ' + err.stack);
+    SpreadsheetApp.getUi().alert('Error occurred in "removeGA4KeyEventFromEvent" function: \n' + err);
   }
 }
 
@@ -357,25 +357,25 @@ function deleteEventRows() {
       // Sort the sheetData array in descending order based on the row number
       sheetData.sort((a, b) => b.length - a.length);
 
-      const conversionEventAPI = AnalyticsAdmin.Properties.ConversionEvents;
+      const keyEventAPI = AnalyticsAdmin.Properties.KeyEvents;
       let pageToken; // Start with no pageToken
-      let conversionEvents = [];
+      let keyEvents = [];
       let isUpdated = false; // Flag to track if any updates were made
 
       do {
-        const response = conversionEventAPI.list(
+        const response = keyEventAPI.list(
           `properties/${ga4PropertyID}`,
           {pageSize: 200, pageToken: pageToken}
         );
 
-        conversionEvents = conversionEvents.concat(response.conversionEvents || []);
+        keyEvents = keyEvents.concat(response.keyEvents || []);
         pageToken = response.nextPageToken; // Update pageToken for the next iteration
 
         sheetData.forEach((data) => {
-          if (conversionEvents) {
-            conversionEvents.forEach((conversionEvent) => {
-              if (conversionEvent.eventName === data.eventName) {
-                conversionEventAPI.remove(conversionEvent.name);
+          if (keyEvents) {
+            keyEvents.forEach((keyEvent) => {
+              if (keyEvent.eventName === data.eventName) {
+                keyEventAPI.remove(keyEvent.name);
               }
             });
           }
