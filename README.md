@@ -18,7 +18,7 @@ The solution also includes [**Annotations**](Google-Sheet#annotations), which ca
 3. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **Event Group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
 
 ## Intro to documentation
-The documentation is divided into 5 separate parts:
+The documentation is organized in the following way:
 1. [Google Sheet](Google-Sheet) (Everything starts with the Google Sheet)
 	* [Apps Script](Google-Sheet/Apps-Script) (used in the Google Sheet)
 3. [BigQuery](BigQuery) (for integrating the documentation with GA4 Data so you can understand if the documentation or tracking is broken)
