@@ -329,6 +329,15 @@ If you want to learn more about creating custom URL links with Calculated Field,
 FORMAT_DATETIME('%Y-%m-%d %H:%M',  event_uploaded_to_bq_time)
 ```
 
+#### Total Events \[Calc\]
+* **Field name:** Total Events \[Calc\]
+* **Field ID:** total_events_calc
+
+**Formula:**
+```javascript
+CONCAT('Total Events: ',COUNT_DISTINCT(event_name))
+```
+
 #### Event Last Seen Days \[Calc\]
 * **Field name:** Event Last Seen Days \[Calc\]
 * **Field ID:** event_last_seen_days_calc
