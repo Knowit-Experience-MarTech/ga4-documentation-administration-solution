@@ -89,6 +89,15 @@ COUNT_DISTINCT(IF(parameter_count_total > 0 AND parameter_display_name IS NOT NU
 COUNT_DISTINCT(IF(parameter_count_total > 0 AND parameter_display_name IS NULL AND parameter_name IS NOT NULL, parameter_name, NULL))
 ```
 
+#### Total Parameters \[Calc\]
+* **Field name:** Total Parameters \[Calc\]
+* **Field ID:** total_parameters_calc
+
+**Formula:**
+```javascript
+CONCAT('Total Parameters: ',COUNT_DISTINCT(parameter_name))
+```
+
 #### Parameter Count Total \[Calc\]
 * **Field name:** Parameter Count Total \[Calc\]
 * **Field ID:** parameter_count_total_calc
