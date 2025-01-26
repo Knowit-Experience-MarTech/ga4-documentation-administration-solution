@@ -40,7 +40,7 @@ declare excluded_events string default (
     from unnest(split(excluded_events_hardcoded, ',')) as value
     union distinct
     select distinct trim(value) as event
-    from `savio-ga-bigquery.analytics_208906313.ga4_documentation_bq_settings`,
+    from `your-project.analytics_XXX.ga4_documentation_bq_settings`,
     unnest(split(events_exclusion, ',')) as value
     where events_exclusion is not null and events_exclusion != ''
   )
@@ -55,23 +55,23 @@ declare yesterday_events_exists bool default false;
 declare day_interval int64;
 declare is_initial_run bool default (
   select count(1) = 0 
-  from `savio-ga-bigquery.analytics_208906313.__TABLES_SUMMARY__`
+  from `your-project.analytics_XXX.__TABLES_SUMMARY__`
   where table_id = 'ga4_documentation_events_daily_counts'
 );
 
 set day_interval_short = (
   select ep_day_interval_short
-  from `savio-ga-bigquery.analytics_208906313.ga4_documentation_bq_settings`
+  from `your-project.analytics_XXX.ga4_documentation_bq_settings`
 );
 
 set day_interval_extended = (
   select ep_day_interval_extended
-  from `savio-ga-bigquery.analytics_208906313.ga4_documentation_bq_settings`
+  from `your-project.analytics_XXX.ga4_documentation_bq_settings`
 );
 
 set delete_event_count_after_days = (
   select ep_delete_event_count_after_days
-  from `savio-ga-bigquery.analytics_208906313.ga4_documentation_bq_settings`
+  from `your-project.analytics_XXX.ga4_documentation_bq_settings`
 );
 
 if is_initial_run then
@@ -83,7 +83,7 @@ end if;
 /*** END DECLARATIONS THAT SHOULDN'T BE EDITED ***/
 
 -- Create the table if not exists
-create table if not exists `savio-ga-bigquery.analytics_208906313.ga4_documentation_events_and_documentation_status` (
+create table if not exists `your-project.analytics_XXX.ga4_documentation_events_and_documentation_status` (
   event_group string options(description='Event Group. Used for event categorization.'),
   event_name string options(description='Event Name.'),
   event_method string options(description='Type of tracking/data collection method. Implementation, Google Tag Manager setup etc.'),
@@ -116,21 +116,21 @@ create table if not exists `savio-ga-bigquery.analytics_208906313.ga4_documentat
 -- Check if events_fresh_* table exists using __TABLES_SUMMARY__
 set events_fresh_exists = (
   select count(1) > 0
-  from `savio-ga-bigquery.analytics_208906313.__TABLES_SUMMARY__`
+  from `your-project.analytics_XXX.__TABLES_SUMMARY__`
   where table_id like 'events_fresh_%'
 );
 
 -- Check if events_intraday_* table exists using __TABLES_SUMMARY__
 set events_intraday_exists = (
   select count(1) > 0
-  from `savio-ga-bigquery.analytics_208906313.__TABLES_SUMMARY__`
+  from `your-project.analytics_XXX.__TABLES_SUMMARY__`
   where table_id like 'events_intraday_%'
 );
 
 -- Check if yesterday's events_* table exists using __TABLES_SUMMARY__
 set yesterday_events_exists = (
   select count(1) > 0
-  from `savio-ga-bigquery.analytics_208906313.__TABLES_SUMMARY__`
+  from `your-project.analytics_XXX.__TABLES_SUMMARY__`
   where table_id = concat('events_', format_date('%Y%m%d', date_sub(current_date(), interval 1 day)))
 );
 
@@ -140,7 +140,7 @@ create temp table EventsData as
     event_date,
     event_name,
     platform
-  from `savio-ga-bigquery.analytics_208906313.events_*` limit 0;
+  from `your-project.analytics_XXX.events_*` limit 0;
 
 begin
   if events_fresh_exists then
@@ -150,7 +150,7 @@ begin
       event_date,
       event_name,
       platform
-    from `savio-ga-bigquery.analytics_208906313.events_fresh_*`
+    from `your-project.analytics_XXX.events_fresh_*`
     where _table_suffix between format_date('%Y%m%d', date_sub(current_date(), interval day_interval day))
       and format_date('%Y%m%d', current_date())
       and event_name not in unnest(split(excluded_events, ', '));
@@ -162,7 +162,7 @@ begin
       event_date,
       event_name,
       platform
-    from `savio-ga-bigquery.analytics_208906313.events_*`
+    from `your-project.analytics_XXX.events_*`
     where _table_suffix between format_date('%Y%m%d', date_sub(current_date(), interval day_interval day))
       and format_date('%Y%m%d', date_sub(current_date(), interval 1 day))
       and event_name not in unnest(split(excluded_events, ', '));
@@ -174,7 +174,7 @@ begin
         event_date,
         event_name,
         platform
-      from `savio-ga-bigquery.analytics_208906313.events_intraday_*`
+      from `your-project.analytics_XXX.events_intraday_*`
       where _table_suffix = format_date('%Y%m%d', current_date())
       and event_name not in unnest(split(excluded_events, ', '));
     end if;
@@ -187,7 +187,7 @@ begin
           event_date,
           event_name,
           platform
-        from `savio-ga-bigquery.analytics_208906313.events_intraday_*`
+        from `your-project.analytics_XXX.events_intraday_*`
         where _table_suffix = format_date('%Y%m%d', date_sub(current_date(), interval 1 day))
         and event_name not in unnest(split(excluded_events, ', '));
       end if;
@@ -259,7 +259,7 @@ PreparedData as (
     case when ed.event_first_seen_date_android is null then aec.event_first_seen_date_android else ed.event_first_seen_date_android end as event_first_seen_date_android,
     case when ed.event_first_seen_date_ios is null then aec.event_first_seen_date_ios else ed.event_first_seen_date_ios end as event_first_seen_date_ios
   from
-    `savio-ga-bigquery.analytics_208906313.ga4_documentation_events_and_documentation_status` ed
+    `your-project.analytics_XXX.ga4_documentation_events_and_documentation_status` ed
   full join 
     AggregatedEventCount aec
     on aec.event_name = ed.event_name
@@ -323,7 +323,7 @@ from
       event_edited_time,
       event_uploaded_to_bq_time
     from 
-      `savio-ga-bigquery.analytics_208906313.ga4_documentation_events`
+      `your-project.analytics_XXX.ga4_documentation_events`
     where 
       event_name not in ('ga4_config')
   ) eDoc 
@@ -365,7 +365,7 @@ group by
   event_first_seen_date_ios
 ;
 
-merge into `savio-ga-bigquery.analytics_208906313.ga4_documentation_events_and_documentation_status` as target
+merge into `your-project.analytics_XXX.ga4_documentation_events_and_documentation_status` as target
 using (
   select
     event_name,
@@ -511,13 +511,13 @@ when not matched by source then
 
 /*** IMAGE DOCUMENTATION FOR EVENTS ***/
 -- Step 1: Create the table if not exists
-create table if not exists `savio-ga-bigquery.analytics_208906313.ga4_documentation_events_and_images` (
+create table if not exists `your-project.analytics_XXX.ga4_documentation_events_and_images` (
     event_name string options(description='Event Name.'),
     event_image_documentation string options(description='URL to image.')
 )
 cluster by event_name;
 
-merge into `savio-ga-bigquery.analytics_208906313.ga4_documentation_events_and_images` as target
+merge into `your-project.analytics_XXX.ga4_documentation_events_and_images` as target
 using (
 select 
   event_name,
@@ -529,7 +529,7 @@ select
     event_image
   end as event_image_documentation
 from
-  `savio-ga-bigquery.analytics_208906313.ga4_documentation_events`,
+  `your-project.analytics_XXX.ga4_documentation_events`,
   unnest(split(event_image_documentation)) as event_image
 where
   event_image_documentation is not null and event_image_documentation != ''
@@ -549,7 +549,7 @@ when not matched by source then
 
 /***** LOG DAILY EVENT count ****/
 -- Step 1: Create the partitioned table if it doesn't exist
-create table if not exists `savio-ga-bigquery.analytics_208906313.ga4_documentation_events_daily_counts`
+create table if not exists `your-project.analytics_XXX.ga4_documentation_events_daily_counts`
 (
   event_date date options(description='Event Date.'),
   event_name string options(description='Event Name.'),
@@ -561,7 +561,7 @@ create table if not exists `savio-ga-bigquery.analytics_208906313.ga4_documentat
 partition by event_date
 cluster by event_name;
 
-merge into `savio-ga-bigquery.analytics_208906313.ga4_documentation_events_daily_counts` as target
+merge into `your-project.analytics_XXX.ga4_documentation_events_daily_counts` as target
 using (
 select
   event_date,
@@ -623,5 +623,5 @@ when not matched then
 
    --**** DELETE AND CLEAN UP DATA ****
 -- Delete event count data older than 365 days
-delete from `savio-ga-bigquery.analytics_208906313.ga4_documentation_events_daily_counts`
+delete from `your-project.analytics_XXX.ga4_documentation_events_daily_counts`
 where event_date < date_sub(current_date(), interval delete_event_count_after_days day);
