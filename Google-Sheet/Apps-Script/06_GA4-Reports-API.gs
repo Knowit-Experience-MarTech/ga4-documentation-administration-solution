@@ -1,5 +1,5 @@
 /**
- * Copyright 2024 Knowit Experience Oslo
+ * Copyright 2025 Knowit Experience Oslo
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,9 +96,21 @@ function getGA4EventDataFromApi() {
     const helperEventData = [];
     const helperEventRows = helperSheet.getRange(2, 1, report.rows.length, headers.length).getValues();
 
-    // Define an array of event names to exclude
-    const excludedEventNames = ['session_start', 'first_visit', 'user_engagement'];
+  let rawEventNotIn = ss.getSheetByName(settingsTab)
+    .getRange('SettingsBigQueryExcludeEvents')
+    .getValue();
 
+  // Make sure it's a string and remove extra whitespace
+  if (typeof rawEventNotIn !== 'string') {
+    rawEventNotIn = rawEventNotIn.toString();
+  }
+  rawEventNotIn = rawEventNotIn.trim();
+
+// Split on commas and trim each element
+const excludedEventNames = rawEventNotIn.split(',')
+  .map(name => name.trim())
+  .filter(name => name.length > 0);
+  
     helperEventRows.forEach((row, index) => {
       const eventName = row[0].trim();
 
@@ -112,6 +124,7 @@ function getGA4EventDataFromApi() {
         helperEventData.push(helperEvent);
       }
     });
+Logger.log(helperEventData)
 
     const eventSheet = ss.getSheetByName(eventTab);
     const eventCount = eventSheet.getRange(eventRangeColumn).getDisplayValues().flat().filter(String).length;

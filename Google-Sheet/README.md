@@ -1,5 +1,7 @@
 # Google Sheet documentation
 
+Google Sheet is the backbone for all documentation and management, supported by Apps Script for automation.
+
 ## How to use the Google Sheet
 * [**Make a copy of the Google Sheet**](https://docs.google.com/spreadsheets/d/162QAnKN7nBgRxOzsisKLlqzdAsGOk4r2wDe6lzBFbks/copy)
   * If you are a consultant and are doing the documentation on behalf of a client, it's recommended to copy the Google Sheet with an email belonging to the clients organization. This way ownership to the Google Sheet can be transferred within the clients organization.
@@ -16,12 +18,13 @@ The Google Sheet is using **Apps Script** for much of the functionality. See the
 | ------------- | ------------- |
 | [Events](#events) | In this sheet you edit and document Events. |
 | [Parameters](#parameters)  | In this sheet you edit and document Parameters (Standard Dimensions, Custom Dimensions, Standard Metrics, Custom Metrics). |
-| [Annotations](#annotations)  | Annotations can be added manually, you can import GA4 Property Change History (if something is changed in the property, this is logged in the Change History), and you can import Google Tag Manager Container Versions (name & description).  |
+| [Annotations](#annotations)  | Annotations can be added manually, you can import GA4 Property Change History (if something is changed in the property, this is logged in the Change History), and you can import Google Tag Manager Container Versions.  |
 | Key Events | Listing Events from the Events Sheet where the Event is marked as a Key Event. No functionality in this sheet. |
 | Event Parameters | This Sheet is listing Parameters from the Parameters Sheet where the Scope of the Parameter is set to EVENT. No functionality in this sheet. |
 | Item Parameters | This Sheet is listing Parameters from the Parameters Sheet where the Scope of the Parameter is set to ITEM. No functionality in this sheet. |
 | User Properties | This Sheet is listing Parameters from the Parameters Sheet where the Scope of the Parameter is set to USER. No functionality in this sheet. |
 | [Settings](#settings)  | Settings for Sheets functionality. |
+| [Advanced Settings](#advanced-settings)  | Only relevant if you are using BigQuery as a Data Source for Looker Studio. |
 
 ## 📈 GA4 Documentation Menu
 At the top of the sheet, you will find a custom menu called "**📈 GA4 Documentation**".
@@ -44,7 +47,7 @@ All buttons will trigger an Apps Script function. If you are doing bulk editing 
 | Button  | Description |
 | ------------- | ------------- |
 | Add/Edit Parameters | This button is for adding/editing Parameters (Event, Item or User Scoped). If you want to add Item Parameters to an Event, select the corresponding **Item Parameters** cell, and click the **Add/Edit Parameters** button. In the popup, select the Parameters you want to add to the Event, and click **Fill Current Cell**. |
-| Get Events & Event Count | Events & Event Count can either be downloaded from the **API**, or from **BigQuery**. Use the setting **Get GA4 Event & Parameters from** in the **Settings** Sheet to select API or BigQuery. Use BigQuery if you experience **(other)** issues, or if you want todays data included (**Streaming** export must be actived in GA4). |
+| Get Events & Event Count | Events & Event Count can either be downloaded from the **API**, or from **BigQuery**. Use the setting **Get GA4 Event & Parameters from** in the **Settings** Sheet to select API or BigQuery. <br /><br /> Use BigQuery if you experience **(other)** issues, if you want todays data included (**Streaming** export must be actived in GA4). BigQuery will also download which **platform** (Web, iOS or Android) the event belongs to. If **Edit checkbox** is ticked for an existing event, platform will automatically be added to selected event(s). |
 | Get Key Events | This will download Key Events from GA4. If this/these Key Event(s) doesn't exist in the Event Sheet, they will be added after the last row in the Sheet. If the Event exist in the Sheet, corresponding row in **Resource Name** column will be highlighted green, and a Resource Name will be added. **Key Event** checkbox and **Counting Method** will not be updated, **unless** you tick the **Edit** checkbox. This is to prevent overriding existing documentation by accident. |
 | Create Key Event | Select Event(s) (**Edit** checkbox) that you want make a Key Event. |
 | Update Key Event | Select Key Event(s) (**Edit** checkbox) that you want to update. Updates you can do to a Key Event is to select either **ONCE_PER_EVENT** or **ONCE_PER_SESSION**. |
@@ -73,10 +76,10 @@ The different columns in the Sheet are described below.
 | Additional Comments | Add Additional Comments here, ex. describing what Parameters are tracking specifically for this Event. |
 | URL to Image(s) | Sometimes words can't describe the Event good enough, and you need image(s)/illustration(s) to document the Event. Paste URL(s) to images in this cell. Separate several image URLs with **new line** (line break).  Alt or Ctrl + Enter (**Windows**) or Cmd + Enter (**Mac**). See also [**Image Documentation**](#image-documentation). |
 | Autofilled Time | If any cell is changed to the left of the **Autofilled Time** column, this column will be autofilled with the time the change was made. |
-| Website / iOS / Android | If the Event is used on a Website, tick the Website **checkbox**, and vice versa for iOS/Android. If neither Website, iOS or Android is selected, the Event will not be exported to BigQuery. |
+| Web / iOS / Android | If the Event is used on Web, tick the Website **checkbox**, and vice versa for iOS/Android. If neither Web, iOS or Android is selected, the Event will not be exported to BigQuery. <br /> If you are downloading **Event Count** from **BigQuery**, and the **Edit checkbox** is ticked, these platform checkboxes will be automatically ticked for selected Event(s). |
 | Edit | Tick this checkbox for functionally related to that Event (see [Buttons in Event Sheet](#buttons-in-event-sheet)) |
 | Resource Name | Resource Name ID will be added be added to this column if the Event is a Key Event in GA4 |
-| GTM Setup & Comment | If you are using GTM/sGTM, add relevant information here. Ex. name of the Tag in GTM/sGTM. |
+| GTM Setup & Comment | If you are using GTM/sGTM or are creating/modifying events within GA4, add relevant information here. Ex. name of the Tag in GTM/sGTM. |
 
 ### Image Documentation
 Sometimes words can't describe the Event good enough, and you need image(s)/illustration(s) to document the Event. Where to store those images is up to you, but if you are going to export the documentation to [**Looker Studio**](Looker-Studio), images needs to be publicly available.
@@ -120,6 +123,7 @@ The different columns in the Sheet are described below.
 | Example Value | Add an **Example Value** that helps to understand what this Parameter is tracking. |
 | BQ Count | BigQuery Count of how many times this Parameter has been requested. Choose **BigQuery** in the **Get GA4 Event & Parameters from** settings in the **Settings** Sheet. |
 | Description | Write a description of the parameter. Max length of 150 characters if this is a Custom Metric or Dimension. |
+| Web / iOS / Android | If the Parameter is used on Web, tick the Website **checkbox**, and vice versa for iOS/Android. If neither Web, iOS or Android are selected, the Parameter will not be exported to BigQuery. <br /> If you are downloading **Parameter Count** from **BigQuery**, and the **Edit checkbox** is ticked, these platform checkboxes will be automatically ticked for selected Parameters. |
 | Edit | Checkboxes that are used together with the **buttons**. |
 | Resource Name | It's an kind of ID returned from the API, and will be automatically filled out for Custom Dimensions and Metrics (list, create, update). Use this to identify if the Custom Dimension or Metrics exists in GA4. |
 | GTM Setup & Comment | Use this to describe the Parameter in GTM/SGTM. Ex. name of Variable, how the value is created (Data Layer) etc. How detailed this description should be is up to you. |
@@ -163,32 +167,59 @@ Suggested solution for downloading **GTM Container Versions** as Annotations:
 ## Settings
 Description of the Settings sheet.
 
-| Function  | Comment | 
-| ------------- | ------------- |
-| Clear Settings Fields & Data | This will clear the following settings and data the Sheet: GA4 Settings, BigQuery Settings, GTM Settings, Firestore Settings, GA4 Account & Property helper Sheet, GTM Account & Container helper Sheet, GA4 API Event Data from helper Sheet, GA4 BigQuery Event Data from helper Sheet, GA4 BigQuery Parameter Data from helper Sheet, Event Data Source Sheet, Event Images Data Source Sheet, Parameters Data Source Sheet, Annotations Data Source Sheet, Event Count from Event Sheet, Resource Name (GA4 API) from Event Sheet, Parameter Resource Name (GA4 API) from Parameter Sheet, Parameter Count from Parameter Sheet & Annotations. |
-| **Sheet Settings** | |
-| Enforce snake_case | Enforce **snake_case** for Event Name & Parameter Name. Recommende setting is Yes, but if you download Events & Parameters from GA4 that isn't in this format, select No. |
-| Date Format | Date format used in exports, annotations etc. |
-| Reporting Period | Reporting Period when pulling data from GA4 (Reports & Change History). |
-| Get GA4 Event & Parameters from | Get Event Count & Parameters (Dimensions & Metrics) from either API or BigQuery. |
+| Function  | Description | Comment |
+| ------------- | ------------- | ------------- |
+| Clear Settings Fields & Data | This will clear settings and data from the Sheet. | GA4 Settings, BigQuery Settings, GTM Settings, Firestore Settings, GA4 Account & Property helper Sheet, GTM Account & Container helper Sheet, GA4 API Event Data from helper Sheet, GA4 BigQuery Event Data from helper Sheet, GA4 BigQuery Parameter Data from helper Sheet, Event Data Source Sheet, Event Images Data Source Sheet, Parameters Data Source Sheet, Annotations Data Source Sheet, Event Count from Event Sheet, Resource Name (GA4 API) from Event Sheet, Parameter Resource Name (GA4 API) from Parameter Sheet, Parameter Count from Parameter Sheet & Annotations.  |
+| **Sheet Settings** |
+| Enforce snake_case | Enforce **snake_case** for Event Name & Parameter Name. Recommende setting is Yes, but if you download Events & Parameters from GA4 that isn't in this format, select No. |  |
+| Date Format | Date format used in exports, annotations etc. |  |
+| Reporting Period | Reporting Period when pulling data from GA4 (Reports & Change History). |  |
+| Get GA4 Event & Parameters from | Get Event Count & Parameters (Dimensions & Metrics) from either API or BigQuery. |  |
 | **GA4 Settings** | |
-| Account| Click **Get GA4 Accounts** button to list GA4 Accounts you have access to. Select the GA4 Account from the dropdown list. |
-| Property | After Account has been selected, click **Get GA4 Properties** button. Select Property. When you click the **Get GA4 Properties** button, ALL GA4 Accounts except the one selected will be deleted from the Sheet. |
-| **BigQuery Settings** | |
-| Project ID | Google Cloud Project ID where GA4 BigQuery is located. |
-| Data Set ID | BigQuery Data Set ID. This will be automatically suggested if **GA4 Property** and **BigQuery Project ID** is filled out. |
-| Table ID (Event Table) | BigQuery Table ID for Event documentation. It's recommended to use the Table ID suggested in the Settings. |
-| Table ID (Parameter Table) | BigQuery Table ID for Parameters (Dimensions & Metrics) documentation. It's recommended to use the Table ID suggested in the Settings. |
-| Table ID (Annotation Table) | BigQuery Table ID for Annotations. It's recommended to use the Table ID suggested in the Settings. |
-| Exclude Params from SQL Query | If you are getting parameters  from BigQuery instead of API, not all Event & User Scoped Parameters are relevant. Exclude these parameters separated by comma. Parameters are queried from key (event_params.key, user_properties.key & items.item_params.key) and items (item_name, item_id etc.). |
-| Include Ecom Params in SQL query | If "Yes" is selected, Ecommerce parameters will also be included in the SQL query. |
-| **Annotation Settings** |  |
-| Log "Added by" Email | Should **Added by** in Annotations log email of who made the annnotation? **Yes** = Logged, **No** = Not logged, **Redacted** = x*****@domain.com (where x is the first letter in email address). |
-| **Firestore Settings** | See documentation in **Settings in the Sheet** and the [**Firestore documentation**](Firestore) |
-| **RegEx Validation** |  |
-| Enforce snake_case | RegEx for enforcing **snake_case**. |
-| Parameter Display Name | Parameter Display Name in "Parameters" Tab can only contain text, underscore and spaces. This RegEx enforces that for the English language, but you may be able to use characters from other alphabets as well. Change the RegEx to match your language if your documentation isn't in English. |
+| Account| Click **Get GA4 Accounts** button to list GA4 Accounts you have access to. Select the GA4 Account from the dropdown list. |  |
+| Property | After Account has been selected, click **Get GA4 Properties** button. Select Property. When you click the **Get GA4 Properties** button, ALL GA4 Accounts except the one selected will be deleted from the Sheet. |  |
+| **BigQuery Settings** |
+| Project ID | Google Cloud Project ID where GA4 BigQuery is located. |  |
+| Data Set ID | BigQuery Data Set ID. This will be automatically suggested if **GA4 Property** and **BigQuery Project ID** is filled out. |  |
+| Table ID (Event Table) | BigQuery Table ID for Event documentation. It's recommended to use the Table ID suggested in the Settings. |  |
+| Table ID (Parameter Table) | BigQuery Table ID for Parameters (Dimensions & Metrics) documentation. It's recommended to use the Table ID suggested in the Settings. |  |
+| Table ID (Annotation Table) | BigQuery Table ID for Annotations. It's recommended to use the Table ID suggested in the Settings. |  |
+| Exclude Events from SQL Query | Not all Event Names are relevant for documentation, ex. automatic created events. Exclude these Events separated by comma. | session_start, first_visit, first_open, user_engagement, firebase_campaign, app_exception, app_remove, app_update, os_update, app_install, notification_dismiss, notification_foreground, notification_open, notification_receive, error, app_clear_data |
+| Exclude Params from SQL Query | If you are getting parameters  from BigQuery instead of API, not all Event & User Scoped Parameters are relevant. Exclude these parameters separated by comma. Parameters are queried from key (event_params.key, user_properties.key & items.item_params.key) and items (item_name, item_id etc.). | batch_ordering_id, batch_page_id, campaign, campaign_info_source, debug_event, debug_mode, engaged_session_event, entrances, ga_session_id, ga_session_number, ignore_referrer, medium, page_title, session_engaged, source, term, unique_search_term, engagement_time_msec, page_referrer,  prevenue_28d,  dclid,  gclsrc,  gclid, srsltid, campaign_id, content, firebase_conversion,  firebase_screen_id, firebase_screen_class, firebase_event_origin, firebase_conversion, first_open_time, last_gclid, gad_source, firebase_error, fatal, previous_first_open_count, firebase_previous_id, previous_app_version, previous_os_version, system_app, update_with_analytics, traffic_type, system_app_update, firebase_screen, firebase_previous_class, firebase_previous_screen, client_id, _ltv_USD, _ltv_EUR, _ltv_JPY, _ltv_GBP, _ltv_CNY, _ltv_AUD, _ltv_CAD, _ltv_CHF, _ltv_HKD, _ltv_SGD, _ltv_SEK, _ltv_KRW, _ltv_NOK, _ltv_NZD, _ltv_INR, _ltv_MXN, _ltv_TWD, _ltv_ZAR, _ltv_BRL, _ltv_DKK, _ltv_PLN, _ltv_THB, _ltv_ILS, _ltv_IDR, _ltv_CZK, _ltv_AED, _ltv_TRY, _ltv_HUF, _ltv_CLP, _ltv_SAR, _ltv_PHP, _ltv_MYR, _ltv_COP,  _ltv_RON, _ltv_PEN, _ltv_BGN, _ltv_ARS, device_id, last_advertising_id_reset |
+| Include Ecom Params in SQL query | If "Yes" is selected, Ecommerce parameters will also be included in the SQL query. |  |
+| **Annotation Settings** | 
+| Log "Added by" Email | Should **Added by** in Annotations log email of who made the annnotation? **Yes** = Logged, **No** = Not logged, **Redacted** = x*****@domain.com (where x is the first letter in email address). |  |
+| **Firestore Settings** | See documentation in **Settings in the Sheet** and the [**Firestore documentation**](Firestore) |  |
+| **RegEx Validation** |
+| Enforce snake_case | RegEx for enforcing **snake_case**. | |
+| Parameter Display Name | Parameter Display Name in "Parameters" Tab can only contain text, underscore and spaces. This RegEx enforces that for the English language, but you may be able to use characters from other alphabets as well. Change the RegEx to match your language if your documentation isn't in English. | |
 
+## Advanced Settings
+Advanced settings are only relevant if you are using BigQuery as a Data Source in Looker Studio. **Exclude Events & Params** from the Settings Sheet will also be uploaded when you click "**Upload Settings to BigQuery**". 
+**Export Event & Parameter Documentation** from the **GA4 Documentation** menu will also export these settings to BigQuery.
+It's recommended to protect this Sheet, and only let a few persons have access to change these settings.
+
+| Function  | Standard Setting | Description |
+| ------------- | ------------- | ------------- |
+| **Events & Parameter Settings** |
+| Day Interval Short | 1 | Number of days to query  (e.g., last 1 day). Declared in query as **day_interval_short**. |
+| Day Interval Extended | 28 | Number of days to query the first time to get some event & parameter count data. If you have lot's of data, cost may occour if you are selecting a long period. For anomaly detection you need at least 28 days of data. Declared in query as **day_interval_extended**. |
+| Delete Count Data After Number of Days | 365 | Event  & parameter daily count data older than this will be deleted. Declared in query as **delete_event_count_after_days**. |
+| **Anomaly Settings** |
+| Day Interval Short | 1 | Number of days to check for anomalies (e.g., last 1 day). Declared in query as **day_interval_short**. |
+| Day Interval Extended | 28 | Number of days to query the first time to get some session count data. Declared in query as **day_interval_extended**. |
+| Minimum Number of Days before Anomaly Detection | 28 | Minimum number of days of data collected before running anomaly detection. With **standard** deviation model, 28 days (as minimum) is recommended. With **day of week** adjustment, 56 or 84 is recommended. Declared in query as **days_before_anomaly_detection**. |
+| Rolling Statistics Interval | 90 | Days for rolling statistics (e.g., last 90 days). Declared in query as **day_interval_large**. |
+| Delete Anomaly Data After Number of Days | 365 | Anomaly data older than this will be deleted. Declared in query as **delete_anomaly_data_after_days**. |
+| Number of Days to check for new Events or Parameters | 1 | Days to check for new events and parameters. (e.g., last 1 day). Declared in query as **day_interval_new_events_params**. |
+| Standard Deviation Model Setting | standard | Standard Deviation model can either be 'standard' or 'dayofweek'. dayofweek = adjusted for day of week. standard = not adjusted for day of week. Declared in query as **stddev_model_setting**. |
+| Minimum Expected Count Threshold | 10 | Minimum expected count threshold for anomaly detection. If expected count is equal to or lower than this number, no anomaly detection will be run. Delcared in query as **min_expected_count**. |
+| Standard Deviation Multiplier | 3 | Multiplier for standard deviation. Standard deviation for events and parameters. Scale goes from 1 to 3. Default setting is 3; lower sensitivity, fewer false positives. Declared in query as **stddev_multiplier**. |
+| Events Explained by Sessions Threshold | 0.2 | If an event anomaly is reported, and should have been explained by changes in sessions, increase the number. Decrease the number for the opposite scenario. Declared in query as **events_explained_by_sessions_threshold**. |
+| Parameters Explained by Sessions Threshold | 0.2 | If an parameter anomaly is reported, and should have been explained by changes in sessions, increase the number. Decrease the number for the opposite scenario. Declared in query as **parameters_explained_by_sessions_threshold**. |
+| Exclude Events from Anomaly Detection | experience_impression | Exclude Events from Anomaly Detection. These Events are in addition to Events excluded in the **Settings Sheet**. Separate Events with , (comma). |
+
+In addition, you can delete individual anomalies from this sheet. Sometimes an anomaly was incorrectly detected. If you don't want those to be stored in BigQery and reported in Looker Studio, they can be deleted.
 
 ## Triggers
 If you want to automatically export documentation and annotations, and import GA4 Change History and GTM Container Versions, you must add some **Timer Triggers** to the Google Sheet.
@@ -201,7 +232,6 @@ Description of Trigger settings below, with suggested frequence.
 
 | Function  | Event Source | Time Based Trigger | interval | Comment |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| uploadEventsToBigQuery | Time-drive | Day timer | 7am to 8am | Uploads **Event & Parameter documentation** to BigQuery each morning between 7am and 8am. |
 | uploadAnnotationsToBigQuery | Time-drive | Hour timer | Every 4 hour | Uploads **Annotations** to BigQuery every 4 hour. |
 | uploadToFirestore | Time-drive | Hour timer | Every 4 hour | Uploads **Event documentation** to Firestore every 4 hour. |
 | getGA4ChangeHistory | Time-drive | Hour timer | Every 2 hour | Downloads **GA4 Change History** to the Google Sheet every 2 hour. |
@@ -212,7 +242,7 @@ Description of Trigger settings below, with suggested frequence.
 
 | Function  | Event Source | Time Based Trigger | interval | Comment |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| eventDocumentationToSheet | Time-drive | Day timer | 7am to 8am | Writes **Event & Parameter documentation** to the Sheet each morning between 7am and 8am. This is just to ensure that if you forget to write the documentation manually to the Sheet, this will ensure that the latest version of the documentation is available in Looker Studio. |
+| eventDocumentationToSheet | Time-drive | Day timer | 7am to 8am | Optional. Writes **Event & Parameter documentation** to the Sheet each morning between 7am and 8am. This is just to ensure that if you forget to write the documentation manually to the Sheet, this will ensure that the latest version of the documentation is available in Looker Studio. |
 | uploadToFirestore | Time-drive | Hour timer | Every 4 hour | Uploads **Event documentation** to Firestore every 4 hour. |
 | getGA4ChangeHistory | Time-drive | Hour timer | Every 2 hour | Downloads **GA4 Change History** to the Google Sheet every 2 hour. |
 | listGTMContainerVersions | Time-drive | Minutes timer | Every 30 minutes | Downloads **GTM Container Versions** to the Google Sheet every 30 minutes. Since the GTM API doesn't have any date & time information, the download must happen so often that the Container Version is placed on the correct date in the Sheet. How often that is is up to you to decide, but there is also a [**API quota**](https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas) |

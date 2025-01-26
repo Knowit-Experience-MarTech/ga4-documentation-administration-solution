@@ -1,93 +1,96 @@
 # Firestore and Server-side Google Tag Manager
-If you are using **Server-side Google Tag Manager** (sGTM), **Firestore** can be integrated in the data collection in real-time. Here are some possible use cases:
 
-* **Flag** GA4 Events that are being collected and not documented.
-* **Route** GA4 Events to a different GA4 Property if Events aren’t documented.
-* **Block** GA4 Events that aren’t documented.
-* Add **event_group** parameter (Custom Dimension) from your documentation to the **Event Name** in real-time.
+For those using **Server-side Google Tag Manager** (sGTM), **Firestore** can enhance real-time data collection. Here are some use cases:
 
-These examples aren’t randomly selected. This functionality can be found in some other Event based analytics tools, and also in third party solutions that handles Event documentation.
+- **Flag** undocumented GA4 Events.
+- **Route** undocumented GA4 Events to a different GA4 Property.
+- **Block** undocumented GA4 Events.
+- Add an **event_group** parameter from your documentation to the **Event Name** in real-time.
+
+This functionality parallels some features found in other event-based analytics tools and third-party documentation solutions.
 
 ## Syncing GA4 Events & Parameters to Firestore
-[**Google Cloud Firestore**](https://cloud.google.com/firestore) is a NoSQL document database built for automatic scaling, high performance, and ease of application development.
 
-To access Firestore with Apps Script, the [**Firestore library**](https://github.com/grahamearley/FirestoreGoogleAppsScript) has been installed in this Google Sheet.
+[**Google Cloud Firestore**](https://cloud.google.com/firestore) is a scalable NoSQL document database ideal for performance-driven applications. Firestore is accessible from Apps Script using the [**Firestore library**](https://github.com/grahamearley/FirestoreGoogleAppsScript).
 
-Firestore free quota per day is 50,000 document Reads, 20,000 document Writes and 20,000 document Deletes. See [**Firestore pricing**](https://cloud.google.com/firestore/pricing) for more information.
+Firestore’s daily free quota includes 50,000 document Reads, 20,000 document Writes, and 20,000 document Deletes. See [**Firestore pricing**](https://cloud.google.com/firestore/pricing) for details.
 
-**Syncing GA4 Events & Parameters to Firestore works like this:**
+**Syncing GA4 Events & Parameters to Firestore works as follows:**
 
-* If the Event Name isn’t in Firestore, the Event Name & Parameters will be added.
-* If the Event Name is in Firestore & Google Sheet, the Event Name & Parameters will be updated.
-* If the Event Name is in Firestore, but not Google Sheet, the Event Name & Parameters will be deleted from Firestore.
+- If an Event Name is missing in Firestore, it’s added with its parameters.
+- If an Event Name is in both Firestore and Google Sheet, it’s updated.
+- If an Event Name is in Firestore but not in Google Sheet, it’s deleted from Firestore.
 
-**The following data is synchronized with Firestore:**
+**Data synchronized with Firestore includes:**
 
-| Parameter | Description |
-| ------------- | ------------- |
-| change_status | **added** or **updated** |
-| date_edited  | Date event_name or parameters was edited. Date comes from Autofilled Time column.  |
-| event_group | **Event Group** from Events Sheet. |
-| event_name | **Event Name** from Events Sheet. |
-| event_parameters | **Event Parameters** from Events Sheet. Array. |
-| items | **Item Parameters** from Events Sheet. Array. |
-| user_properties | **User Scoped Parameters** from Events Sheet. Array. |
+| Parameter       | Description                                                                                     |
+|-----------------|-------------------------------------------------------------------------------------------------|
+| change_status   | **added** or **updated**                                                                        |
+| date_edited     | Date when the event_name or parameters were last edited. From the Autofilled Time column.       |
+| event_group     | **Event Group** from the Events Sheet                                                           |
+| event_name      | **Event Name** from the Events Sheet                                                            |
+| event_parameters | **Event Parameters** from the Events Sheet (Array)                                             |
+| items           | **Item Parameters** from the Events Sheet (Array)                                               |
+| user_properties | **User Scoped Parameters** from the Events Sheet (Array)                                        |
 
 ![Firestore Event Documentation](images/firestore-event-documentation.png)
 
 ## Google Cloud & Firestore Setup
-Either create a new [**Google Cloud Project**](https://console.cloud.google.com/projectcreate) for the Firestore setup, or add Firestore to your existing **sGTM project**.
+
+You can either create a new [**Google Cloud Project**](https://console.cloud.google.com/projectcreate) for Firestore or add it to your existing **sGTM project**.
 
 ### Firestore Setup
-Follow the steps below to set up Firestore.
 
-* [Select a Cloud Firestore mode](https://console.cloud.google.com/firestore/create-database)
-  * Select Native Mode
-* Choose where to store your data
-  * Create Database
- 
+1. [Select a Cloud Firestore mode](https://console.cloud.google.com/firestore/create-database):
+   - Choose Native Mode
+2. Choose a data location
+   - Create Database
+
 #### Create a Google Service Account
-To connect this Google Sheet to Firestore, the easiest way is to create a **Google Service Account** with **read/write access** to your Firestore database. Giving a service account access to your datastore is like giving access to a user’s account, but this account is strictly used by your script, not by a person.
 
-* Open the [**Google Service Accounts page**](https://console.cloud.google.com/projectselector2/iam-admin/serviceaccounts).
-* Select the Firestore project, and then click **“Create Service Account“**.
-* For your service account’s role, choose **Datastore > Cloud Datastore Owner**.
-* Check the **“Furnish a new private key”** box and select **JSON** as your **key type**.
-* When you press **“Create“**, your browser will download a **.json** file with your private key.
-* Save the .json file locally.
+To link Firestore with Google Sheets, create a **Google Service Account** with **read/write access**:
+
+1. Visit the [**Google Service Accounts page**](https://console.cloud.google.com/projectselector2/iam-admin/serviceaccounts).
+2. Select the Firestore project and click **Create Service Account**.
+3. For the role, select **Datastore > Cloud Datastore Owner**.
+4. Enable **“Furnish a new private key”** and select **JSON** as the key type.
+5. Click **Create** to download a **.json** file with your private key, then save it locally.
 
 ## Firestore Setup in Google Sheet
-* Go to the **Settings** Sheet and **Firestore settings**.
-* Insert the following values from the .json file:
-  * **Client Email** -> **client_email** from the .json file
-  * **Project ID** -> **project_id** from the .json file
-  * **Private Key** -> **private_key** from the .json file
-* **First Collection** -> Name of first collection. Suggested name **event_data**.
-  * See [**Firestore Collections**](https://cloud.google.com/firestore/docs/data-model#collections) help text.
-* **Sheet Settings** -> **Date Format**. Dropdown menu.
-  * Date stored comes from **Autofilled Time** in the **Event Sheet**.
 
-**Firestore Settings** will be stored as [**Apps Script Script Properties**](https://developers.google.com/apps-script/guides/properties).
+1. Go to the **Settings** Sheet and **Firestore settings**.
+2. Insert the following values from the .json file:
+   - **Client Email** → **client_email**
+   - **Project ID** → **project_id**
+   - **Private Key** → **private_key**
+3. **First Collection** → Suggested name **event_data**.
+   - See [**Firestore Collections**](https://cloud.google.com/firestore/docs/data-model#collections) for more info.
+4. **Sheet Settings** → **Date Format**. Use the dropdown menu.
+   - Date comes from **Autofilled Time** in the **Event Sheet**.
+
+Firestore settings are stored as [**Apps Script Script Properties**](https://developers.google.com/apps-script/guides/properties).
 
 ## Server-side Google Tag Manager Setup
-The last part of the puzzle is to either **flag**, **block** or **route** undocumented Events in **Server-side GTM**. In the example setup here, we are going to **flag** undocumented Events.
+
+To **flag**, **block**, or **route** undocumented Events in **Server-side GTM**, a **Firestore Lookup Variable** is used. This example flags undocumented Events.
 
 ### Firestore Lookup Variable
-To do that we are going to use a **Firestore Lookup Variable**. For detailed information about this variable, see the [**Enrich Server-side Data With Cloud Firestore**](https://www.simoahava.com/analytics/enrich-server-side-data-with-cloud-firestore/) by _Simo Ahava_. Do especially read the [**Override Project ID part**](https://www.simoahava.com/analytics/enrich-server-side-data-with-cloud-firestore/#override-project-id) if Server-side GTM and Firestore are in 2 different Google Cloud projects.
 
-| Settings | Value | Description |
-| ------------- | ------------- | ------------- |
-| Lookup type | Document path | Help text from the Firestore Lookup Variable: “Look up a document by specifying its components (collection, document, subcollection)“. |
-| Document path | event_data/{{Event Name}} | If you have chosen a different **First Collection** in the **Firestore Setting** in Google Sheet, replace **event_data** with your choice. |
-| Key Path | event_group | Will return **Event Group** from the Google Sheet. |
-| Override Project ID | your-firestore-project-id | If Firestore lives in a different Google Cloud Project, you have to override Project ID. |
-| Convert undefined | not-documented | Undocumented Events will be flagged as **not-documented** Event Group. See settings in the Firestore Lookup image below. |
+To set up, use a **Firestore Lookup Variable**. For more details, see [**Enrich Server-side Data With Cloud Firestore**](https://www.simoahava.com/analytics/enrich-server-side-data-with-cloud-firestore/) by _Simo Ahava_. Pay particular attention to the [**Override Project ID section**](https://www.simoahava.com/analytics/enrich-server-side-data-with-cloud-firestore/#override-project-id) if sGTM and Firestore are in separate projects.
+
+| Settings           | Value                      | Description                                                                                                      |
+|--------------------|----------------------------|------------------------------------------------------------------------------------------------------------------|
+| Lookup type        | Document path              | “Look up a document by specifying its components (collection, document, subcollection).”                         |
+| Document path      | event_data/{{Event Name}}  | If using a different **First Collection**, replace **event_data** with that name.                               |
+| Key Path           | event_group                | Returns **Event Group** from Google Sheet.                                                                       |
+| Override Project ID | your-firestore-project-id | Needed if Firestore is in a different Google Cloud Project.                                                      |
+| Convert undefined  | not-documented             | Flags undocumented Events as **not-documented**.                                                                 |
 
 ![Firestore Variable in Server-side GTM](images/sgtm-firestore-variable.png)
 
-Now edit your **GA4 Tag** in **sGTM**. In the **Parameters to Add / Edit** section, add **event_group** as a parameter, and your **Firestore Lookup Variable** as **Value**.
+Next, edit your **GA4 Tag** in **sGTM**. In **Parameters to Add / Edit**, add **event_group** as a parameter and your **Firestore Lookup Variable** as the **Value**.
 ![GA4 Tag in Server-side GTM](images/ga4-tag-sgtm.png)
 
-The image from the **GA4 Explore report** shows the result of this setup. **Core Web Vital Events** haven't been documented, and are flagged as **not_documented**.
+In the **GA4 Explore report**, undocumented **Core Web Vital Events** are flagged as **not_documented**.
 
-![GA4 Exploration not-documented Event Group](images/ga4-event_group-not-documented.png )
+![GA4 Exploration not-documented Event Group](images/ga4-event_group-not-documented.png)
