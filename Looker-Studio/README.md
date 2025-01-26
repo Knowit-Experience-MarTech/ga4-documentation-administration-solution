@@ -2,11 +2,6 @@
 Looker Studio is used for presenting Event & Parameter Documentation, in addition to Annotations.
 
 Looker Studio comes in 2 different versions; [**Advanced**](Advanced) and [**Basic**](Basic).
-1. Video below demonstrates the **Looker Studio Advanced version**
-2. Demo of [**Looker Studio Basic version**](https://lookerstudio.google.com/reporting/43387b12-cfe6-43ba-8e0c-afcf1a46a0f8/page/p_nkztye53cd)
-
-[![GA4 Event & Parameter Documentation - Looker Studio - Advanced](images/ga4-event-parameter-documentation-thumbnail-youtube.png)](https://youtu.be/1j8h_VNe0Hk)
-
 
 | Functionality  | Advanced | Basic |
 | ------------- | ------------- | ------------- |
@@ -33,13 +28,4 @@ Looker Studio comes in 2 different versions; [**Advanced**](Advanced) and [**Bas
 | Google Cloud costs may occur | <span class="checked">✔</span> | :x: |
 | Annotation report | <span class="checked">✔</span> | <span class="checked">✔</span> |
 
-<table>
-  <tr>
-    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-administration-solution/blob/main/Looker-Studio/images/ga4-documentation-overview_ls.png" alt="GA4 Documentation Overview"  ></td>
-    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-administration-solution/blob/main/Looker-Studio/images/ga4-event-documentation_ls.png" alt="GA4 Event Documentation" ></td>
-   </tr> 
-    <tr>
-    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-administration-solution/blob/main/Looker-Studio/images/ga4-parameter-documentation_ls.png" alt="GA4 Parameter Documentation"  ></td>
-    <td> <img src="https://github.com/Knowit-Experience-MarTech/ga4-documentation-administration-solution/blob/main/Looker-Studio/images/ga4-event-parameter-documentation_ls.png" alt="GA4 Event & Parameter Documentation" ></td>
-   </tr> 
-</table>
+
