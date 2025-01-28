@@ -4,11 +4,11 @@
 * This functionality is in **BETA**
 * Anomaly detection flags Events or Parameters with significant spikes or drops that aren’t explained by session fluctuations.
   * **Event** anomalies are detected independently across platforms.
-  * **Parameter** anomalies are detected independently across scopeS, platforms and events.
+  * **Parameter** anomalies are detected independently across scopes, platforms and events.
 	* Parameter anomalies are only flagged if their anomaly aren’t explained by an Event. 
 * New Events and Parameters detected are flagged independently.
 
-This helps you identify if something is broken or has changed.
+This helps you identify if something is potentially broken or has changed.
 
 * Anomalies are detected using **Standard Deviation**
   - You can choose between **adjusted for day of week**, and **not adjusted for day of week**
