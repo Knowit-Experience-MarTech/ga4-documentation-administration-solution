@@ -1,5 +1,5 @@
 /**
- * Copyright 2024 Knowit Experience Oslo
+ * Copyright 2025 Knowit Experience Oslo
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ const ss = SpreadsheetApp.getActiveSpreadsheet();
 const getActiveSheet = ss.getActiveSheet();
 
 const settingsTab = 'Settings'; // Settings Tab
+const bigQuerySettingsTab = 'Advanced Settings'; // BigQuery Settings Tab
 const eventTab = 'Events'; // Event Tab
 const parameterTab = "Parameters"; // Parameters Tab
 const annotationTab = "Annotations"; // Annotations Tab
@@ -128,9 +129,12 @@ const parameterDisallowAdsPersonalizationColumn = 8; // Disallow Ads
 const parameterExampleValueColumn = 9; // Parameter Example Value Column in Parameter Tab
 const parameterCountColumn = 10; // Parameter Example Value Column in Parameter Tab
 const parameterDescriptionColumn = 11; // Parameter Description Column in Parameter Tab
-const parameterEditCheckboxColumn = 12; // Column number that has checkbox in Parameter Tab
-const parameterResourceNameColumn = 13; // Column with GA4 Admin API Resource ID in Parameter Tab
-const parameterGTMCommentColumn = 14; // Column with GA4 Admin API Resource ID in Parameter Tab
+const parameterPlatformWebsiteColumn = 12; // Web Platform checkbox Column in Parameter Tab
+const parameterPlatformIosColumn = 13; // iOS Platform checkbox Column in Parameter Tab
+const parameterPlatformAndroidColumn = 14; // Android Platform checkbox Column in Parameter Tab
+const parameterEditCheckboxColumn = 15; // Column number that has checkbox in Parameter Tab
+const parameterResourceNameColumn = 16; // Column with GA4 Admin API Resource ID in Parameter Tab
+const parameterGTMCommentColumn = 17; // Column with GA4 Admin API Resource ID in Parameter Tab
 
 const customDimensionType = ss.getSheetByName(helperDropDownTab).getRange('HelperCustomDimension').getValue();
 const customDimensionFormat = ss.getSheetByName(helperDropDownTab).getRange('HelperCustomDimensionFormat').getValue();
@@ -155,9 +159,9 @@ const eventUserParametersColumn = 14; // Event User Parameter Column in Event Ta
 const eventCommentColumn = 16; // Event Comment Column in Event Tab
 const eventImageDocumentationColumn = 17; // Event Image Documentation Column in Event Tab
 const eventEditedTimeColumn = 18; // Event Edited Time Column in Event Tab
-const eventPlatformWebsiteColumn = 19; // Event Edited Time Column in Event Tab
-const eventPlatformIosColumn = 20; // Event Edited Time Column in Event Tab
-const eventPlatformAndroidColumn = 21; // Event Edited Time Column in Event Tab
+const eventPlatformWebsiteColumn = 19; // Web Platform checkbox Column in Event Tab
+const eventPlatformIosColumn = 20; // iOS Platform checkbox Column in Event Tab
+const eventPlatformAndroidColumn = 21; // Android Platform checkbox Column in Event Tab
 const eventEditCheckboxColumn = 22; // Column number that has checkbox in Event Tab
 const eventResourceNameColumn = 23; // Column with GA4 Admin API Resource ID in Event Tab
 const eventGTMCommentColumn = 24; // Column with GA4 Admin API Resource ID in Event Tab

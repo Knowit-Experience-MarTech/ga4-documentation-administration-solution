@@ -1,28 +1,42 @@
-# GA4 Events, Parameters & Annotations documentation & administration solution
-This is a solution that makes it easier to document and administrate **Events**, **Key Events**, **Parameters** (Dimensions & Metrics) for **Google Analytics 4 (GA4)**. 
+# GA4 Documentation & Administration Solution
 
-[**Google Sheet**](Google-Sheet) is used for **doing the documentation**, and [**Looker Studio**](Looker-Studio) is used for **presenting the documentation**. Since the Google Sheet is integrated with several API's, you can (bulk) create/edit/delete Custom Dimensions & Metrics and Key Events. This means that you can document and administrate Custom Dimensions & Metrics and Key Events in the same operation.
+This solution simplifies the documentation and management of **Events**, **Key Events**, and **Parameters** (Dimensions & Metrics) for **Google Analytics 4 (GA4)**.
 
-It also makes it easier for "non-technical" people to understand what a particular **Event Name** is tracking, and what the different **Parameters** connected to the **Event Name** is tracking, by **presenting** the documentation in [**Looker Studio**](Looker-Studio). Looker Studio comes in **2 different versions**: **Basic** and **Advanced**. 
+* 3.0 is latest version.
 
-The **Basic** version is using the **Google Sheet as a Data Source**, while the **Advanced** version is using **BigQuery as a Data Source**. The BigQuery solution will join the GA4 documentation with your GA4 BigQuery data, making it easy to identify if the documentation is aligned with data collected in GA4 (are documentation or data collection broken?).
+### Key Components
+- **[Google Sheet](Google-Sheet):** Central platform for documenting Events, Parameters, and Annotations. 
+  - Integrated with APIs to allow bulk operations (create/edit/delete) for Custom Dimensions, Metrics, and Key Events.
+  - Integrated with BigQuery for easier identification of platforms, events & parameters.
+- **[Looker Studio](Looker-Studio):** Visualization tool with two versions:
+  - **[Basic:](Looker-Studio/Basic)** Uses Google Sheets as a data source.
+  - **[Advanced:](Looker-Studio/Advanced)** Uses BigQuery, allowing documentation to align directly with GA4 data.
+    - Includes **Anomaly Detection** to identify data collection issues like tracking inconsistencies, or flagging new events and parameters discovered.
 
-The solution also includes [**Annotations**](Google-Sheet#annotations), which can help you understand changes to your data. Annotations can either be added manually, or automatically created from [**GA4 Property Change History**](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1beta/accounts/searchChangeHistoryEvents) or [**Google Tag Manager Container Versions**](https://developers.google.com/tag-platform/tag-manager/api/v2/reference/accounts/containers/versions).
+### Annotations
+Annotations provide context to data changes and can be added manually in Google Sheet, or automatically generated through:
+- GA4 Property Change History
+- Google Tag Manager (GTM) Container Versions
 
-![GA4 Documentation illustration](Google-Sheet/images/ga4-documentation-illustration.png)
+### Additional Features
+1. **[Documentation Sync with GA4 Data](BigQuery)** (BigQuery): Joins GA4 documentation with your data to help identify tracking and documentation misalignments.
+	* **[Anomaly Detection:](BigQuery/Anomaly-Detection)** Flags spikes, drops, and new events/parameters that may signal tracking issues unrelated to traffic changes.
+3. **[Event Export to Firestore:](Firestore)** Allows undocumented events to be flagged or blocked. Requires Server-side GTM for Event Group management.
 
-**Overall functionality is listed below:**
+---
 
-1. [**Google Sheet**](Google-Sheet) using [**Apps Script**](Google-Sheet/Apps-Script) for easier documentation and administration of Events, Parameters and Annotations. Everything starts with this Google Sheet.
-2. [**Looker Studio**](Looker-Studio) for presenting and sharing the documentation. The Advanced version using [**BigQuery**](BigQuery) will make it easier to identify if your documentation is aligned with the data you are collecting, or if the documentation or data collection is "broken".
-3. **Export** of Event documentation to [**Firestore**](Firestore). This will make it possible to **block** or **flag** undocmented Events, in addition to adding **Event Group** from the Google Sheet Event documentation. This requires [**Server-side GTM**](https://developers.google.com/tag-platform/tag-manager/server-side).
+### Overview of Functionality
 
-## Intro to documentation
-The documentation is organized in the following way:
-1. [Google Sheet](Google-Sheet) (Everything starts with the Google Sheet)
-	* [Apps Script](Google-Sheet/Apps-Script) (used in the Google Sheet)
-3. [BigQuery](BigQuery) (for integrating the documentation with GA4 Data so you can understand if the documentation or tracking is broken)
-4. [Looker Studio](Looker-Studio) (for presenting Events, Parameters and Annotations in a way that is easier to understand)
-5. [Firestore](Firestore) (for flagging or blocking undocumented GA4 Events)
+1. **[Google Sheet](Google-Sheet):** Backbone for all documentation and management, supported by Apps Script for automation.
+2. **[Looker Studio](Looker-Studio):** User-friendly platform for documentation sharing, with an Advanced version (BigQuery) to validate against GA4 data.
+3. **[Firestore](Firestore):** Optional integration to flag or block undocumented events in GA4.
 
-This solution is made by [**Eivind Savio**](https://www.savio.no/google-analytics/ga4-documentation-events-parameters-annotations) from [**Knowit Experience**](https://www.knowit.no/om-oss/experience/) (Oslo). It is not officially supported by Knowit Experience.
+---
+
+<img src="Google-Sheet/images/ga4-documentation_looker-studio-google-sheet.png" alt="GA4 Documentation Overview" />
+
+<img src="BigQuery/images/ga4-documentation_basic-vs-advanced-illustration.png" alt="Basic versus Advanced documentation solution illustration" />
+
+---
+
+Solution by [**Eivind Savio**](https://www.savio.no/google-analytics/ga4-documentation-events-parameters-annotations) from [**Knowit Experience**](https://www.knowit.no/om-oss/experience/) (Oslo). Not officially supported by Knowit Experience.

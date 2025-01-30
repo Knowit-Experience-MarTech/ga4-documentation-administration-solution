@@ -280,7 +280,7 @@ This section contains information about **Fields** used in Looker Studio (not al
 Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Date Range Dimensions are only used in the **Annotations page**, not in other pages.
 
 ### GA4 Event Documentation
-![GA4 Event Documentation](/Looker-Studio/images/GA4-Documentation-Google-Sheet-GA4-Event-Documentation.png)
+![GA4 Event Documentation](../images/GA4-Documentation-Google-Sheet-GA4-Event-Documentation.png)
 
 | Number  | Field | Data Type | Field Type | Data Source |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -302,7 +302,7 @@ Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Dat
 | 16 | Event Description | Text | Dimension | EventDataSource |
 
 ### GA4 Parameter Documentation
-![GA4 Parameter Documentation](/Looker-Studio/images/GA4-Documentation-Google-Sheet-Parameter-Documentation.png)
+![GA4 Parameter Documentation](../images/GA4-Documentation-Google-Sheet-Parameter-Documentation.png)
 
 | Number  | Field | Data Type | Field Type | Data Source |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -326,7 +326,7 @@ Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Dat
 | 18 | Parameter GTM Comment | Text | Dimension | ParameterDataSource |
 
 ### GA4 Event & Parameter Documentation
-![GA4 Event & Parameter Documentation](/Looker-Studio/images/GA4-Documentation-Google-Sheet-Event-Parameter-Documentation.png)
+![GA4 Event & Parameter Documentation](../images/GA4-Documentation-Google-Sheet-Event-Parameter-Documentation.png)
 
 | Number  | Field | Data Type | Field Type | Data Source |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -354,7 +354,7 @@ Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Dat
 | 22 | Parameter GTM Comment | Text | Dimension | ParameterDataSource |
 
 #### Image Documentation for Events
-![GA4 Event & Parameter Documentation - Images](/Looker-Studio/images/GA4-Documentation-BigQuery-Event-Parameter-Documentation-Images.png)
+![GA4 Event & Parameter Documentation - Images](../images/GA4-Documentation-BigQuery-Event-Parameter-Documentation-Images.png)
 
 | Number  | Field | Data Type | Field Type | Data Source |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -362,7 +362,7 @@ Sometimes Looker Studio adds **Date Range Dimension** to charts by "itself". Dat
 | 2 | Event Image \[Calc\] | Image Link | Dimension | GA4 Image and Event Name Blend |
 
 ### GA4 Parameter & Event Documentation
-![GA4 Parameter & Event Documentation - Images](/Looker-Studio/images/GA4-Documentation-Google-Sheet-Parameter-Event-Documentation.png)
+![GA4 Parameter & Event Documentation - Images](../images/GA4-Documentation-Google-Sheet-Parameter-Event-Documentation.png)
 
 | Number  | Field | Data Type | Field Type | Data Source |
 | ------------- | ------------- | ------------- | ------------- |------------- |
