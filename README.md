@@ -2,7 +2,7 @@
 
 This solution simplifies the documentation and management of **Events**, **Key Events**, and **Parameters** (Dimensions & Metrics) for **Google Analytics 4 (GA4)**.
 
-* [3.0 is latest version](../../releases/tag/3.0).
+* [3.1 is latest version](../../releases/tag/3.1).
 
 ### Key Components
 - **[Google Sheet](Google-Sheet):** Central platform for documenting Events, Parameters, and Annotations. 
