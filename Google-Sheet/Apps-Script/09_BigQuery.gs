@@ -1024,20 +1024,43 @@ const helperSheet = ss.getSheetByName(helperGA4EventDataFromBigQueryTab);
   const undocumentedEvents = allEventNames.filter(name => !eventDataDocumented.includes(name));
 
   if (undocumentedEvents.length > 0) {
-    const undocumentedStartRow = headerRowNumber + sheetData.length + 1;
-    // Insert undocumented events
+    // 2) Find the last row that has data in the eventNameColumn (column #2, or your chosen column)
+    const eventNameValues = eventSheet
+      .getRange(1, eventNameColumn, eventSheet.getLastRow(), 1)
+      .getValues();
+
+    let lastRowWithDataInEventName = 0;
+    // Loop bottom-up to find the first non-empty cell in that column
+    for (let i = eventNameValues.length - 1; i >= 0; i--) {
+      // If not empty
+      if (eventNameValues[i][0].toString().trim() !== "") {
+        lastRowWithDataInEventName = i + 1; // 1-based
+        break;
+      }
+    }
+
+    // 3) We will start adding new rows after that last row
+    const undocumentedStartRow = lastRowWithDataInEventName + 1;
+
+    // 4) Insert each undocumented event in a new row
     undocumentedEvents.forEach((eventName, i) => {
-      const { eventCount, platforms } = eventPlatformMap[eventName] || { eventCount: 0, platforms: new Set() };
+      const { eventCount, platforms } = eventPlatformMap[eventName] || {
+        eventCount: 0,
+        platforms: new Set()
+      };
       const row = undocumentedStartRow + i;
+
+      // Set the event name
       eventSheet.getRange(row, eventNameColumn).setValue(eventName);
+      // Set the count
       eventSheet.getRange(row, eventEventCountColumn).setValue(eventCount);
 
-      // Insert checkboxes for these new rows
+      // Insert checkboxes
       eventSheet.getRange(row, eventPlatformWebsiteColumn).insertCheckboxes();
       eventSheet.getRange(row, eventPlatformIosColumn).insertCheckboxes();
       eventSheet.getRange(row, eventPlatformAndroidColumn).insertCheckboxes();
 
-      // Set values
+      // Set platform checkboxes
       eventSheet.getRange(row, eventPlatformWebsiteColumn).setValue(platforms.has('WEB'));
       eventSheet.getRange(row, eventPlatformIosColumn).setValue(platforms.has('IOS'));
       eventSheet.getRange(row, eventPlatformAndroidColumn).setValue(platforms.has('ANDROID'));
