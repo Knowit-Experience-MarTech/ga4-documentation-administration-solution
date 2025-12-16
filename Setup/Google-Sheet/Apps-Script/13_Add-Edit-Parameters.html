@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Select Parameters</title>
+<style>
+html, body{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
+}
+h1{
+  font-size: 1.2em;
+  margin: 5px 0 5px 0;
+}
+.btn{
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #000000;
+  color:#ffffff;
+}
+.btn:hover{
+  cursor: pointer;
+}
+.fill{
+  background:#228B22;
+}
+.fill:hover {
+  background:#2db92d;
+}
+.fill:active, .active {
+  background:#5bd75b;
+  color: #000000;
+}
+.get{
+  background:#3545A7;
+}
+.get:hover {
+  background:#6472ce;
+}
+.get:active, .get:focus {
+  background:#9ea7e0;
+}
+.btn:nth-child(1) {
+  margin-right: 8px;
+}
+#search{
+  width: 95%;
+  font-size: 1.1em;
+  padding: 3px;
+}
+input {
+  vertical-align: -3px;
+}
+.info{
+  font-size: 1.2em;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+// Parameter search
+  $("#search").keyup(function(){
+    const filter = $("#search").val().toLowerCase();
+    const checkbox = $("input[type='checkbox']");
+    const span = $("span");
+    for (let i = 0; i < checkbox.length; i++) {  
+      txtValue = checkbox[i].value.toLowerCase();
+        if (txtValue && txtValue.indexOf(filter) === -1) {
+          span[i].style.display = "none";
+        } else {
+          span[i].style.display = "";
+        }
+    }
+  });
+});
+function runFillCell(button) {
+  button.classList.add('active');
+
+  // Call the server-side function
+  google.script.run.withSuccessHandler(function() {
+    // Remove the class when the script finishes
+    button.classList.remove('active');
+  }).fillCell(button.parentNode);
+}
+</script>
+</head>
+<body>
+<div>
+<h1>Select Parameters</h1>
+<form id="form" name="form">
+<input type="button" class="btn fill" value="Fill Current Cell" onclick="runFillCell(this)" />
+<input type="button" class="btn get" value="Get Parameters from Cell" onclick="google.script.run.showDialog()" />
+<br />
+<br />
+<?
+if(Object.prototype.toString.call(parameters) === '[object Array]') { ?>
+  <input type="text" id="search" placeholder="Search for parameter.." title="Type in a parameter" />
+  <br />
+  <br />
+<? 
+}
+?>
+<? if (Object.prototype.toString.call(parameters) === '[object Array]') { ?>
+  <? if (arr1.length > 0) { ?>
+    <? for (let i = 0; i < arr1.length; i++) { ?>
+      <? let arrData = arr1[i]; ?>
+      <span>
+        <input type="checkbox" value="<?= arrData ?>" name="ch<?= arrData ?>" id="ch<?= arrData ?>" <? if (inArray(arrData, arr2)) { ?>checked<? } ?>>
+        <label for="ch<?= arrData ?>"><?= arrData ?></label><br />
+      </span>
+    <? } ?>
+  <? } else { ?>
+    <p class="info">No parameters available.</p>
+  <? } ?>
+<? } else { ?>
+  <p class="info">Select a <strong>Cell</strong> in either the column <strong>Event Parameters</strong>, <strong>Item Parameters</strong> or <strong>User Parameters</strong>.</p>
+<? } ?>
+<br>
+<input type="button" class="btn fill" value="Fill Current Cell" onclick="runFillCell(this)" />
+<input type="button" class="btn get" value="Get Parameters from Cell" onclick="google.script.run.showDialog()" />
+</form>
+</div>
+</body>
+</html>
