@@ -4,7 +4,7 @@ The GA4 documentation solution comes in 2 versions:
 1. [Basic](#basic)
 2. [Advanced](#advanced)
 
-First decided which solution you are going to use. Advanced is the recommended solution.
+First decide which solution you are going to use. Advanced is the recommended solution.
 
 ## Basic
 Basic contains the following parts:

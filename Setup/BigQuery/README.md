@@ -280,6 +280,14 @@ The following BigQuery tables will be used in **Looker Studio**:
 | event_name | STRING | Event Name |
 | event_image_documentation | STRING | URL to image |
 
+### Table: ga4_documentation_events_first_seen
+
+| Field name  | Type | Comment |
+| ------------- | ------------- | ------------- |
+| first_seen_date | DATE | Date when the event was first observed. |
+| event_name | STRING | Name of the event. |
+| platform | STRING | The platform on which the event was observed. |
+
 ## Parameter related tables
 
 ### Table: ga4_documentation_parameters_and_documentation_status
@@ -330,6 +338,16 @@ The following BigQuery tables will be used in **Looker Studio**:
 | parameter_count_web | INTEGER | Daily Parameter Count for **Web platform** |
 | parameter_count_android | INTEGER | Daily Parameter Count for **Android platform** |
 | parameter_count_ios | INTEGER | Daily Parameter Count for **iOS platform** |
+
+
+### Table: ga4_documentation_parameters_first_seen
+
+| Field name  | Type | Comment |
+| ------------- | ------------- | ------------- |
+| first_seen_date | DATE | The date when the parameter was first observed. |
+| parameter_name | STRING | The name of the parameter. |
+| parameter_scope | STRING | The scope of the parameter. |
+| platform | STRING | The platform on which the parameter was observed. |
 
 ## Settings table
 
