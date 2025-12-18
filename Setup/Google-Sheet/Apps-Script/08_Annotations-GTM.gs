@@ -58,8 +58,18 @@ function listGTMContainers() {
     }
     const sheet = ss.getSheetByName(helperGTMTab);
     const startRow = 2;
-    const numRows = sheet.getLastRow(); // The number of row to clear
-    sheet.getRange(startRow, 2, numRows+1, sheet.getLastColumn()).clearContent();
+
+    const lastRow = sheet.getLastRow();
+    const lastCol = sheet.getLastColumn();
+
+    // How many rows exist below the header row?
+    const rowsToClear = lastRow - startRow + 1;
+    // How many columns exist from column B to the last used column?
+    const colsToClear = lastCol - 1;
+
+    if (rowsToClear > 0 && colsToClear > 0) {
+      sheet.getRange(startRow, 2, rowsToClear, colsToClear).clearContent();
+    }
  
     const containerList = [];
     const containers = TagManager.Accounts.Containers.list(`accounts/${gtmAccountID}`);
@@ -179,8 +189,15 @@ function listGTMContainerVersions() {
       }
     });
 
-    let count = annotationSheet.getRange(annotationRangeColumn).getDisplayValues().flat().filter(String).length;
-    let rows = annotationSheet.getDataRange().offset(headerRowNumber, 0, count).getValues();
+    let rows = [];
+    const lastRow = annotationSheet.getLastRow();
+    const lastCol = annotationSheet.getLastColumn();
+
+    if (lastRow > headerRowNumber && lastCol > 0) {
+      rows = annotationSheet
+        .getRange(headerRowNumber + 1, 1, lastRow - headerRowNumber, lastCol)
+        .getValues();
+    }
 
     const sheetData = [];
     rows.forEach((row, index) => {

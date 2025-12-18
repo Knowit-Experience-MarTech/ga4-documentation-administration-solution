@@ -951,8 +951,19 @@ function getGA4ChangeHistory() {
       });
     
       const annotationSheet = ss.getSheetByName(annotationTab);
-      let count = annotationSheet.getRange(annotationRangeColumn).getDisplayValues().flat().filter(String).length;
-      let rows = annotationSheet.getDataRange().offset(headerRowNumber, 0, count).getValues();
+      if (!annotationSheet) {
+        throw new Error('Sheet not found: ' + annotationTab);
+      }
+
+      // Read existing rows under the header (safe even when sheet is empty)
+      let rows = [];
+      const lastRow = annotationSheet.getLastRow();
+      const lastCol = annotationSheet.getLastColumn();
+
+      if (lastRow > headerRowNumber && lastCol > 0) {
+        const numRows = lastRow - headerRowNumber;
+        rows = annotationSheet.getRange(headerRowNumber + 1, 1, numRows, lastCol).getValues();
+      }
 
       const helperSheet = ss.getSheetByName('HelperAnnotationDropdown');
       const annotationCategory = helperSheet.getRange('AnnotationGA4ChangeHistory').getValue();
