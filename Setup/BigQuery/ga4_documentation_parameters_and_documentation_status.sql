@@ -1,5 +1,5 @@
 /**
- * Copyright 2025 Knowit Experience Oslo
+ * Copyright 2025 Knowit AI & Analytics
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -134,6 +134,15 @@ create table if not exists `your-project.analytics_XXX.ga4_documentation_paramet
   parameter_documentation_status_aggregated string options(description='Documentation in Google Sheet is joined with GA4 BQ data on a aggregated level. Status can be: Documented and Data, Documented no Data and Not Documented.'),
 )
 cluster by event_name, parameter_scope, parameter_name, parameter_documentation_status_aggregated;
+
+-- Ensure the first-seen table exists (safe if already created)
+create table if not exists `your-project.analytics_XXX.ga4_documentation_parameters_first_seen` (
+  parameter_name string options(description='The name of the parameter.'),
+  parameter_scope string options(description='The scope of the parameter.'),
+  platform string options(description='The platform on which the parameter was observed.'),
+  first_seen_date date options(description='The date when the parameter was first observed.')
+)
+cluster by parameter_name, parameter_scope, platform;
 
 -- Check if events_fresh_* table exists using INFORMATION_SCHEMA.TABLES
 set events_fresh_exists = (
