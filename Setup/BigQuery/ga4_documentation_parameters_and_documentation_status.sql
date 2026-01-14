@@ -1026,15 +1026,6 @@ when not matched then
     source.parameter_documentation_status_aggregated
   );
 
--- Ensure the first-seen table exists (safe if already created)
-create table if not exists `your-project.analytics_XXX.ga4_documentation_parameters_first_seen` (
-  parameter_name string options(description='The name of the parameter.'),
-  parameter_scope string options(description='The scope of the parameter.'),
-  platform string options(description='The platform on which the parameter was observed.'),
-  first_seen_date date options(description='The date when the parameter was first observed.')
-)
-cluster by parameter_name, parameter_scope, platform;
-
 -- Insert-only feed from the main status table (earliest across events)
 merge into `your-project.analytics_XXX.ga4_documentation_parameters_first_seen` fs
 using (
