@@ -1,5 +1,5 @@
 /**
- * Copyright 2025 Knowit AI & Analytics
+ * Copyright 2026 Knowit AI & Analytics
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,12 +24,12 @@ declare day_interval_short int64;
 declare day_interval_extended int64;
 declare delete_event_count_after_days int64;
 
--- excluded events from settings table (normalized + deduped)
+-- excluded events from settings table
 declare excluded_events array<string> default (
   select array_agg(ee_array order by ee_array)
   from (
     select distinct trim(ee_array) as ee_array
-    from `your-project.analytics_XXX.ga4_documentation_bq_settings`,
+    from `your_project.analytics_XXX.ga4_documentation_bq_settings`,
     unnest(split(events_exclusion, ',')) as ee_array
     where events_exclusion is not null
       and trim(ee_array) <> ''
@@ -51,22 +51,22 @@ declare start_suffix string;
 
 declare is_initial_run bool default (
   select count(1) = 0
-  from `your-project.analytics_XXX`.INFORMATION_SCHEMA.TABLES
+  from `your_project.analytics_XXX`.INFORMATION_SCHEMA.TABLES
   where table_name = 'ga4_documentation_events_daily_counts'
 );
 
 -- load settings
 set day_interval_short = (
   select ep_day_interval_short
-  from `your-project.analytics_XXX.ga4_documentation_bq_settings`
+  from `your_project.analytics_XXX.ga4_documentation_bq_settings`
 );
 set day_interval_extended = (
   select ep_day_interval_extended
-  from `your-project.analytics_XXX.ga4_documentation_bq_settings`
+  from `your_project.analytics_XXX.ga4_documentation_bq_settings`
 );
 set delete_event_count_after_days = (
   select ep_delete_event_count_after_days
-  from `your-project.analytics_XXX.ga4_documentation_bq_settings`
+  from `your_project.analytics_XXX.ga4_documentation_bq_settings`
 );
 
 if is_initial_run then
@@ -80,7 +80,7 @@ set yest_suffix  = format_date('%Y%m%d', date_sub(current_date(), interval 1 day
 set start_suffix = format_date('%Y%m%d', date_sub(current_date(), interval day_interval day));
 
 /*** === target tables: create if needed === ***/
-create table if not exists `your-project.analytics_XXX.ga4_documentation_events_and_documentation_status` (
+create table if not exists `your_project.analytics_XXX.ga4_documentation_events_and_documentation_status` (
   event_group string options(description='Event group/category used for organization (e.g., Engagement, Ecommerce).'),
   event_name string options(description='GA4 Event Name. Primary key for the documentation row.'),
   event_method string options(description='How the event is collected (e.g., GTM tag, SDK instrumentation, server-side).'),
@@ -117,13 +117,13 @@ create table if not exists `your-project.analytics_XXX.ga4_documentation_events_
 )
 cluster by event_name;
 
-create table if not exists `your-project.analytics_XXX.ga4_documentation_events_and_images` (
+create table if not exists `your_project.analytics_XXX.ga4_documentation_events_and_images` (
   event_name string options(description='Name of the event.'),
   event_image_documentation string options(description='URL to image.')
 )
 cluster by event_name;
 
-create table if not exists `your-project.analytics_XXX.ga4_documentation_events_daily_counts` (
+create table if not exists `your_project.analytics_XXX.ga4_documentation_events_daily_counts` (
   event_date date options(description='Date on which the event counts were recorded.'),
   event_name string options(description='Name of the event being tracked.'),
   event_count_total int64 options(description='Total number of events recorded daily across all platforms.'),
@@ -134,7 +134,7 @@ create table if not exists `your-project.analytics_XXX.ga4_documentation_events_
 partition by event_date
 cluster by event_name;
 
-create table if not exists `your-project.analytics_XXX.ga4_documentation_events_first_seen` (
+create table if not exists `your_project.analytics_XXX.ga4_documentation_events_first_seen` (
   event_name string options(description='Name of the event.'),
   platform string options(description='When the event was first seen for a platform.'),
   first_seen_date date options(description='Date when the event was first observed.')
@@ -144,19 +144,19 @@ cluster by event_name, platform;
 /*** === source table availability === ***/
 set events_fresh_exists = exists (
   select 1
-  from `your-project.analytics_XXX`.INFORMATION_SCHEMA.TABLES
+  from `your_project.analytics_XXX`.INFORMATION_SCHEMA.TABLES
   where table_name like 'events_fresh_%'
 );
 
 set events_intraday_exists = exists (
   select 1
-  from `your-project.analytics_XXX`.INFORMATION_SCHEMA.TABLES
+  from `your_project.analytics_XXX`.INFORMATION_SCHEMA.TABLES
   where table_name like 'events_intraday_%'
 );
 
 set yesterday_events_exists = exists (
   select 1
-  from `your-project.analytics_XXX`.INFORMATION_SCHEMA.TABLES
+  from `your_project.analytics_XXX`.INFORMATION_SCHEMA.TABLES
   where table_name = concat('events_', yest_suffix)
 );
 
@@ -173,7 +173,7 @@ if events_fresh_exists then
     parse_date('%Y%m%d', event_date) as event_date,
     event_name,
     platform
-  from `your-project.analytics_XXX.events_fresh_*`
+  from `your_project.analytics_XXX.events_fresh_*`
   where _table_suffix between start_suffix and today_suffix
     and event_name not in unnest(excluded_events)
     and event_name is not null
@@ -184,7 +184,7 @@ else
     parse_date('%Y%m%d', event_date),
     event_name,
     platform
-  from `your-project.analytics_XXX.events_*`
+  from `your_project.analytics_XXX.events_*`
   where _table_suffix between start_suffix and yest_suffix
     and event_name not in unnest(excluded_events)
     and event_name is not null
@@ -196,7 +196,7 @@ else
       parse_date('%Y%m%d', event_date),
       event_name,
       platform
-    from `your-project.analytics_XXX.events_intraday_*`
+    from `your_project.analytics_XXX.events_intraday_*`
     where _table_suffix = today_suffix
       and event_name not in unnest(excluded_events)
       and event_name is not null
@@ -209,7 +209,7 @@ else
       parse_date('%Y%m%d', event_date),
       event_name,
       platform
-    from `your-project.analytics_XXX.events_intraday_*`
+    from `your_project.analytics_XXX.events_intraday_*`
     where _table_suffix = yest_suffix
       and event_name not in unnest(excluded_events)
       and event_name is not null
@@ -281,7 +281,7 @@ prepared_data as (
     ifnull(ed.event_first_seen_date_web, aec.event_first_seen_date_web) as event_first_seen_date_web,
     ifnull(ed.event_first_seen_date_android, aec.event_first_seen_date_android) as event_first_seen_date_android,
     ifnull(ed.event_first_seen_date_ios, aec.event_first_seen_date_ios) as event_first_seen_date_ios
-  from `your-project.analytics_XXX.ga4_documentation_events_and_documentation_status` ed
+  from `your_project.analytics_XXX.ga4_documentation_events_and_documentation_status` ed
   full join aggregated_event_count aec
     on aec.event_name = ed.event_name
 )
@@ -336,14 +336,14 @@ full join (
     event_android_app,
     event_edited_time,
     event_uploaded_to_bq_time
-  from `your-project.analytics_XXX.ga4_documentation_events`
+  from `your_project.analytics_XXX.ga4_documentation_events`
   where event_name not in ('ga4_config')
 ) as edoc
 on edoc.event_name = pd.event_name
 where (edoc.event_uploaded_to_bq_time is not null or pd.event_count_total > 0);
 
 /*** === upsert status table (keeps earliest via least logic) === ***/
-merge into `your-project.analytics_XXX.ga4_documentation_events_and_documentation_status` as target
+merge into `your_project.analytics_XXX.ga4_documentation_events_and_documentation_status` as target
 using (
   select
     tpd.event_name,
@@ -444,18 +444,18 @@ when not matched by source then
   delete;
 
 /*** === append-only first_seen table: populate from STATUS (insert if missing; never update) === ***/
-merge into `your-project.analytics_XXX.ga4_documentation_events_first_seen` as target
+merge into `your_project.analytics_XXX.ga4_documentation_events_first_seen` as target
 using (
   select event_name, 'WEB' as platform, event_first_seen_date_web as first_seen_date
-  from `your-project.analytics_XXX.ga4_documentation_events_and_documentation_status`
+  from `your_project.analytics_XXX.ga4_documentation_events_and_documentation_status`
   where platform_web is true and event_first_seen_date_web is not null
   union all
   select event_name, 'ANDROID' as platform, event_first_seen_date_android as first_seen_date
-  from `your-project.analytics_XXX.ga4_documentation_events_and_documentation_status`
+  from `your_project.analytics_XXX.ga4_documentation_events_and_documentation_status`
   where platform_android is true and event_first_seen_date_android is not null
   union all
   select event_name, 'IOS' as platform, event_first_seen_date_ios as first_seen_date
-  from `your-project.analytics_XXX.ga4_documentation_events_and_documentation_status`
+  from `your_project.analytics_XXX.ga4_documentation_events_and_documentation_status`
   where platform_ios is true and event_first_seen_date_ios is not null
 ) as source
 on target.event_name = source.event_name
@@ -464,10 +464,46 @@ when not matched then
   insert (event_name, platform, first_seen_date)
   values (source.event_name, source.platform, source.first_seen_date);
 
--- note: no "when matched" clause → append-only, never updates.
+/*** IMAGE DOCUMENTATION FOR EVENTS ***/
+-- Step 1: Create the table if not exists
+create table if not exists `your_project.analytics_XXX.ga4_documentation_events_and_images` (
+    event_name string options(description='Event Name.'),
+    event_image_documentation string options(description='URL to image.')
+)
+cluster by event_name;
+
+merge into `your_project.analytics_XXX.ga4_documentation_events_and_images` as target
+using (
+select 
+  event_name,
+  case -- Fix Google Drive Image URL so it can be used in ex. Looker Studio
+  when event_image like 'https://drive.google.com/file/d/%' then
+    concat('https://drive.google.com/uc?id=', 
+      substring(event_image, instr(event_image, '/d/') + 3, instr(event_image, '/view') - (instr(event_image, '/d/') + 3)))
+    else
+    event_image
+  end as event_image_documentation
+from
+  `your_project.analytics_XXX.ga4_documentation_events`,
+  unnest(split(event_image_documentation)) as event_image
+where
+  event_image_documentation is not null and event_image_documentation != ''
+) as source
+on target.event_image_documentation = source.event_image_documentation
+
+when matched then
+  update set
+    target.event_image_documentation = source.event_image_documentation
+
+when not matched then
+  insert (event_name, event_image_documentation)
+  values (source.event_name, source.event_image_documentation)
+
+when not matched by source then
+  delete;
 
 /*** === daily counts upsert === ***/
-merge into `your-project.analytics_XXX.ga4_documentation_events_daily_counts` as target
+merge into `your_project.analytics_XXX.ga4_documentation_events_daily_counts` as target
 using (
   with dates as (
     select d as event_date
@@ -514,5 +550,5 @@ when not matched then
   values (source.event_date, source.event_name, source.event_count_total, source.event_count_web, source.event_count_android, source.event_count_ios);
 
 -- retention: delete old daily rows
-delete from `your-project.analytics_XXX.ga4_documentation_events_daily_counts`
+delete from `your_project.analytics_XXX.ga4_documentation_events_daily_counts`
 where event_date < date_sub(current_date(), interval delete_event_count_after_days day);

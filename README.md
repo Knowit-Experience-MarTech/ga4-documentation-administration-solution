@@ -4,7 +4,7 @@ This solution simplifies the documentation and management of **Events**, **Key E
 
 ## Upgrading
 
-* [4.0 is latest version](../../releases/tag/v4.0).
+* [4.1 is latest version](../../releases/tag/v4.1).
 
 ## Setup
 
